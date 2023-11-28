@@ -12,6 +12,7 @@ class User(db.Model, SerializerMixin):
     username = db.Column(db.String, unique=True, nullable=False)
     age = db.Column(db.Integer)
     hairstyle = db.Column(db.String)
+    group_id = db.Column(db.Integer, db.ForeignKey("groups.id"))
 
     def __repr__(self):
         return f"User# {self.id}: {self.username}"
@@ -23,13 +24,17 @@ class Product(db.Model, SerializerMixin):
     name = db.Column(db.String, unique=True)
     condition = db.Column(db.Integer)
     is_new = db.Column(db.Boolean, default=False, nullable=False)
+    brand_id = db.Column(db.Integer, db.ForeignKey("brands.id"))
+
 
     def __repr__(self):
         return f"Product# {self.id}: {self.name}"
     
 class Group(db.Model, SerializerMixin):
+    __tablename__ = "groups"
+
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, unique=True)
+    name = db.Column(db.String)
     description = db.Column(db.String)
 
     members = []
@@ -38,8 +43,10 @@ class Group(db.Model, SerializerMixin):
         return f"Group #{self.id}: {self.name} | {('Members: ', self.members) if self.members else 'No current members'}"
     
 class Brand(db.Model, SerializerMixin):
+    __tablename__ = "brands"
+
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, unique=True)
+    name = db.Column(db.String)
     description = db.Column(db.String)
 
     products = []

@@ -1,9 +1,14 @@
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
 
-from config import db
+from config import db, metadata
 
-# Models go here!
+product_owners = db.Table(
+    "products_owners",
+    metadata,
+    db.Column("user_id", db.Integer, db.ForeignKey("users.id"), primary_key=True),
+    db.Column("product_id", db.Integer, db.ForeignKey("products.id"), primary_key=True)
+)
 
 class User(db.Model, SerializerMixin):
     __tablename__ = "users"
@@ -15,6 +20,7 @@ class User(db.Model, SerializerMixin):
     group_id = db.Column(db.Integer, db.ForeignKey("groups.id"))
 
     group = db.relationship("Group", back_populates="members")
+    products = db.relationship("Product", secondary=product_owners, back_populates="owners")
 
     def __repr__(self):
         return f"User# {self.id}: {self.username}"
@@ -29,6 +35,7 @@ class Product(db.Model, SerializerMixin):
     brand_id = db.Column(db.Integer, db.ForeignKey("brands.id"))
 
     brand = db.relationship("Brand", back_populates="products")
+    owners = db.relationship("User", secondary=product_owners, back_populates="products")
 
 
     def __repr__(self):
@@ -41,7 +48,7 @@ class Group(db.Model, SerializerMixin):
     name = db.Column(db.String)
     description = db.Column(db.String)
 
-    members = db.relationship("User", back_populates="group")
+    members = db.relationship("User", back_populates="group", cascade="all, delete-orphan")
 
     def __repr__(self):
         return f"Group #{self.id}: {self.name} | {('Members: ', self.members) if self.members else 'No current members'}"
@@ -53,7 +60,7 @@ class Brand(db.Model, SerializerMixin):
     name = db.Column(db.String)
     description = db.Column(db.String)
 
-    products = db.relationship("Product", back_populates="brand")
+    products = db.relationship("Product", back_populates="brand", cascade="all, delete-orphan")
 
     def __repr__(self):
         return f"Brand #{self.id}: {self.name}{(' | Products: ', self.products) if self.products else ''}"

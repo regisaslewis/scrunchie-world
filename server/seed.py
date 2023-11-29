@@ -8,13 +8,15 @@ from faker import Faker
 
 # Local imports
 from app import app
-from models import db, User, Product, Review, Group, Brand
+from models import db, User, Product, Review, Group, Brand, product_owners
 
 if __name__ == '__main__':
     fake = Faker()
     with app.app_context():
 
         print("Deleting old info...")
+        db.session.query(product_owners).delete()
+        db.session.commit()
         Review.query.delete()
         Group.query.delete()
         Brand.query.delete()
@@ -22,7 +24,6 @@ if __name__ == '__main__':
         Product.query.delete()
 
         print("Starting seed...")
-        # Seed code goes here!
         all_business = Group(name="All Business", description="Function is everything.")
         chic_cheeky = Group(name="Chic and Cheeky", description="Stylish but playful.")
         go_squad = Group(name="The Go Squad", description="On the move.")
@@ -46,6 +47,15 @@ if __name__ == '__main__':
         old_reliable = Product(name="Old Reliable", condition=1, is_new=False, brand=retro)
         gorrilla_grip = Product(name="Gorrilla Grip", condition=4, is_new=False, brand=active)
         products = [red_deluxe, unbreakable, old_reliable, gorrilla_grip]
+
+        ted.products.append(old_reliable)
+        ted.products.append(gorrilla_grip)
+        unbreakable.owners.append(marla)
+        old_reliable.owners.append(debra)
+        frannie.products.append(old_reliable)
+        frannie.products.append(unbreakable)
+        red_deluxe.owners.append(frannie)
+
 
         db.session.add_all(groups)
         db.session.add_all(brands)

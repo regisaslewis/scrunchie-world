@@ -17,11 +17,11 @@ if __name__ == '__main__':
         print("Deleting old info...")
         db.session.query(product_owners).delete()
         db.session.commit()
-        Review.query.delete()
         Group.query.delete()
         Brand.query.delete()
         User.query.delete()
         Product.query.delete()
+        Review.query.delete()
 
         print("Starting seed...")
         all_business = Group(name="All Business", description="Function is everything.")
@@ -56,11 +56,17 @@ if __name__ == '__main__':
         frannie.products.append(unbreakable)
         red_deluxe.owners.append(frannie)
 
+        r1 = Review(user=ted, product=old_reliable, rating=5, comment="Always there when I need it.")
+        r2 = Review(user=ted, product=gorrilla_grip, rating=4, comment="Not a strand lose by the day's end.  Causes mild headache.")
+        r3 = Review(product=unbreakable, user=frannie, rating=1, comment="Exploded in my hydraulic press, not 'unbreakable'.")
+        r4 = Review(product=old_reliable, user=debra, rating=3, comment="I lost mine.")
+        reviews = [r1, r2, r3, r4]
 
         db.session.add_all(groups)
         db.session.add_all(brands)
         db.session.add_all(users)
         db.session.add_all(products)
+        db.session.add_all(reviews)
 
         db.session.commit()
         print("Seeding Complete.")

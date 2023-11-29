@@ -1,5 +1,6 @@
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
+import emoji
 
 from config import db, metadata
 
@@ -21,6 +22,7 @@ class User(db.Model, SerializerMixin):
 
     group = db.relationship("Group", back_populates="members")
     products = db.relationship("Product", secondary=product_owners, back_populates="owners")
+    reviews = db.relationship("Review", back_populates="user", cascade="all, delete-orphan")
 
     def __repr__(self):
         return f"User# {self.id}: {self.username}"
@@ -36,6 +38,7 @@ class Product(db.Model, SerializerMixin):
 
     brand = db.relationship("Brand", back_populates="products")
     owners = db.relationship("User", secondary=product_owners, back_populates="products")
+    reviews = db.relationship("Review", back_populates="product", cascade="all, delete-orphan")
 
 
     def __repr__(self):
@@ -51,7 +54,7 @@ class Group(db.Model, SerializerMixin):
     members = db.relationship("User", back_populates="group", cascade="all, delete-orphan")
 
     def __repr__(self):
-        return f"Group #{self.id}: {self.name} | {('Members: ', self.members) if self.members else 'No current members'}"
+        return f"Group #{self.id}: {self.name} | Members: {[n.username for n in self.members] if self.members else 'No current members'}"
     
 class Brand(db.Model, SerializerMixin):
     __tablename__ = "brands"
@@ -63,13 +66,22 @@ class Brand(db.Model, SerializerMixin):
     products = db.relationship("Product", back_populates="brand", cascade="all, delete-orphan")
 
     def __repr__(self):
-        return f"Brand #{self.id}: {self.name}{(' | Products: ', self.products) if self.products else ''}"
+        return f"Brand #{self.id}: {self.name} | Products: {[n.name for n in self.products] if self.products else 'None'}"
 
 
 class Review(db.Model, SerializerMixin):
     __tablename__ = "reviews"
 
     id = db.Column(db.Integer, primary_key=True)
-    product_id = db.Column(db.Integer, db.ForeignKey("products.id"))
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    rating = db.Column(db.Integer)
     comment = db.Column(db.String)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    product_id = db.Column(db.Integer, db.ForeignKey("products.id"))
+
+    user = db.relationship("User", back_populates="reviews")
+    product = db.relationship("Product", back_populates="reviews")
+
+    def __repr__(self):
+        return f"{self.user.username}'s Review of {self.product.name}: {self.rating * (emoji.emojize(':star:'))} {self.comment}"
+    
+    

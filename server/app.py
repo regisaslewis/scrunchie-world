@@ -16,7 +16,7 @@ from models import User, Product, Group, Brand, Review
 
 @app.route('/')
 def index():
-    return '<h1>Project Server</h1>'
+    return '<h1>Scrunchie World Server</h1>'
 
 @app.route("/users", methods=["GET"])
 def users():
@@ -84,7 +84,7 @@ def show_brand(id):
         if brand:
             return make_response(jsonify(brand.to_dict()), 200,)
         else:
-            return make_response(jsonify({"Error": f"Brand #{id} not found."}), 404,)
+            return make_response(jsonify({"Error": f"Brand #{id} not found."}), 404)
         
 @app.route("/reviews", methods=["GET"])
 def reviews():

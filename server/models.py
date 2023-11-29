@@ -14,6 +14,8 @@ product_owners = db.Table(
 class User(db.Model, SerializerMixin):
     __tablename__ = "users"
 
+    serialize_rules = ("-group.members", "-products", "-reviews",)
+
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, unique=True, nullable=False)
     age = db.Column(db.Integer)
@@ -29,6 +31,7 @@ class User(db.Model, SerializerMixin):
 
 class Product(db.Model, SerializerMixin):
     __tablename__ = "products"
+    serialize_rules = ("-brand.products", "-owners", "-reviews",)
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, unique=True)
@@ -47,6 +50,8 @@ class Product(db.Model, SerializerMixin):
 class Group(db.Model, SerializerMixin):
     __tablename__ = "groups"
 
+    serialize_rules = ("-members.group",)
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     description = db.Column(db.String)
@@ -58,6 +63,8 @@ class Group(db.Model, SerializerMixin):
     
 class Brand(db.Model, SerializerMixin):
     __tablename__ = "brands"
+
+    serialize_rules = ("-products.brand",)
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
@@ -71,6 +78,8 @@ class Brand(db.Model, SerializerMixin):
 
 class Review(db.Model, SerializerMixin):
     __tablename__ = "reviews"
+
+    serialize_rules = ("-user.reviews", "-product.reviews",)
 
     id = db.Column(db.Integer, primary_key=True)
     rating = db.Column(db.Integer)

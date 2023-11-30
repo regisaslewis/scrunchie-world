@@ -33,7 +33,7 @@ if __name__ == '__main__':
         palace = Brand(name="The Palace", description="Elegance in form.")
         retro = Brand(name="Vintagity", description="Remember when...")
         astro = Brand(name="Zodiac", description="Guided by the stars.")
-        active = Brand(name="EnMotion", description="Stopping is death.")
+        active = Brand(name="Momentum", description="Stopping is death.")
         brands =[palace, retro, astro, active]
 
         ted = User(username="Ted", age=45, hairstyle="wavy, long", group=go_squad)
@@ -46,7 +46,8 @@ if __name__ == '__main__':
         unbreakable = Product(name="Unbreakable", condition=5, is_new=True, brand=astro)
         old_reliable = Product(name="Old Reliable", condition=1, is_new=False, brand=retro)
         gorrilla_grip = Product(name="Gorrilla Grip", condition=4, is_new=False, brand=active)
-        products = [red_deluxe, unbreakable, old_reliable, gorrilla_grip]
+        madame = Product(name="Madame Elastique", condition=5, is_new=True, brand=palace)
+        products = [red_deluxe, unbreakable, old_reliable, gorrilla_grip, madame]
 
         ted.products.append(old_reliable)
         ted.products.append(gorrilla_grip)

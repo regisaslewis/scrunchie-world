@@ -94,14 +94,18 @@ def reviews():
         return make_response(jsonify([n.to_dict() for n in reviews]), 200,)
     return make_response(jsonify({"text": "Method Not Allowed"}), 405,)
 
-@app.route("/reviews/<int:id>", methods=["GET"])
+@app.route("/reviews/<int:id>", methods=["GET", "DELETE"])
 def show_review(id):
-    if request.method == "GET":
-        review = Review.query.filter(Review.id == id).first()
-        if review:
-            return make_response(jsonify(review.to_dict()), 200,)
-        else:
-            return make_response(jsonify({"Error": f"Review #{id} not found."}), 404,)
+    review = Review.query.filter(Review.id == id).first()
+    if review:
+        if request.method == "GET":
+                return make_response(jsonify(review.to_dict()), 200,)    
+        elif request.method == "DELETE":
+            db.session.delete(review)
+            db.session.commit()
+            return make_response({"message": f"Review #{id} deleted."}, 200)
+    else:
+        return make_response(jsonify({"Error": f"Review #{id} not found."}), 404)
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

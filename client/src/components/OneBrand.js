@@ -1,9 +1,17 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 
-function OneBrand() {
+function OneBrand({brandItem}) {
+
+    const { name, description, products } = brandItem
+    const productList = products.map(e => <p>{e.name}</p>)
+
     return (
-            <h2>OneBrand Page Here.</h2>
+        <div>
+            <h2>{name}</h2>
+            <h3>{description}</h3>
+            <h4>Products:</h4>
+            {productList}
+        </div>
     );
 }
 

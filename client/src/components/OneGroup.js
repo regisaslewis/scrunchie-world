@@ -1,9 +1,17 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 
-function OneGroup() {
+function OneGroup({groupItem}) {
+
+    const { name, members, description } = groupItem;
+    const memberList = members.map(e => <p>{e.username}</p>)
+
     return (
-            <h2>OneGroup Page Here.</h2>
+        <div>
+            <h2>{name}</h2>
+            <h3>{description}</h3>
+            <h4>Members:</h4>
+            {memberList}
+        </div>
     );
 }
 

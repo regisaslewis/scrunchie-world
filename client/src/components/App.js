@@ -8,6 +8,32 @@ import Brands from "./Brands";
 import Reviews from "./Reviews";
 
 function App() {
+
+  const [groupList, setGroupList] = useState([]);
+  const [brandList, setBrandList] = useState([]);
+  const [reviewList, setReviewList] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5555/groups")
+      .then(resp => resp.json())
+      .then(data => setGroupList(data))
+      .catch(error => console.log(error.message))
+  }, [])
+
+  useEffect(() => {
+    fetch("http://localhost:5555/brands")
+      .then(resp => resp.json())
+      .then(data => setBrandList(data))
+      .catch(error => console.log(error.message))
+  }, [])
+
+  useEffect(() => {
+    fetch("http://localhost:5555/reviews")
+      .then(resp => resp.json())
+      .then(data => setReviewList(data))
+      .catch(error => console.log(error.message))
+  }, [])
+
   return (
     <div>
       <NavBar />
@@ -20,13 +46,19 @@ function App() {
           <Home />
         </Route>
         <Route path="/groups">
-          <Groups />
+          <Groups
+            groupList = {groupList}
+          />
         </Route>
         <Route path="/brands">
-          <Brands />
+          <Brands
+            brandList = {brandList}
+          />
         </Route>
         <Route path="/reviews">
-          <Reviews />
+          <Reviews 
+            reviewList = {reviewList}
+          />
         </Route>
       </Switch>
     </div>

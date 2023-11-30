@@ -57,11 +57,13 @@ if __name__ == '__main__':
         frannie.products.append(unbreakable)
         red_deluxe.owners.append(frannie)
 
-        r1 = Review(user=ted, product=old_reliable, rating=5, comment="Always there when I need it.")
-        r2 = Review(user=ted, product=gorrilla_grip, rating=4, comment="Not a strand lose by the day's end.  Causes mild headache.")
-        r3 = Review(product=unbreakable, user=frannie, rating=1, comment="Exploded in my hydraulic press, not 'unbreakable'.")
-        r4 = Review(product=old_reliable, user=debra, rating=3, comment="I lost mine.")
+        r1 = Review(id=1, user=ted, product=old_reliable, rating=5, comment="Always there when I need it.")
+        r2 = Review(id=2, user=ted, product=gorrilla_grip, rating=4, comment="Not a strand lose by the day's end.  Causes mild headache.")
+        r3 = Review(id=3, product=unbreakable, user=frannie, rating=1, comment="Exploded in my hydraulic press, not 'unbreakable'.")
+        r4 = Review(id=4, product=old_reliable, user=debra, rating=3, comment="I lost mine.")
         reviews = [r1, r2, r3, r4]
+        r5 = Review(id=5, product=red_deluxe, user=frannie, rating=2, comment="A little too red for my tastes.")
+        r6 = Review(id=6, product=gorrilla_grip, user=marla, rating=3, comment="AVERAGE ACROSS THE BOARD")
 
         db.session.add_all(groups)
         db.session.add_all(brands)

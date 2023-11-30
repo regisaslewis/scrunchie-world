@@ -11,10 +11,20 @@ function App() {
     <div>
       <NavBar />
       <h1>Scrunchie World Client</h1>
-      <Home />
-      <SignUp />
-      <Group />
-      <Brand />
+      <Switch>
+        <Route exact path="/">
+          <SignUp />
+        </Route>
+        <Route path="/home">
+          <Home />
+        </Route>
+        <Route path="/group">
+          <Group />
+        </Route>
+        <Route path="/brand">
+          <Brand />
+        </Route>
+      </Switch>
     </div>
   )
 }

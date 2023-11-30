@@ -3,8 +3,9 @@ import { Switch, Route } from "react-router-dom";
 import NavBar from "./NavBar";
 import Home from "./Home";
 import SignUp from "./SignUp";
-import Group from "./Group";
-import Brand from "./Brand";
+import Groups from "./Groups";
+import Brands from "./Brands";
+import Reviews from "./Reviews";
 
 function App() {
   return (
@@ -18,11 +19,14 @@ function App() {
         <Route path="/home">
           <Home />
         </Route>
-        <Route path="/group">
-          <Group />
+        <Route path="/groups">
+          <Groups />
         </Route>
-        <Route path="/brand">
-          <Brand />
+        <Route path="/brands">
+          <Brands />
+        </Route>
+        <Route path="/reviews">
+          <Reviews />
         </Route>
       </Switch>
     </div>

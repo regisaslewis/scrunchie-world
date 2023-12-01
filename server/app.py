@@ -86,20 +86,36 @@ def show_brand(id):
         else:
             return make_response(jsonify({"Error": f"Brand #{id} not found."}), 404)
         
-@app.route("/reviews", methods=["GET"])
+@app.route("/reviews", methods=["GET", "POST"])
 def reviews():
     if request.method == "GET":
         reviews = Review.query.all()
 
-        return make_response(jsonify([n.to_dict() for n in reviews]), 200,)
+        return make_response(jsonify([n.to_dict() for n in reviews]), 200)
+    elif request.method == "POST":
+        new_review = Review(
+            rating = request.form.get("rating"),
+            comment = request.form.get("comment"),
+            user_id = request.form.get("user_id"),
+            product_id = request.form.get("product_id"),        
+        )
+        db.session.add(new_review)
+        db.session.commit()
+        return make_response(new_review.to_dict(), 201)
     return make_response(jsonify({"text": "Method Not Allowed"}), 405,)
 
-@app.route("/reviews/<int:id>", methods=["GET", "DELETE"])
+@app.route("/reviews/<int:id>", methods=["GET", "PATCH", "DELETE"])
 def show_review(id):
     review = Review.query.filter(Review.id == id).first()
     if review:
         if request.method == "GET":
-                return make_response(jsonify(review.to_dict()), 200,)    
+                return make_response(jsonify(review.to_dict()), 200,)
+        elif request.method == "PATCH":
+            for attr in request.form:
+                setattr(review, attr, request.form.get(attr))
+            db.session.add(review)
+            db.session.commit()
+            return make_response(review.to_dict(), 200) 
         elif request.method == "DELETE":
             db.session.delete(review)
             db.session.commit()

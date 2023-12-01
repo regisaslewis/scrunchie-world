@@ -5,6 +5,7 @@
 # Remote library imports
 from flask import request, make_response, jsonify
 from flask_restful import Resource
+import copy
 
 # Local imports
 from config import app, db, api
@@ -14,84 +15,131 @@ from models import User, Product, Group, Brand, Review
 
 # Views go here!
 
+def delete_item(tag, id):
+    class_name = copy.copy(tag.__class__.__name__)
+    db.session.delete(tag)
+    db.session.commit()
+    return make_response({"message": f"{class_name} #{id} deleted."})
+
+def post_item(item):
+    db.session.add(item)
+    db.session.commit()
+    return make_response(jsonify(item.to_dict(), 201))
+
+def patch_item(item):
+        for attr in request.form:
+            setattr(item, attr, request.form.get(attr))
+        db.session.add(item)
+        db.session.commit()
+        return make_response(item.to_dict(), 200)
+
+def get_group(group):
+    items = group.query.all()
+    return make_response(jsonify([n.to_dict() for n in items]), 200)
+
+def get_item(item):
+    return make_response(jsonify(item.to_dict()), 200)
+
+
 @app.route('/')
 def index():
     return '<h1>Scrunchie World Server</h1>'
 
-@app.route("/users", methods=["GET"])
+@app.route("/users", methods=["GET", "POST"])
 def users():
     if request.method == "GET":
-        users = User.query.all()
+        return get_group(User)
+    elif request.method == "POST":
+        new_user = User(
+            username = request.form.get("username"),
+            age = request.form.get("age"),
+            hairstyle = request.form.get("hairstyle"),
+            group_id = request.form.get("group_id")
+        )
+        return post_item(new_user)
+    return make_response(jsonify({"text": "Method Not Allowed"}), 405)
 
-        return make_response(jsonify([n.to_dict() for n in users]), 200,)
-    return make_response(jsonify({"text": "Method Not Allowed"}), 405,)
-
-@app.route("/users/<int:id>", methods=["GET"])
+@app.route("/users/<int:id>", methods=["GET", "PATCH", "DELETE"])
 def show_user(id):
-    if request.method == "GET":
-        user = User.query.filter(User.id == id).first()
-        if user:
-            return make_response(jsonify(user.to_dict()), 200,)
-        else:
-            return make_response(jsonify({"Error": f"User #{id} not found."}), 404,)
+    user = User.query.filter(User.id == id).first()
+    if user:
+        if request.method == "GET":
+            return get_item(user)
+        elif request.method == "PATCH":
+            return patch_item(user)
+        elif request.method == "DELETE":
+            return delete_item(user, id)
+    else:
+        return make_response(jsonify({"Error": f"User #{id} not found."}), 404)
         
-@app.route("/products", methods=["GET"])
+@app.route("/products", methods=["GET", "POST"])
 def product():
     if request.method == "GET":
-        products = Product.query.all()
-
-        return make_response(jsonify([n.to_dict() for n in products]), 200,)
+        return get_group(Product)
+    if request.method == "POST":
+        new_product = Product(
+            name = request.form.get("name"),
+            cost = request.form.get("cost"),
+            brand_id = request.form.get("brand_id")
+        )
+        return post_item(new_product)
     return make_response(jsonify({"text": "Method Not Allowed"}), 405,)
 
 @app.route("/products/<int:id>", methods=["GET"])
 def show_product(id):
-    if request.method == "GET":
-        product = Product.query.filter(Product.id == id).first()
-        if product:
-            return make_response(jsonify(product.to_dict()), 200,)
-        else:
-            return make_response(jsonify({"Error": f"Product #{id} not found."}), 404,)
+    product = Product.query.filter(Product.id == id).first()
+    if product:
+        if request.method == "GET":
+            return get_item(product)
+    else:
+        return make_response(jsonify({"Error": f"Product #{id} not found."}), 404,)
         
-@app.route("/groups", methods=["GET"])
+@app.route("/groups", methods=["GET", "POST"])
 def groups():
     if request.method == "GET":
-        groups = Group.query.all()
-
-        return make_response(jsonify([n.to_dict() for n in groups]), 200,)
+        return get_group(Group)
+    if request.method == "POST":
+        new_group = Group(
+            name = request.form.get("name"),
+            description = request.form.get("description")
+        )
+        return post_item(new_group)
     return make_response(jsonify({"text": "Method Not Allowed"}), 405,)
 
 @app.route("/groups/<int:id>", methods=["GET"])
 def show_group(id):
-    if request.method == "GET":
-        group = Group.query.filter(Group.id == id).first()
-        if group:
-            return make_response(jsonify(group.to_dict()), 200,)
-        else:
-            return make_response(jsonify({"Error": f"Group #{id} not found."}), 404,)
+    group = Group.query.filter(Group.id == id).first()
+    if group:
+        if request.method == "GET":
+            return get_item(group)
+    else:
+        return make_response(jsonify({"Error": f"Group #{id} not found."}), 404,)
 
-@app.route("/brands", methods=["GET"])
+@app.route("/brands", methods=["GET", "POST"])
 def brands():
     if request.method == "GET":
-        brands = Brand.query.all()
-
-        return make_response(jsonify([n.to_dict() for n in brands]), 200,)
+        return get_group(Brand)
+    if request.method == "POST":
+        new_brand = Brand(
+            name = request.form.get("name"),
+            description = request.form.get("description")
+        )
+        return post_item(new_brand)
     return make_response(jsonify({"text": "Method Not Allowed"}), 405,)
 
 @app.route("/brands/<int:id>", methods=["GET"])
 def show_brand(id):
-    if request.method == "GET":
-        brand = Brand.query.filter(Brand.id == id).first()
-        if brand:
-            return make_response(jsonify(brand.to_dict()), 200,)
-        else:
-            return make_response(jsonify({"Error": f"Brand #{id} not found."}), 404)
+    brand = Brand.query.filter(Brand.id == id).first()
+    if brand:
+        if request.method == "GET":
+            return get_item(brand)
+    else:
+        return make_response(jsonify({"Error": f"Brand #{id} not found."}), 404)
         
 @app.route("/reviews", methods=["GET", "POST"])
 def reviews():
     if request.method == "GET":
-        reviews = Review.query.all()
-
-        return make_response(jsonify([n.to_dict() for n in reviews]), 200)
+        return get_group(Review)
     elif request.method == "POST":
         new_review = Review(
             rating = request.form.get("rating"),
@@ -99,9 +147,7 @@ def reviews():
             user_id = request.form.get("user_id"),
             product_id = request.form.get("product_id"),        
         )
-        db.session.add(new_review)
-        db.session.commit()
-        return make_response(new_review.to_dict(), 201)
+        return post_item(new_review)
     return make_response(jsonify({"text": "Method Not Allowed"}), 405,)
 
 @app.route("/reviews/<int:id>", methods=["GET", "PATCH", "DELETE"])
@@ -109,17 +155,11 @@ def show_review(id):
     review = Review.query.filter(Review.id == id).first()
     if review:
         if request.method == "GET":
-                return make_response(jsonify(review.to_dict()), 200,)
+                return get_item(review)
         elif request.method == "PATCH":
-            for attr in request.form:
-                setattr(review, attr, request.form.get(attr))
-            db.session.add(review)
-            db.session.commit()
-            return make_response(review.to_dict(), 200) 
+            return patch_item(review)
         elif request.method == "DELETE":
-            db.session.delete(review)
-            db.session.commit()
-            return make_response({"message": f"Review #{id} deleted."}, 200)
+            return delete_item(review, id)
     else:
         return make_response(jsonify({"Error": f"Review #{id} not found."}), 404)
 

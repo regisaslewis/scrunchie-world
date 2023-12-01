@@ -42,11 +42,11 @@ if __name__ == '__main__':
         debra = User(username="Debra", age=35, hairstyle="bald", group=fans)
         users = [ted, marla, frannie, debra]
 
-        red_deluxe = Product(name="Red Deluxe", condition=3, is_new=False, brand=palace)
-        unbreakable = Product(name="Unbreakable", condition=5, is_new=True, brand=astro)
-        old_reliable = Product(name="Old Reliable", condition=1, is_new=False, brand=retro)
-        gorrilla_grip = Product(name="Gorrilla Grip", condition=4, is_new=False, brand=active)
-        madame = Product(name="Madame Elastique", condition=5, is_new=True, brand=palace)
+        red_deluxe = Product(name="Red Deluxe", cost=3, brand=palace)
+        unbreakable = Product(name="Unbreakable", cost=5, brand=astro)
+        old_reliable = Product(name="Old Reliable", cost=1, brand=retro)
+        gorrilla_grip = Product(name="Gorrilla Grip", cost=4, brand=active)
+        madame = Product(name="Madame Elastique", cost=5, brand=palace)
         products = [red_deluxe, unbreakable, old_reliable, gorrilla_grip, madame]
 
         ted.products.append(old_reliable)

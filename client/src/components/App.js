@@ -12,6 +12,7 @@ function App() {
   const [groupList, setGroupList] = useState([]);
   const [brandList, setBrandList] = useState([]);
   const [reviewList, setReviewList] = useState([]);
+  const [username, setUsername] = useState("");
 
   useEffect(() => {
     fetch("http://localhost:5555/groups")
@@ -40,7 +41,9 @@ function App() {
       <h1>Scrunchie World Client</h1>
       <Switch>
         <Route exact path="/">
-          <SignUp />
+          <SignUp
+            setUsername = {setUsername}
+          />
         </Route>
         <Route path="/home">
           <Home />

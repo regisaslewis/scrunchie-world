@@ -12,9 +12,6 @@ from config import app, db, api
 # Add your model imports
 from models import User, Product, Group, Brand, Review
 
-
-# Views go here!
-
 def delete_item(tag, id):
     class_name = copy.copy(tag.__class__.__name__)
     db.session.delete(tag)
@@ -27,8 +24,8 @@ def post_item(item):
     return make_response(jsonify(item.to_dict(), 201))
 
 def patch_item(item):
-        for attr in request.form:
-            setattr(item, attr, request.form.get(attr))
+        for attr in request.get_json():
+            setattr(item, attr, request.get_json().get(attr))
         db.session.add(item)
         db.session.commit()
         return make_response(item.to_dict(), 200)
@@ -40,6 +37,8 @@ def get_group(group):
 def get_item(item):
     return make_response(jsonify(item.to_dict()), 200)
 
+def data(key):
+    return request.get_json()[key]
 
 @app.route('/')
 def index():
@@ -50,11 +49,11 @@ def users():
     if request.method == "GET":
         return get_group(User)
     elif request.method == "POST":
+            # username = request.get_json().get("username"),
         new_user = User(
-            username = request.form.get("username"),
-            age = request.form.get("age"),
-            hairstyle = request.form.get("hairstyle"),
-            group_id = request.form.get("group_id")
+            username = data("username"),
+            age = data("age"),
+            hairstyle = data("hairstyle"),
         )
         return post_item(new_user)
     return make_response(jsonify({"text": "Method Not Allowed"}), 405)
@@ -78,9 +77,9 @@ def product():
         return get_group(Product)
     if request.method == "POST":
         new_product = Product(
-            name = request.form.get("name"),
-            cost = request.form.get("cost"),
-            brand_id = request.form.get("brand_id")
+            name = data("name"),
+            cost = data("cost"),
+            brand_id = data("brand_id")
         )
         return post_item(new_product)
     return make_response(jsonify({"text": "Method Not Allowed"}), 405,)
@@ -100,8 +99,8 @@ def groups():
         return get_group(Group)
     if request.method == "POST":
         new_group = Group(
-            name = request.form.get("name"),
-            description = request.form.get("description")
+            name = data("name"),
+            description = data("description")
         )
         return post_item(new_group)
     return make_response(jsonify({"text": "Method Not Allowed"}), 405,)
@@ -121,8 +120,8 @@ def brands():
         return get_group(Brand)
     if request.method == "POST":
         new_brand = Brand(
-            name = request.form.get("name"),
-            description = request.form.get("description")
+            name = data("name"),
+            description = data("description")
         )
         return post_item(new_brand)
     return make_response(jsonify({"text": "Method Not Allowed"}), 405,)
@@ -142,10 +141,10 @@ def reviews():
         return get_group(Review)
     elif request.method == "POST":
         new_review = Review(
-            rating = request.form.get("rating"),
-            comment = request.form.get("comment"),
-            user_id = request.form.get("user_id"),
-            product_id = request.form.get("product_id"),        
+            rating = data("rating"),
+            comment = data("comment"),
+            user_id = data("user_id"),
+            product_id = data("product_id"),        
         )
         return post_item(new_review)
     return make_response(jsonify({"text": "Method Not Allowed"}), 405,)

@@ -3,6 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import NavBar from "./NavBar";
 import Home from "./Home";
 import SignUp from "./SignUp";
+import Login from "./Login";
 import Groups from "./Groups";
 import Brands from "./Brands";
 import Reviews from "./Reviews";
@@ -15,21 +16,21 @@ function App() {
   const [username, setUsername] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:5555/groups")
+    fetch("/groups")
       .then(resp => resp.json())
       .then(data => setGroupList(data))
       .catch(error => console.log(error.message))
   }, [])
 
   useEffect(() => {
-    fetch("http://localhost:5555/brands")
+    fetch("/brands")
       .then(resp => resp.json())
       .then(data => setBrandList(data))
       .catch(error => console.log(error.message))
   }, [])
 
   useEffect(() => {
-    fetch("http://localhost:5555/reviews")
+    fetch("/reviews")
       .then(resp => resp.json())
       .then(data => setReviewList(data))
       .catch(error => console.log(error.message))
@@ -41,9 +42,16 @@ function App() {
       <h1>Scrunchie World Client</h1>
       <Switch>
         <Route exact path="/">
+          {username ? 
+          <h2>Hello, {username}!</h2> : 
           <SignUp
             setUsername = {setUsername}
-          />
+          />}
+        </Route>
+        <Route path="/login">
+            <Login
+              setUsername = {setUsername}
+            />
         </Route>
         <Route path="/home">
           <Home />

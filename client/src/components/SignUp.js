@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
@@ -18,7 +19,7 @@ function SignUp({ setUsername }) {
         },
         validationSchema: formSchema,
         onSubmit: (values) => {
-            fetch("http://localhost:5555/users", {
+            fetch("/users", {
                 method: "POST",
                 headers: {
                     "Accept": "application/json",
@@ -27,36 +28,29 @@ function SignUp({ setUsername }) {
                 body: JSON.stringify(values, null, 2),
             })
             .then(resp => resp.json())
-            .then(data => setUsername(data.username))
+            .then(data => setUsername(data[0].username))
         }
     })
-
 
 
     return (
         <div>
             <h2>Sign Up Page Here.</h2>
-            <form onSubmit={useFormik.handleSubmit}>
+            <form onSubmit={formik.handleSubmit}>
                 <label>Username:</label>
                 <input name="username" value={formik.values.username} onChange={formik.handleChange} />
-                <p>{formik.errors.username}</p>
+                <p style={{ color: "red" }}>{formik.errors.username}</p>
                 <label>Age:</label>
-                <input name="age" value={formik.values.age} onChange={formik.handleChnage} />
-                <p>{formik.errors.age}</p>
+                <input name="age" value={formik.values.age} onChange={formik.handleChange} />
+                <p style={{ color: "red" }}>{formik.errors.age}</p>
                 <label>Hairstyle:</label>
-                <input name="hairstyle" value={formik.values.hairstyle} onChange={formik.handleChnage} />
-                <p>{formik.errors.hairstyle}</p>
-                {/* <label>Username:</label>
-                <input name="username" type="text" />
-                <br/>
-                <label>Age:</label>
-                <input name="age" type="text" />
-                <br/>
-                <label>Hairstyle:</label>
-                <input name="hairstyle" type="text" /> */}
+                <input name="hairstyle" value={formik.values.hairstyle} onChange={formik.handleChange} />
+                <p style={{ color: "red" }}>{formik.errors.hairstyle}</p>
+                <button type="submit">Sign Up</button>
             </form>
-            <button>Sign Up</button>
-            <button>Log In</button>
+            <NavLink to="/login" exact>
+                <button>Log In</button>
+            </NavLink>
         </div>
     );
 }

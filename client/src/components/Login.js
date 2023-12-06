@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
-function Login({setUsername}) {
+function Login({setUsername, setUserID}) {
 
     const [passes, setPasses] = useState(true)
     const history = useHistory();
@@ -29,6 +29,9 @@ function Login({setUsername}) {
                 usernames = [];
                 for (let i =0; i < data.length; i++) {
                     usernames.push(data[i]["username"])
+                    if (data[i]["username"] == formik.values.username) {
+                        setUserID(data[i]["id"])
+                    }
                 }
                 if (usernames.includes(formik.values.username)) {
                     setUsername(formik.values.username)

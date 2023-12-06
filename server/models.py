@@ -31,7 +31,7 @@ class User(db.Model, SerializerMixin):
 
 class Product(db.Model, SerializerMixin):
     __tablename__ = "products"
-    serialize_rules = ("-brand.products", "-owners", "-reviews",)
+    serialize_rules = ("-brand.products", "-owners.group", "-reviews",)
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, unique=True)

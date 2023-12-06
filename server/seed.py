@@ -45,25 +45,26 @@ if __name__ == '__main__':
         red_deluxe = Product(name="Red Deluxe", cost=3, brand=palace)
         unbreakable = Product(name="Unbreakable", cost=5, brand=astro)
         old_reliable = Product(name="Old Reliable", cost=1, brand=retro)
-        gorrilla_grip = Product(name="Gorrilla Grip", cost=4, brand=active)
+        gorilla_grip = Product(name="Gorilla Grip", cost=4, brand=active)
         madame = Product(name="Madame Elastique", cost=5, brand=palace)
-        products = [red_deluxe, unbreakable, old_reliable, gorrilla_grip, madame]
+        products = [red_deluxe, unbreakable, old_reliable, gorilla_grip, madame]
 
         ted.products.append(old_reliable)
-        ted.products.append(gorrilla_grip)
+        ted.products.append(gorilla_grip)
         unbreakable.owners.append(marla)
         old_reliable.owners.append(debra)
         frannie.products.append(old_reliable)
         frannie.products.append(unbreakable)
         red_deluxe.owners.append(frannie)
+        marla.products.append(gorilla_grip)
 
         r1 = Review(id=1, user=ted, product=old_reliable, rating=5, comment="Always there when I need it.")
-        r2 = Review(id=2, user=ted, product=gorrilla_grip, rating=4, comment="Not a strand lose by the day's end.  Causes mild headache.")
+        r2 = Review(id=2, user=ted, product=gorilla_grip, rating=4, comment="Not a strand lose by the day's end.  Causes mild headache.")
         r3 = Review(id=3, product=unbreakable, user=frannie, rating=1, comment="Exploded in my hydraulic press, not 'unbreakable'.")
         r4 = Review(id=4, product=old_reliable, user=debra, rating=3, comment="I lost mine.")
         reviews = [r1, r2, r3, r4]
         r5 = Review(id=5, product=red_deluxe, user=frannie, rating=2, comment="A little too red for my tastes.")
-        r6 = Review(id=6, product=gorrilla_grip, user=marla, rating=3, comment="AVERAGE ACROSS THE BOARD")
+        r6 = Review(id=6, product=gorilla_grip, user=marla, rating=3, comment="AVERAGE ACROSS THE BOARD")
 
         db.session.add_all(groups)
         db.session.add_all(brands)

@@ -13,7 +13,9 @@ function App() {
   const [groupList, setGroupList] = useState([]);
   const [brandList, setBrandList] = useState([]);
   const [reviewList, setReviewList] = useState([]);
+  const [productList, setProductList] = useState([]);
   const [username, setUsername] = useState("");
+  const [userID, setUserID] = useState(0);
 
   useEffect(() => {
     fetch("/groups")
@@ -36,6 +38,13 @@ function App() {
       .catch(error => console.log(error.message))
   }, [])
 
+  useEffect(() => {
+    fetch("/products")
+      .then(resp => resp.json())
+      .then(data => setProductList(data))
+      .catch(error => console.log(error.message))
+  }, [])
+
   return (
     <div>
       <NavBar />
@@ -43,18 +52,23 @@ function App() {
       <Switch>
         <Route exact path="/">
           {username ? 
-          <h2>Hello, {username}!</h2> : 
+          <Home 
+          username={username}
+          reviewList={reviewList}
+          groupList={groupList}
+          productList={productList}
+          userID={userID}
+          /> : 
           <SignUp
             setUsername = {setUsername}
+            setUserID={setUserID}
           />}
         </Route>
         <Route path="/login">
             <Login
               setUsername = {setUsername}
+              setUserID={setUserID}
             />
-        </Route>
-        <Route path="/home">
-          <Home />
         </Route>
         <Route path="/groups">
           <Groups

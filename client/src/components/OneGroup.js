@@ -3,7 +3,7 @@ import React from "react";
 function OneGroup({groupItem}) {
 
     const { name, members, description } = groupItem;
-    const memberList = members.map(e => <p>{e.username}</p>)
+    const memberList = members.map(e => <p key={e.id}>{e.username}</p>)
 
     return (
         <div>

@@ -39,7 +39,7 @@ function SignUp({ setUsername, setUserID }) {
     return (
         <div>
             <h2>Sign Up Page Here.</h2>
-            <form onSubmit={formik.handleSubmit}>
+            <form autoComplete="off" onSubmit={formik.handleSubmit}>
                 <label>Username:</label>
                 <input name="username" value={formik.values.username} onChange={formik.handleChange} />
                 <p style={{ color: "red" }}>{formik.errors.username}</p>

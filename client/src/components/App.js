@@ -7,6 +7,7 @@ import Login from "./Login";
 import Groups from "./Groups";
 import Brands from "./Brands";
 import Reviews from "./Reviews";
+import NewReviewForm from "./NewReviewForm"
 
 function App() {
 
@@ -83,6 +84,11 @@ function App() {
         <Route path="/reviews">
           <Reviews 
             reviewList = {reviewList}
+          />
+        </Route>
+        <Route path="/newreviewform">
+          <NewReviewForm 
+            
           />
         </Route>
       </Switch>

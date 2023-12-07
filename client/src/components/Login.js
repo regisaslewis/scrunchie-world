@@ -46,7 +46,7 @@ function Login({setUsername, setUserID}) {
     return (
         <div>
             <h2>Log In Page Here</h2>
-            <form onSubmit={formik.handleSubmit}>
+            <form onSubmit={formik.handleSubmit} autoComplete="off">
                 <label>Username:</label>
                 <input name="username" type="text" onChange={ e => {formik.handleChange(e); setPasses(true)}} value={formik.values.username} />
                 <br/>

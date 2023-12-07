@@ -3,7 +3,7 @@ import React from "react";
 function OneBrand({brandItem}) {
 
     const { name, description, products } = brandItem
-    const productList = products.map(e => <p>{e.name}</p>)
+    const productList = products.map(e => <p key={e.id}>{e.name}</p>)
 
     return (
         <div>

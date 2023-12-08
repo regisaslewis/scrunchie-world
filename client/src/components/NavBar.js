@@ -1,6 +1,6 @@
 import React from "react";
 
-function NavBar({setUsername, setUserID}) {
+function NavBar({setUsername, setUserID, username}) {
 
     function handleLogout() {
         fetch("/logout", {
@@ -16,7 +16,7 @@ function NavBar({setUsername, setUserID}) {
     return (
         <div>
             <h2>Navigation Bar here.</h2>
-            <button onClick={handleLogout}>Logout</button>
+            {!!username ? <button onClick={handleLogout}>Logout</button>: ""}
         </div>
     );
 }

@@ -66,6 +66,7 @@ function App() {
   return (
     <div>
       <NavBar
+      username={username}
       setUsername={setUsername}
       setUserID={setUserID}
       />

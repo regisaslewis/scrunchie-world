@@ -1,15 +1,9 @@
 #!/usr/bin/env python3
-
-# Standard library imports
-
-# Remote library imports
-from flask import request, make_response, jsonify
+from flask import request, make_response, jsonify, session
 from flask_restful import Resource
 import copy
 
-# Local imports
 from config import app, db, api
-# Add your model imports
 from models import User, Product, Group, Brand, Review
 
 def delete_item(tag, id):
@@ -44,17 +38,44 @@ def data(key):
 def index():
     return '<h1>Scrunchie World Server</h1>'
 
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        username = data("username")
+
+        user = User.query.filter_by(username=username).first()
+        if user is None:
+            return jsonify({"Error": "Not a valid user."}), 401
+        
+        session["user_id"] = user.id
+        return jsonify(user.to_dict())
+    
+@app.route("/check_session", methods=["GET"])
+def check_session():
+    if request.method == "GET":
+        user = User.query.filter(User.id == session.get("user_id")).first()
+        if user:
+            return user.to_dict()
+        else:
+            return {"message": "401: Not Logged in"}, 401
+
+@app.route("/logout", methods=["DELETE"])
+def logout():
+    if request.method == "DELETE":
+        session["user_id"] = None
+        return {"message": "Not Logged In"}, 204
+
 @app.route("/users", methods=["GET", "POST"])
 def users():
     if request.method == "GET":
         return get_group(User)
     elif request.method == "POST":
-            # username = request.get_json().get("username"),
         new_user = User(
             username = data("username"),
             age = data("age"),
             hairstyle = data("hairstyle"),
         )
+        session["user_id"] = len(User.query.all()) + 1
         return post_item(new_user)
     return make_response(jsonify({"text": "Method Not Allowed"}), 405)
 

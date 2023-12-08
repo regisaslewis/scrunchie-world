@@ -59,7 +59,7 @@ if __name__ == '__main__':
         marla.products.append(gorilla_grip)
 
         r1 = Review(id=1, user=ted, product=old_reliable, rating=5, comment="Always there when I need it.")
-        r2 = Review(id=2, user=ted, product=gorilla_grip, rating=4, comment="Not a strand lose by the day's end.  Causes mild headache.")
+        r2 = Review(id=2, user=ted, product=gorilla_grip, rating=4, comment="Not a strand loose by the day's end.  Causes mild headache.")
         r3 = Review(id=3, product=unbreakable, user=frannie, rating=1, comment="Exploded in my hydraulic press, not 'unbreakable'.")
         r4 = Review(id=4, product=old_reliable, user=debra, rating=3, comment="I lost mine.")
         reviews = [r1, r2, r3, r4]

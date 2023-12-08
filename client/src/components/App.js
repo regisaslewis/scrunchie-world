@@ -15,8 +15,25 @@ function App() {
   const [brandList, setBrandList] = useState([]);
   const [reviewList, setReviewList] = useState([]);
   const [productList, setProductList] = useState([]);
+  const [userList, setUserList] = useState([]);
   const [username, setUsername] = useState("");
-  const [userID, setUserID] = useState(0);
+  const [userID, setUserID] = useState(null);
+
+  useEffect(() => {
+    fetch("/users")
+      .then(resp => resp.json())
+      .then(data => setUserList(data))
+      .catch(error => console.log(error.message))
+  }, [])
+
+  useEffect(() => {
+    fetch("/check_session")
+    .then(resp => resp.json())
+    .then(user => {
+      setUsername(user.username);
+      setUserID(user.id);
+    })
+    }, [])
 
   useEffect(() => {
     fetch("/groups")
@@ -37,7 +54,7 @@ function App() {
       .then(resp => resp.json())
       .then(data => setReviewList(data))
       .catch(error => console.log(error.message))
-  }, [])
+  }, [setReviewList])
 
   useEffect(() => {
     fetch("/products")
@@ -48,11 +65,14 @@ function App() {
 
   return (
     <div>
-      <NavBar />
+      <NavBar
+      setUsername={setUsername}
+      setUserID={setUserID}
+      />
       <h1>Scrunchie World Client</h1>
       <Switch>
         <Route exact path="/">
-          {username ? 
+          {!!username ? 
           <Home 
           username={username}
           reviewList={reviewList}
@@ -67,6 +87,7 @@ function App() {
         </Route>
         <Route path="/login">
             <Login
+              userList = {userList}
               setUsername = {setUsername}
               setUserID={setUserID}
             />
@@ -87,8 +108,11 @@ function App() {
           />
         </Route>
         <Route path="/newreviewform">
-          <NewReviewForm 
-            
+          <NewReviewForm
+          userID = {userID}
+          productList = {productList}
+          reviewList={reviewList}
+          setReviewList = {setReviewList}
           />
         </Route>
       </Switch>

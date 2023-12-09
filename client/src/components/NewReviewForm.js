@@ -1,20 +1,24 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 
 function NewReviewForm({
         userID,
         productList,
         reviewList,
-        setReviewList
+        setReviewList,
     }) {
 
     const history = useHistory();
     
+    const userProducts = productList.filter(e => e.owners.some(o => o.id == userID))
+    // const userReviews = reviewList.filter(e => e.user_id == userID)
 
-    const options = productList.map(e => <option key={e.id} id={e.id}>{e.name}</option>);
+    const options = userProducts.map(e => <option key={e.id} id={e.id}>{e.name}</option>);
+
     const [prodID, setProdID] = useState(0);
+    
     const formSchema = yup.object().shape({
         product: yup.string().required("Please select a product"),
         rating: yup.number().positive().integer().required().min(1).max(5),
@@ -72,6 +76,10 @@ function NewReviewForm({
                 <br/>
                 <button type="submit">Submit Review</button>
             </form>
+            <br/>
+            <NavLink to="/" exact>
+                <button>Cancel</button>
+            </NavLink>
         </div>
     )
 };

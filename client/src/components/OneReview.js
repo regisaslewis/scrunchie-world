@@ -6,11 +6,11 @@ function OneReview({reviewItem}) {
     const starCount = "⭐".repeat(rating)
 
     return (
-            <div>
-                <h2>{user.username}'s Review for {product.name}</h2>
-                <h3>{rating}/5 {starCount}</h3>
-                <p>{comment}</p>
-            </div>
+        <div>
+            <h2>{user.username}'s Review for {product.name}</h2>
+            <h3>{rating}/5 {starCount}</h3>
+            <p>{comment}</p>
+        </div>
     );
 }
 

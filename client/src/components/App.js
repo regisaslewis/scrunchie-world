@@ -16,9 +16,10 @@ function App() {
   const [brandList, setBrandList] = useState([]);
   const [reviewList, setReviewList] = useState([]);
   const [productList, setProductList] = useState([]);
+  const [userID, setUserID] = useState(null);
   const [userList, setUserList] = useState([]);
   const [username, setUsername] = useState("");
-  const [userID, setUserID] = useState(null);
+  const [products, setProducts] = useState(productList.filter(e => e.owners.some(o => o.id == userID)))
 
   useEffect(() => {
     fetch("/users")
@@ -109,11 +110,20 @@ function App() {
             reviewList = {reviewList}
           />
         </Route>
+        <Route path="/products">
+            <Products
+            userID={userID}
+            userList={userList}
+            productList={productList}
+            />
+        </Route>
         <Route path="/newreviewform">
           <NewReviewForm
           userID = {userID}
           productList = {productList}
           reviewList={reviewList}
+          products={products}
+          setProducts={setProducts}
           setReviewList = {setReviewList}
           />
         </Route>

@@ -51,9 +51,10 @@ function Home({
             <br/>
             {!!showReviewList == true ? showReviewList : "No Reviews Written"}
             <p>_________</p>
+            <NavLink to="/products" exact>
+                <button>Link New Product</button>
+            </NavLink>
             <h3>Products:</h3>
-            <button>Link a Product</button>
-            <br/>
             {!!showProducts === true ? showProducts : "No Products Linked"}
         </div>
     );

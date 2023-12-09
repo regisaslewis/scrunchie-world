@@ -105,12 +105,15 @@ def product():
         return post_item(new_product)
     return make_response(jsonify({"text": "Method Not Allowed"}), 405,)
 
-@app.route("/products/<int:id>", methods=["GET"])
+
+@app.route("/products/<int:id>", methods=["GET", "PATCH"])
 def show_product(id):
     product = Product.query.filter(Product.id == id).first()
     if product:
         if request.method == "GET":
             return get_item(product)
+        elif request.method == "PATCH":
+            return patch_item(product)
     else:
         return make_response(jsonify({"Error": f"Product #{id} not found."}), 404,)
         

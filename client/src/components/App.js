@@ -7,7 +7,8 @@ import Login from "./Login";
 import Groups from "./Groups";
 import Brands from "./Brands";
 import Reviews from "./Reviews";
-import NewReviewForm from "./NewReviewForm"
+import NewReviewForm from "./NewReviewForm";
+import Products from "./Products";
 
 function App() {
 

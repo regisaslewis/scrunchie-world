@@ -15,6 +15,8 @@ function App() {
   const [userList, setUserList] = useState([]);
   const [user, setUser] = useState(null);
   const [groupList, setGroupList] = useState([]);
+  const [group, setGroup] = useState([]);
+  const [inGroup, setInGroup] = useState(false);
   const [brandList, setBrandList] = useState([]);
   const [reviewList, setReviewList] = useState([]);
   const [productList, setProductList] = useState([]);
@@ -40,8 +42,13 @@ function App() {
         return resp.json()
       }
     })
-    .then(user => setUser(user))
-    }, [])
+    .then(user => {
+      setUser(user);
+      if (user.group_id !== null) {
+        setInGroup(true)
+      }
+    })
+  }, [])
 
     useEffect(() => {
       fetch("/products")
@@ -62,7 +69,7 @@ function App() {
         setUserReviews(userRevs);
       })
       .catch(error => console.log(error.message))
-    }, [user])
+    }, [user, inGroup])
 
   useEffect(() => {
     fetch("/groups")
@@ -70,6 +77,10 @@ function App() {
       .then(data => setGroupList(data))
       .catch(error => console.log(error.message))
   }, [])
+
+  useEffect(() => {
+    setGroup(groupList.filter(e => e.members.some(o => o.id == user.id)))
+  }, [groupList])
 
   useEffect(() => {
     fetch("/brands")
@@ -97,6 +108,27 @@ function App() {
     })
 }
 
+function handleGroupChange(newGroupID) {
+  fetch(`/users/${user.id}`, {
+      method: "PATCH",
+      headers: {
+          "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+          group_id: newGroupID
+      }),
+  })
+  .then(resp => resp.json())
+  .then(data => {
+    if (data.group === null) {
+      setInGroup(false);
+    } else {
+      setInGroup(true);
+    }
+    setUser(data);
+  })
+}
+
   return (
     <div>
       <NavBar
@@ -109,8 +141,13 @@ function App() {
           {!!user ? 
           <Home 
             user={user}
+            inGroup={inGroup}
+            setinGroup={setInGroup}
+            handleGroupChange={handleGroupChange}
             reviewList={reviewList}
             groupList={groupList}
+            group={group}
+            setGroup={setGroup}
             userProducts={userProducts}
             setUserProducts={setUserProducts}
           /> : 
@@ -127,6 +164,8 @@ function App() {
         <Route path="/groups">
           <Groups
             user={user}
+            setGroup={setGroup}
+            handleGroupChange={handleGroupChange}
             groupList = {groupList}
           />
         </Route>

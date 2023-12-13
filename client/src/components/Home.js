@@ -7,8 +7,11 @@ function Home({
     user,
     reviewList,
     groupList,
+    group,
+    setGroup,
     userProducts,
-    setUserProducts
+    handleGroupChange,
+    inGroup
     }) {
 
     const [userReviews, setUserReviews] = useState(reviewList.filter(e => e.user_id == user.id))
@@ -20,26 +23,17 @@ function Home({
                 setUserReviews(data.filter(e => e.user_id == user.id))
             })
     }, [])
-    useEffect(() => {
-        fetch("/products")
-            .then(resp => resp.json())
-            .then(data => {
-                setUserProducts(data.filter(e => e.owners.some(o => o.id == user.id)))
-            })
-    }, [])
 
-    const group = groupList.filter(e => e.members.some(o => o.id == user.id))
-    const showGroup = group.map(e => <OneGroup key={e.id} groupItem={e} />);
+    let showGroup = group.map(e => <OneGroup key={e.id} groupList={groupList} user={user} handleGroupChange={handleGroupChange} groupItem={e} setGroup={setGroup} />)
 
     const showReviewList = userReviews.map(e => <OneReview key={e.id} reviewItem={e} />)
-    
     const showProducts = userProducts.map(e => <p key={e.id}>{e.name}</p>)
-
+    
     return (
         <div>
             <h2>Hello, {user.username}!</h2>
             <h3>Group:</h3>
-            {showGroup.length > 0 ? 
+            {inGroup ? 
             showGroup : 
             <NavLink to="/groups">
                 <button>Join a Group</button>
@@ -50,13 +44,14 @@ function Home({
                 <button>Add a Review</button>
             </NavLink>
             <br/>
-            {!!showReviewList == true ? showReviewList : "No Reviews Written"}
+            <br/>
+            {showReviewList.length > 0 ? showReviewList : "No Reviews Written"}
             <p>_________</p>
             <NavLink to="/products" exact>
                 <button>Link New Product</button>
             </NavLink>
             <h3>Products:</h3>
-            {!!showProducts === true ? showProducts : "No Products Linked"}
+            {showProducts.length > 0 ? showProducts : "No Products Linked"}
         </div>
     );
 }

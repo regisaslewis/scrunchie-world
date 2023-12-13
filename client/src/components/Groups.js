@@ -1,7 +1,8 @@
 import React from "react";
 import OneGroup from "./OneGroup";
+import { NavLink } from "react-router-dom";
 
-function Groups({groupList, user}) {
+function Groups({groupList, user, handleGroupChange, setGroup}) {
 
     // SORT BY NORMAL ORDER
     // groupList.sort((a, b) => {
@@ -29,12 +30,15 @@ function Groups({groupList, user}) {
     //     return 0;
     // });
 
-    const showGroupList = groupList.map(e => <OneGroup key={e.id} groupItem={e} user={user} />)
+    const showGroupList = groupList.map(e => <OneGroup key={e.id} groupList={groupList} user={user} handleGroupChange={handleGroupChange} groupItem={e} setGroup={setGroup} />)
 
     return (
         <div>
             <h2>You can only be in one Group</h2>
             <h3>Choose Wisely</h3>
+            <NavLink to="/" exact>
+                <button>Cancel</button>
+            </NavLink>
             <p>_________</p>
             {showGroupList}
         </div>

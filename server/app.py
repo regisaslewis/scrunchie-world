@@ -113,7 +113,12 @@ def show_product(id):
         if request.method == "GET":
             return get_item(product)
         elif request.method == "PATCH":
-            return patch_item(product)
+            data = request.get_json()
+            # breakpoint()
+            for attr in data:
+                setattr(product, attr, data[attr])
+            db.session.commit()
+        return make_response(product.to_dict(), 200)
     else:
         return make_response(jsonify({"Error": f"Product #{id} not found."}), 404,)
         

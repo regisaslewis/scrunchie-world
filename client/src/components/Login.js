@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom"
 import { useFormik } from "formik";
 import * as yup from "yup";
 
-function Login({setUsername, setUserID, userList}) {
+function Login({setUser, userList}) {
 
     const [passes, setPasses] = useState(true)
     const history = useHistory();
@@ -32,8 +32,7 @@ function Login({setUsername, setUserID, userList}) {
                 })
                 .then(resp => resp.json())
                 .then(data => {
-                    setUserID(data.id);
-                    setUsername(formik.values.username);
+                    setUser(data);
                     setPasses(true);
                     history.push("/");
                 })

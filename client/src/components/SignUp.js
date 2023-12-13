@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
-function SignUp({ setUsername, setUserID }) {
+function SignUp({ setUser }) {
 
     const formSchema = yup.object().shape({
         username: yup.string().required("Must enter a username").min(3).max(15),
@@ -29,8 +29,7 @@ function SignUp({ setUsername, setUserID }) {
             })
             .then(resp => resp.json())
             .then(data => {
-                setUsername(data[0].username)
-                setUserID(data[0].id)
+                setUser(data[0])
             })
         }
     })

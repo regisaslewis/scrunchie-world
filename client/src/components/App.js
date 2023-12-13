@@ -12,30 +12,57 @@ import Products from "./Products";
 
 function App() {
 
+  const [userList, setUserList] = useState([]);
+  const [user, setUser] = useState(null);
   const [groupList, setGroupList] = useState([]);
   const [brandList, setBrandList] = useState([]);
   const [reviewList, setReviewList] = useState([]);
   const [productList, setProductList] = useState([]);
-  const [userID, setUserID] = useState(null);
-  const [userList, setUserList] = useState([]);
-  const [username, setUsername] = useState("");
-  const [products, setProducts] = useState(productList.filter(e => e.owners.some(o => o.id == userID)))
+  const [userProducts, setUserProducts] = useState([]);
+  const [notUserProducts, setNotUserProducts] = useState([]);
+  const [userReviews, setUserReviews] = useState([]);
 
   useEffect(() => {
     fetch("/users")
       .then(resp => resp.json())
-      .then(data => setUserList(data))
+      .then(data => {
+        setUserList(data);
+    })
       .catch(error => console.log(error.message))
   }, [])
 
   useEffect(() => {
     fetch("/check_session")
-    .then(resp => resp.json())
-    .then(user => {
-      setUsername(user.username);
-      setUserID(user.id);
+    .then(resp => {
+      if (!resp.ok) {
+        handleLogout()
+      } else {
+        return resp.json()
+      }
     })
+    .then(user => setUser(user))
     }, [])
+
+    useEffect(() => {
+      fetch("/products")
+      .then(resp => resp.json())
+      .then(data => {
+        setProductList(data);
+        let userLinkedProducts = user.products;
+        let userUnlinkedProducts = data.filter(e => !e.owners.some(o => o.id == user.id));
+        setUserProducts(() => setUserProducts(userLinkedProducts));
+        setNotUserProducts(() => setNotUserProducts(userUnlinkedProducts));
+      })
+      .catch(error => console.log(error.message))
+      fetch("/reviews")
+      .then(resp => resp.json())
+      .then(data => {
+        setReviewList(data);
+        let userRevs = data.filter(e => e.user_id == user.id);
+        setUserReviews(userRevs);
+      })
+      .catch(error => console.log(error.message))
+    }, [user])
 
   useEffect(() => {
     fetch("/groups")
@@ -58,45 +85,48 @@ function App() {
       .catch(error => console.log(error.message))
   }, [setReviewList])
 
-  useEffect(() => {
-    fetch("/products")
-      .then(resp => resp.json())
-      .then(data => setProductList(data))
-      .catch(error => console.log(error.message))
-  }, [])
+  function handleLogout() {
+    fetch("/logout", {
+        method: "DELETE",
+    })
+    .then(() => {
+        setUser(null);
+        setUserProducts([]);
+        setNotUserProducts([]);
+        setUserReviews([]);
+    })
+}
 
   return (
     <div>
       <NavBar
-      username={username}
-      setUsername={setUsername}
-      setUserID={setUserID}
+      handleLogout={handleLogout}
+      user={user}
       />
       <h1>Scrunchie World Client</h1>
       <Switch>
         <Route exact path="/">
-          {!!username ? 
+          {!!user ? 
           <Home 
-          username={username}
-          reviewList={reviewList}
-          groupList={groupList}
-          productList={productList}
-          userID={userID}
+            user={user}
+            reviewList={reviewList}
+            groupList={groupList}
+            userProducts={userProducts}
+            setUserProducts={setUserProducts}
           /> : 
           <SignUp
-            setUsername = {setUsername}
-            setUserID={setUserID}
+            setUser={setUser}
           />}
         </Route>
         <Route path="/login">
             <Login
               userList = {userList}
-              setUsername = {setUsername}
-              setUserID={setUserID}
+              setUser={setUser}
             />
         </Route>
         <Route path="/groups">
           <Groups
+            user={user}
             groupList = {groupList}
           />
         </Route>
@@ -112,19 +142,22 @@ function App() {
         </Route>
         <Route path="/products">
             <Products
-            userID={userID}
+            user={user}
             userList={userList}
-            productList={productList}
+            userProducts={userProducts}
+            notUserProducts={notUserProducts}
+            setUserProducts={setUserProducts}
             />
         </Route>
         <Route path="/newreviewform">
           <NewReviewForm
-          userID = {userID}
-          productList = {productList}
-          reviewList={reviewList}
-          products={products}
-          setProducts={setProducts}
-          setReviewList = {setReviewList}
+            user={user}
+            productList = {productList}
+            reviewList={reviewList}
+            userProducts={userProducts}
+            userReviews={userReviews}
+            setReviewList = {setReviewList}
+            setUserReviews={setUserReviews}
           />
         </Route>
       </Switch>

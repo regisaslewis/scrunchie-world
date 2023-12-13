@@ -1,22 +1,14 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
-function NavBar({setUsername, setUserID, username}) {
-
-    function handleLogout() {
-        fetch("/logout", {
-            method: "DELETE",
-
-        })
-        .then(() => {
-            setUsername("");
-            setUserID(null);
-        })
-    }
+function NavBar({user, handleLogout}) {
 
     return (
         <div>
             <h2>Navigation Bar here.</h2>
-            {!!username ? <button onClick={handleLogout}>Logout</button>: ""}
+            <NavLink to="/" exact>
+                {!!user ? <button onClick={handleLogout}>Logout</button>: ""}
+            </NavLink>
         </div>
     );
 }

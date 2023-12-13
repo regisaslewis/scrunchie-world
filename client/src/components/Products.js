@@ -1,25 +1,28 @@
-import React, { useState } from "react";
+import React from "react";
 import OneProduct from "./OneProduct";
 import { NavLink } from "react-router-dom";
 
-function Products({productList, userID, userList}) {
-
-    const [linkedList, setLinkedList] = useState(productList.filter(e => e.owners.some(o => o.id == userID)))
-    const [unlinkedList, setUnlinkedList] = useState(productList.filter(e => !e.owners.some(o => o.id == userID)))
-
-    const showProductList = unlinkedList.map(e => <OneProduct 
-        linkedList={linkedList}
-        setLinkedList={setLinkedList}
+function Products({
+    user, 
+    userList,
+    userProducts,
+    notUserProducts,
+    setUserProducts
+    }) {
+        
+    const showProductList = notUserProducts.map(e => <OneProduct 
+        userProducts={userProducts}
+        setUserProducts={setUserProducts}
         userList={userList}
-        userID={userID} 
+        user={user} 
         key={e.id} 
         productItem={e} 
         />)
-
+        
     return (
         <div>
             <h2>Products Page Here.</h2>
-            {showProductList}
+            {!!user ? showProductList : ""}
             <NavLink to="/" exact>
                 <button>Cancel</button>
             </NavLink>

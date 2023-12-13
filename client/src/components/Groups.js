@@ -1,7 +1,7 @@
 import React from "react";
 import OneGroup from "./OneGroup";
 
-function Groups({groupList}) {
+function Groups({groupList, user}) {
 
     // SORT BY NORMAL ORDER
     // groupList.sort((a, b) => {
@@ -29,11 +29,13 @@ function Groups({groupList}) {
     //     return 0;
     // });
 
-    const showGroupList = groupList.map(e => <OneGroup key={e.id} groupItem={e} />)
+    const showGroupList = groupList.map(e => <OneGroup key={e.id} groupItem={e} user={user} />)
 
     return (
         <div>
-            <h2>Groups Page Here.</h2>
+            <h2>You can only be in one Group</h2>
+            <h3>Choose Wisely</h3>
+            <p>_________</p>
             {showGroupList}
         </div>
     );

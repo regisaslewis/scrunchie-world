@@ -4,18 +4,21 @@ import * as yup from "yup";
 import { NavLink, useHistory } from "react-router-dom";
 
 function NewReviewForm({
-        userID,
+        user,
+        userProducts,
+        userReviews,
         productList,
         reviewList,
         setReviewList,
+        setUserReviews
     }) {
 
     const history = useHistory();
-    
-    const userProducts = productList.filter(e => e.owners.some(o => o.id == userID))
-    // const userReviews = reviewList.filter(e => e.user_id == userID)
 
-    const options = userProducts.map(e => <option key={e.id} id={e.id}>{e.name}</option>);
+    const userReviewIDs = userReviews.map(e => e.product_id)    
+    const optionsList = userProducts.filter(({id}) => !userReviewIDs.includes(id))
+
+    const options = optionsList.map(e => <option key={e.id} id={e.id}>{e.name}</option>);
 
     const [prodID, setProdID] = useState(0);
     
@@ -29,7 +32,7 @@ function NewReviewForm({
         initialValues: {
             rating: "",
             comment: "",
-            user_id: userID,
+            user_id: user.id,
         },
         validationSchema: formSchema,
         onSubmit: (values) => {
@@ -45,6 +48,8 @@ function NewReviewForm({
             .then(data => {
                 const newReviewList = [...reviewList, data];
                 setReviewList(newReviewList);
+                const newUserReviewList = [...userReviews, data];
+                setUserReviews(newUserReviewList)
                 history.push("/");
             })
         }

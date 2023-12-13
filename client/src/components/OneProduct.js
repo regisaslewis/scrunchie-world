@@ -2,25 +2,17 @@ import React from "react";
 
 function OneProduct({
     productItem, 
-    userID, 
-    userList,
-    setLinkedList,
-    linkedList
+    user,
+    userProducts,
+    setUserProducts
     }) {
 
     const { name, brand, cost, id, owners } = productItem;
     const brandName = brand.name
-
-    function getUser() {
-        for (let i of userList) {
-            if (i.id == userID)
-            return i
-        }
-    }
-
+    
     function handleClick() {
-        owners.push(getUser());
-
+        owners.push(user);
+        
         fetch(`/products/${id}`, {
             method: "PATCH",
             headers: {
@@ -28,13 +20,13 @@ function OneProduct({
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                owners: owners
+                owners: owners,
             }),
         })
         .then(resp => resp.json())
         .then(() => {
-            const newArray = [...linkedList, productItem];
-            setLinkedList(newArray)
+            const newArray = [...userProducts, productItem];
+            setUserProducts(newArray)
         })
     }
 

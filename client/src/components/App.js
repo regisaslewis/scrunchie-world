@@ -20,6 +20,7 @@ function App() {
   const [group, setGroup] = useState([]);
   const [inGroup, setInGroup] = useState(false);
   const [brandList, setBrandList] = useState([]);
+  const [brand, setBrand] = useState(null)
   const [reviewList, setReviewList] = useState([]);
   const [productList, setProductList] = useState([]);
   const [userProducts, setUserProducts] = useState([]);
@@ -87,7 +88,7 @@ function App() {
       .then(resp => resp.json())
       .then(data => setBrandList(data))
       .catch(error => console.log(error.message))
-  }, [])
+  }, [productList])
 
   useEffect(() => {
     fetch("/reviews")
@@ -175,6 +176,7 @@ function handleGroupChange(newGroupID) {
         <Route path="/brands">
           <Brands
             brandList = {brandList}
+            setBrand={setBrand}
           />
         </Route>
         <Route path="/reviews">
@@ -213,7 +215,11 @@ function handleGroupChange(newGroupID) {
         </Route>
         <Route path="/newproductform">
           <NewProductForm
-          productList={productList} 
+          productList={productList}
+          setProductList={setProductList}
+          brand={brand}
+          brandList={brandList}
+          setBrandList={setBrandList}
           />
         </Route>
       </Switch>

@@ -30,7 +30,7 @@ function NewReviewForm({
 
     const formik = useFormik({
         initialValues: {
-            rating: "",
+            rating: 1,
             comment: "",
             user_id: user.id,
         },
@@ -74,7 +74,7 @@ function NewReviewForm({
                 </select>
                 <br/>
                 <label>Rating:</label>
-                <input name="rating" value={formik.values.rating} onChange={formik.handleChange} />
+                <input type="number" min="1" max="5" name="rating" value={formik.values.rating} onChange={formik.handleChange} />
                 <br/>
                 <label>Comment:</label>
                 <input name="comment" value={formik.values.comment} onChange={formik.handleChange} />

@@ -1,9 +1,16 @@
 import React from "react";
 import OneBrand from "./OneBrand";
 
-function Brands({brandList}) {
+function Brands({
+    brandList,
+    setBrand
+    }) {
 
-    const showBrandList = brandList.map(e => <OneBrand key={e.id} brandItem={e} />)
+    const showBrandList = brandList.map(e => <OneBrand 
+        key={e.id} 
+        brandItem={e}
+        setBrand={setBrand}
+        />)
 
     return (
         <div>

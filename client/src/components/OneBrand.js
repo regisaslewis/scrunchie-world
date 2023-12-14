@@ -1,10 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router-dom/";
 
-function OneBrand({brandItem}) {
+function OneBrand({
+    brandItem,
+    setBrand
+    }) {
 
-    const { name, description, products, id } = brandItem
-    const productList = products.map(e => <p key={e.id}>{e.name}</p>)
+    const { name, description, products } = brandItem
+    const productList = products.map(e => <p key={e.id}>{e.name} ({"💲".repeat(e.cost)})</p>)
 
     return (
         <div>
@@ -13,7 +16,7 @@ function OneBrand({brandItem}) {
             <h4>Products:</h4>
             {productList}
             <NavLink to="/newproductform">
-                <button>Add a new {name} Product</button>
+                <button onClick={() => setBrand(brandItem)}>Add a new {name} Product</button>
             </NavLink>
         </div>
     );

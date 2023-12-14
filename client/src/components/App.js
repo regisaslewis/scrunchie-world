@@ -9,7 +9,7 @@ import Brands from "./Brands";
 import Reviews from "./Reviews";
 import NewReviewForm from "./NewReviewForm";
 import Products from "./Products";
-import AllProducts from "./AllProducts";
+import AllProducts from "./AllProducts.js";
 
 function App() {
 

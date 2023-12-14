@@ -1,22 +1,14 @@
 import React from "react";
-import OneProduct from "./OneProduct";
+import OneAllProduct from "./OneAllProduct";
 import { NavLink } from "react-router-dom";
 
 function AllProducts({
-    user, 
-    userList,
-    userProducts,
-    setUserProducts,
     productList,
     }) {
     
     // let userProductsIDs = userProducts.map(e => e.id)
     // let unlinkedProductList = productList.filter(({id}) => !userProductsIDs.includes(id));
-    const showProductList = productList.map(e => <OneProduct 
-        userProducts={userProducts}
-        setUserProducts={setUserProducts}
-        userList={userList}
-        user={user} 
+    const showProductList = productList.map(e => <OneAllProduct 
         key={e.id} 
         productItem={e} 
         />)

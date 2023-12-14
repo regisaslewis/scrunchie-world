@@ -10,6 +10,7 @@ import Reviews from "./Reviews";
 import NewReviewForm from "./NewReviewForm";
 import Products from "./Products";
 import AllProducts from "./AllProducts.js";
+import NewProductForm from "./NewProductForm";
 
 function App() {
 
@@ -208,6 +209,11 @@ function handleGroupChange(newGroupID) {
             userReviews={userReviews}
             setReviewList = {setReviewList}
             setUserReviews={setUserReviews}
+          />
+        </Route>
+        <Route path="/newproductform">
+          <NewProductForm
+          productList={productList} 
           />
         </Route>
       </Switch>

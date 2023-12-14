@@ -5,9 +5,7 @@ import { NavLink } from "react-router-dom";
 function AllProducts({
     productList,
     }) {
-    
-    // let userProductsIDs = userProducts.map(e => e.id)
-    // let unlinkedProductList = productList.filter(({id}) => !userProductsIDs.includes(id));
+        
     const showProductList = productList.map(e => <OneAllProduct 
         key={e.id} 
         productItem={e} 

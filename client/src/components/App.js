@@ -9,6 +9,7 @@ import Brands from "./Brands";
 import Reviews from "./Reviews";
 import NewReviewForm from "./NewReviewForm";
 import Products from "./Products";
+import AllProducts from "./AllProducts";
 
 function App() {
 
@@ -21,7 +22,6 @@ function App() {
   const [reviewList, setReviewList] = useState([]);
   const [productList, setProductList] = useState([]);
   const [userProducts, setUserProducts] = useState([]);
-  const [notUserProducts, setNotUserProducts] = useState([]);
   const [userReviews, setUserReviews] = useState([]);
 
   useEffect(() => {
@@ -57,9 +57,7 @@ function App() {
       .then(data => {
         setProductList(data);
         let userLinkedProducts = user.products;
-        let userUnlinkedProducts = data.filter(e => !e.owners.some(o => o.id == user.id));
         setUserProducts(() => setUserProducts(userLinkedProducts));
-        setNotUserProducts(() => setNotUserProducts(userUnlinkedProducts));
       })
       .catch(error => console.log(error.message))
       fetch("/reviews")
@@ -104,7 +102,6 @@ function App() {
     .then(() => {
         setUser(null);
         setUserProducts([]);
-        setNotUserProducts([]);
         setUserReviews([]);
     })
 }
@@ -184,12 +181,21 @@ function handleGroupChange(newGroupID) {
             reviewList = {reviewList}
           />
         </Route>
+        <Route path="/allproducts">
+          <AllProducts 
+            user={user}
+            userList={userList}
+            userProducts={userProducts}
+            productList={productList}
+            setUserProducts={setUserProducts}
+          />
+        </Route>
         <Route path="/products">
             <Products
             user={user}
             userList={userList}
             userProducts={userProducts}
-            notUserProducts={notUserProducts}
+            productList={productList}
             setUserProducts={setUserProducts}
             />
         </Route>

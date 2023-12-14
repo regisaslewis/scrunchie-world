@@ -91,9 +91,9 @@ def show_user(id):
             return delete_item(user, id)
     else:
         return make_response(jsonify({"Error": f"User #{id} not found."}), 404)
-        
-@app.route("/products", methods=["GET", "POST"])
-def product():
+    
+@app.route("/allproducts", methods=["GET", "POST"])
+def allproducts():
     if request.method == "GET":
         return get_group(Product)
     if request.method == "POST":
@@ -105,6 +105,21 @@ def product():
         return post_item(new_product)
     return make_response(jsonify({"text": "Method Not Allowed"}), 405,)
 
+@app.route("/allproducts/<int:id>", methods=["GET"])
+def show_all_product(id):
+    product = Product.query.filter(Product.id == id).first()
+    if product:
+        if request.method == "GET":
+            return get_item(product)
+        return make_response(product.to_dict(), 200)
+    else:
+        return make_response(jsonify({"Error": f"Product #{id} not found."}), 404,)
+        
+@app.route("/products", methods=["GET"])
+def product():
+    if request.method == "GET":
+        return get_group(Product)
+    return make_response(jsonify({"text": "Method Not Allowed"}), 405,)
 
 @app.route("/products/<int:id>", methods=["GET", "POST"])
 def show_product(id):

@@ -2,12 +2,11 @@ import React from "react";
 
 function OneProduct({
     productItem, 
-    user,
     userProducts,
     setUserProducts
     }) {
 
-    const { name, brand, cost, id, owners } = productItem;
+    const { name, brand, cost, id } = productItem;
     const brandName = brand.name
     
     function handleClick() {

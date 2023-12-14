@@ -2,7 +2,7 @@ import React from "react";
 import OneProduct from "./OneProduct";
 import { NavLink } from "react-router-dom";
 
-function Products({
+function AllProducts({
     user, 
     userList,
     userProducts,
@@ -10,9 +10,9 @@ function Products({
     productList,
     }) {
     
-    let userProductsIDs = userProducts.map(e => e.id)
-    let unlinkedProductList = productList.filter(({id}) => !userProductsIDs.includes(id));
-    const showProductList = unlinkedProductList.map(e => <OneProduct 
+    // let userProductsIDs = userProducts.map(e => e.id)
+    // let unlinkedProductList = productList.filter(({id}) => !userProductsIDs.includes(id));
+    const showProductList = productList.map(e => <OneProduct 
         userProducts={userProducts}
         setUserProducts={setUserProducts}
         userList={userList}
@@ -23,8 +23,8 @@ function Products({
         
     return (
         <div>
-            <h2>Products Page Here.</h2>
-            {!!user ? showProductList : ""}
+            <h2>All Products Page Here.</h2>
+            {showProductList}
             <NavLink to="/" exact>
                 <button>Return</button>
             </NavLink>
@@ -32,4 +32,4 @@ function Products({
     );
 }
 
-export default Products;
+export default AllProducts;

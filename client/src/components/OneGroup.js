@@ -26,12 +26,8 @@ function OneGroup({groupList, groupItem, handleGroupChange, user, setGroup}) {
             :
             ""}
             {user.group_id === id ?
-            <NavLink to="/" exact>
-                <button onClick={() => handleGroupChange(null)}>Leave current group: {name}</button>
-            </NavLink>:
-            <NavLink to="/" exact>
+            <button onClick={() => handleGroupChange(null)}>Leave current group: {name}</button>:
             <button onClick={() => handleClick(id)}>Join {name}</button>
-            </NavLink>
             }
         </div>
     );

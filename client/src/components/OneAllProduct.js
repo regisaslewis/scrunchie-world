@@ -11,7 +11,7 @@ function OneAllProduct({
         <div>
             <h2>{name}</h2>
             <h3>{brandName}</h3>
-            <h5>{"$".repeat(cost)}</h5>
+            <h5>{"💲".repeat(cost)}</h5>
             <p>_________</p>    
         </div> 
     );

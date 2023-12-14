@@ -50,9 +50,6 @@ function SignUp({ setUser }) {
                 <p style={{ color: "red" }}>{formik.errors.hairstyle}</p>
                 <button type="submit">Sign Up</button>
             </form>
-            <NavLink to="/login" exact>
-                <button>Log In</button>
-            </NavLink>
         </div>
     );
 }

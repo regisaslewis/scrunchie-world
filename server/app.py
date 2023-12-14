@@ -106,17 +106,15 @@ def product():
     return make_response(jsonify({"text": "Method Not Allowed"}), 405,)
 
 
-@app.route("/products/<int:id>", methods=["GET", "PATCH"])
+@app.route("/products/<int:id>", methods=["GET", "POST"])
 def show_product(id):
     product = Product.query.filter(Product.id == id).first()
     if product:
         if request.method == "GET":
             return get_item(product)
-        elif request.method == "PATCH":
-            data = request.get_json()
-            # breakpoint()
-            for attr in data:
-                setattr(product, attr, data[attr])
+        elif request.method == "POST":
+            product.owners.append(User.query.filter_by(id = session["user_id"]).first())
+            db.session.add(product)
             db.session.commit()
         return make_response(product.to_dict(), 200)
     else:

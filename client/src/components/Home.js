@@ -50,7 +50,7 @@ function Home({
             <NavLink to="/products" exact>
                 <button>Link New Product</button>
             </NavLink>
-            <h3>Products:</h3>
+            <h3>Currently linked products:</h3>
             {showProducts.length > 0 ? showProducts : "No Products Linked"}
         </div>
     );

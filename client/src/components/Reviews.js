@@ -46,7 +46,7 @@ function Reviews({reviewList}) {
 
     return (
         <div>
-            <h2>Reviews Page Here.</h2>
+            <h2>All user reviews.</h2>
             {showReviewList}
         </div>
     );

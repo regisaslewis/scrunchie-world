@@ -7,8 +7,8 @@ from config import db, metadata
 product_owners = db.Table(
     "products_owners",
     metadata,
-    db.Column("user_id", db.Integer, db.ForeignKey("users.id"), primary_key=True),
-    db.Column("product_id", db.Integer, db.ForeignKey("products.id"), primary_key=True)
+    db.Column("user_id", db.Integer, db.ForeignKey("users.id")),
+    db.Column("product_id", db.Integer, db.ForeignKey("products.id"))
 )
 
 class User(db.Model, SerializerMixin):

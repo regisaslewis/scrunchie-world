@@ -33,6 +33,7 @@ function App() {
       .catch(error => console.log(error.message))
   }, [])
 
+
   useEffect(() => {
     fetch("/check_session")
     .then(resp => {
@@ -126,6 +127,10 @@ function handleGroupChange(newGroupID) {
       setInGroup(true);
     }
     setUser(data);
+    fetch("/groups")
+      .then(resp => resp.json())
+      .then(data => setGroupList(data))
+      .catch(error => console.log(error.message))
   })
 }
 

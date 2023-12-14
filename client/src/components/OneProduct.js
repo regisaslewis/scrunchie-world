@@ -11,17 +11,13 @@ function OneProduct({
     const brandName = brand.name
     
     function handleClick() {
-        owners.push(user);
         
         fetch(`/products/${id}`, {
-            method: "PATCH",
+            method: "POST",
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({
-                owners: owners,
-            }),
         })
         .then(resp => resp.json())
         .then(() => {

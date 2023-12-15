@@ -36,6 +36,9 @@ function Groups({groupList, user, handleGroupChange, setGroup}) {
         <div>
             <h2>You can only be in one Group</h2>
             <h3>Choose Wisely</h3>
+            <NavLink to="/newgroupform" exact>
+                <button>Create New Group</button>
+            </NavLink>
             <NavLink to="/" exact>
                 <button>Return</button>
             </NavLink>

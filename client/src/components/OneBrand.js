@@ -12,7 +12,7 @@ function OneBrand({
         if (brandItem.products.length > 0) {
             return products.map(e => <p key={e.id}>{e.name} ({"💲".repeat(e.cost)})</p>)
         } else {
-            return <p>No Products yet.</p>
+            return <p style={{"color": "red"}}>No Products yet.</p>
         }
     }
 

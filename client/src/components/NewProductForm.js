@@ -33,7 +33,7 @@ function NewProductForm({
             })
             .then(resp => resp.json())
             .then(data => {
-                const newProductList = [...productList, data];
+                const newProductList = [...productList, data[0]];
                 setProductList(newProductList);
                 history.push("/brands");
             })
@@ -42,7 +42,7 @@ function NewProductForm({
 
     return (
         <div>
-            <h2>New {brand.name} Product Form.</h2>
+            <h2>New {brand.name} Product</h2>
             <form autoComplete="off" onSubmit={formik.handleSubmit}>
                 <label>Product Name:</label>
                 <input type="text" name="name" value={formik.values.name} onChange={formik.handleChange} />

@@ -4,11 +4,13 @@ import { NavLink } from "react-router-dom";
 
 function AllProducts({
     productList,
+    setBrand
     }) {
         
     const showProductList = productList.map(e => <OneAllProduct 
         key={e.id} 
-        productItem={e} 
+        productItem={e}
+        setBrand={setBrand}
         />)
         
     return (

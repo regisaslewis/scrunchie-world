@@ -5,7 +5,7 @@ function NavBar({user, handleLogout}) {
 
     return (
         <div>
-            <h2>Navigation Bar here.</h2>
+        <h1>Scrunchie World!!</h1>
             {!!user ?
             <NavLink to="/" exact>
                 <button onClick={handleLogout}>Logout</button>

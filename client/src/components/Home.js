@@ -14,15 +14,15 @@ function Home({
     inGroup
     }) {
 
-    const [userReviews, setUserReviews] = useState(reviewList.filter(e => e.user_id == user.id))
+    const [userReviews, setUserReviews] = useState(reviewList.filter(e => e.user_id === user.id))
 
     useEffect(() => {
         fetch("/reviews")
             .then(resp => resp.json())
             .then(data => {
-                setUserReviews(data.filter(e => e.user_id == user.id))
+                setUserReviews(data.filter(e => e.user_id === user.id))
             })
-    }, [])
+    }, [user.id])
 
     let showGroup = group.map(e => <OneGroup key={e.id} groupList={groupList} user={user} handleGroupChange={handleGroupChange} groupItem={e} setGroup={setGroup} />)
 

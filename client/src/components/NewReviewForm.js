@@ -46,9 +46,9 @@ function NewReviewForm({
             })
             .then(resp => resp.json())
             .then(data => {
-                const newReviewList = [...reviewList, data];
+                const newReviewList = [...reviewList, data[0]];
                 setReviewList(newReviewList);
-                const newUserReviewList = [...userReviews, data];
+                const newUserReviewList = [...userReviews, data[0]];
                 setUserReviews(newUserReviewList)
                 history.push("/");
             })
@@ -57,7 +57,7 @@ function NewReviewForm({
         
     function getID(e) {
         for (let i = 0; i < productList.length; i++) {
-            if (productList[i].name == e.target.value) {
+            if (productList[i].name === e.target.value) {
                 setProdID(productList[i].id)
             }
         }
@@ -74,7 +74,13 @@ function NewReviewForm({
                 </select>
                 <br/>
                 <label>Rating:</label>
-                <input type="number" min="1" max="5" name="rating" value={formik.values.rating} onChange={formik.handleChange} />
+                <select  name="rating" value={formik.values.rating} onChange={formik.handleChange}>
+                    <option value="1">⭐</option>
+                    <option value="2">⭐⭐</option>
+                    <option value="3">⭐⭐⭐</option>
+                    <option value="4">⭐⭐⭐⭐</option>
+                    <option value="5">⭐⭐⭐⭐⭐</option>
+                </select>
                 <br/>
                 <label>Comment:</label>
                 <input name="comment" value={formik.values.comment} onChange={formik.handleChange} />

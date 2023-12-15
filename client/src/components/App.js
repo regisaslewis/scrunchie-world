@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import NavBar from "./NavBar";
 import Home from "./Home";
 import SignUp from "./SignUp";
@@ -22,21 +22,11 @@ function App() {
   const [group, setGroup] = useState([]);
   const [inGroup, setInGroup] = useState(false);
   const [brandList, setBrandList] = useState([]);
-  const [brand, setBrand] = useState(null)
+  const [brand, setBrand] = useState(null);
   const [reviewList, setReviewList] = useState([]);
   const [productList, setProductList] = useState([]);
   const [userProducts, setUserProducts] = useState([]);
   const [userReviews, setUserReviews] = useState([]);
-
-  useEffect(() => {
-    fetch("/users")
-      .then(resp => resp.json())
-      .then(data => {
-        setUserList(data);
-    })
-      .catch(error => console.log(error.message))
-  }, [])
-
 
   useEffect(() => {
     fetch("/check_session")
@@ -49,10 +39,19 @@ function App() {
     })
     .then(user => {
       setUser(user);
-      if (user.group_id !== null) {
+      if (!!user && user.group_id !== null) {
         setInGroup(true)
       }
     })
+  }, [])
+
+  useEffect(() => {
+    fetch("/users")
+      .then(resp => resp.json())
+      .then(data => {
+        setUserList(data);
+    })
+      .catch(error => console.log(error.message))
   }, [])
 
     useEffect(() => {
@@ -68,8 +67,10 @@ function App() {
       .then(resp => resp.json())
       .then(data => {
         setReviewList(data);
-        let userRevs = data.filter(e => e.user_id == user.id);
-        setUserReviews(userRevs);
+        if (!!user) {
+          let userRevs = data.filter(e => e.user_id === user.id);
+          setUserReviews(userRevs);
+        }
       })
       .catch(error => console.log(error.message))
     }, [user, inGroup])
@@ -82,8 +83,10 @@ function App() {
   }, [])
 
   useEffect(() => {
-    setGroup(groupList.filter(e => e.members.some(o => o.id == user.id)))
-  }, [groupList])
+    if (!!user) {
+      setGroup(groupList.filter(e => e.members.some(o => o.id === user.id)))
+    }
+  }, [user, groupList])
 
   useEffect(() => {
     fetch("/brands")
@@ -144,7 +147,6 @@ function handleGroupChange(newGroupID) {
       handleLogout={handleLogout}
       user={user}
       />
-      <h1>Scrunchie World Client</h1>
       <Switch>
         <Route exact path="/">
           {!!user ? 
@@ -193,6 +195,7 @@ function handleGroupChange(newGroupID) {
           <AllProducts 
             user={user}
             userList={userList}
+            setBrand={setBrand}
             userProducts={userProducts}
             productList={productList}
             setUserProducts={setUserProducts}

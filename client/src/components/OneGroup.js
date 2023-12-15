@@ -1,12 +1,10 @@
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom"
+import React from "react";
 
 function OneGroup({groupList, groupItem, handleGroupChange, user, setGroup}) {
 
     const { name, members, description, id } = groupItem;
 
     let newGroup = groupList.filter(e => e.id === id);
-    // let memberList = members.map(e => <p key={e.id}>{e.username}</p>);
 
     function membersMap() {
         if (groupItem.members.length > 0) {
@@ -22,13 +20,17 @@ function OneGroup({groupList, groupItem, handleGroupChange, user, setGroup}) {
         }
     }
 
-    // function productsMap() {
-    //     if (brandItem.products.length > 0) {
-    //         return products.map(e => <p key={e.id}>{e.name} ({"💲".repeat(e.cost)})</p>)
-    //     } else {
-    //         return <p style={{"color": "red"}}>No Products yet.</p>
-    //     }
-    // }
+    function checkUser() {
+        if (!!user) {
+            if (user.group_id === id) {
+                return <button onClick={() => handleGroupChange(null)}>Leave current group: {name}</button>
+            } else {
+                return <button onClick={() => handleClick(id)}>Join {name}</button>
+            }
+        } else {
+            return ""
+        }
+    }
 
     function handleClick() {
         handleGroupChange(id);
@@ -40,10 +42,7 @@ function OneGroup({groupList, groupItem, handleGroupChange, user, setGroup}) {
             <h2>{name}</h2>
             <h3>{description}</h3>
             {membersMap()}
-            {user.group_id === id ?
-            <button onClick={() => handleGroupChange(null)}>Leave current group: {name}</button>:
-            <button onClick={() => handleClick(id)}>Join {name}</button>
-            }
+            {checkUser()}
         </div>
     );
 }

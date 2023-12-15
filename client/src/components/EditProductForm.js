@@ -7,8 +7,6 @@ function EditProductForm({
     brand,
     product,
     handleProductUpdate,
-    productList,
-    setProductList
     }) {
     const history = useHistory();
 

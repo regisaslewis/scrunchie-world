@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import { NavLink } from "react-router-dom"
 import OneReview from "./OneReview";
 import OneGroup from "./OneGroup";
@@ -11,22 +11,16 @@ function Home({
     setGroup,
     userProducts,
     handleGroupChange,
-    inGroup
+    handleReviewDelete,
+    inGroup,
+    setReview
     }) {
 
-    const [userReviews, setUserReviews] = useState(reviewList.filter(e => e.user_id === user.id))
-
-    useEffect(() => {
-        fetch("/reviews")
-            .then(resp => resp.json())
-            .then(data => {
-                setUserReviews(data.filter(e => e.user_id === user.id))
-            })
-    }, [user.id])
+    const userReviews = reviewList.filter(e => e.user_id === user.id)
 
     let showGroup = group.map(e => <OneGroup key={e.id} groupList={groupList} user={user} handleGroupChange={handleGroupChange} groupItem={e} setGroup={setGroup} />)
 
-    const showReviewList = userReviews.map(e => <OneReview key={e.id} reviewItem={e} />)
+    const showReviewList = userReviews.map(e => <OneReview user={user} key={e.id} setReview={setReview} handleReviewDelete={handleReviewDelete} reviewItem={e} />)
     const showProducts = userProducts.map(e => <p key={e.id}>{e.name}</p>)
     
     return (

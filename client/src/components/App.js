@@ -14,6 +14,7 @@ import NewProductForm from "./NewProductForm";
 import NewBrandForm from "./NewBrandForm";
 import NewGroupForm from "./NewGroupForm";
 import EditProductForm from "./EditProductForm";
+import EditReviewForm from "./EditReviewForm";
 
 function App() {
 
@@ -25,10 +26,10 @@ function App() {
   const [brandList, setBrandList] = useState([]);
   const [brand, setBrand] = useState(null);
   const [reviewList, setReviewList] = useState([]);
+  const [review, setReview] = useState(null)
   const [productList, setProductList] = useState([]);
   const [product, setProduct] = useState(null)
   const [userProducts, setUserProducts] = useState([]);
-  const [userReviews, setUserReviews] = useState([]);
 
   useEffect(() => {
     fetch("/check_session")
@@ -69,10 +70,6 @@ function App() {
       .then(resp => resp.json())
       .then(data => {
         setReviewList(data);
-        if (!!user) {
-          let userRevs = data.filter(e => e.user_id === user.id);
-          setUserReviews(userRevs);
-        }
       })
       .catch(error => console.log(error.message))
     }, [user, inGroup])
@@ -114,7 +111,6 @@ function App() {
     .then(() => {
         setUser(null);
         setUserProducts([]);
-        setUserReviews([]);
     })
 }
 
@@ -154,6 +150,29 @@ function handleProductUpdate(updatedProduct) {
   setProductList(updatedProducts);
 }
 
+function handleReviewUpdate(updatedReview) {
+  const updatedReviews = reviewList.map(e => {
+    if (e.id === updatedReview.id) {
+      return updatedReview;
+    } else {
+      return e;
+    }
+  });
+  setReviewList(updatedReviews)
+}
+
+function handleReviewDelete(id) {
+  fetch(`/reviews/${id}`, {
+    method: "DELETE",
+  })
+  .then(resp => resp.json())
+  .then(() => {
+    console.log("deleted!")
+    const updatedReviews = reviewList.filter(e => e.id !== id);
+    setReviewList(updatedReviews)
+  })
+}
+
   return (
     <div>
       <NavBar
@@ -169,8 +188,10 @@ function handleProductUpdate(updatedProduct) {
             setinGroup={setInGroup}
             handleGroupChange={handleGroupChange}
             reviewList={reviewList}
+            setReview={setReview}
             groupList={groupList}
             group={group}
+            handleReviewDelete={handleReviewDelete}
             setGroup={setGroup}
             userProducts={userProducts}
             setUserProducts={setUserProducts}
@@ -201,7 +222,26 @@ function handleProductUpdate(updatedProduct) {
         </Route>
         <Route path="/reviews">
           <Reviews 
+            handleReviewDelete={handleReviewDelete}
             reviewList = {reviewList}
+            setReview={setReview}
+            user={user}
+          />
+        </Route>
+        <Route path="/newreviewform">
+          <NewReviewForm
+            user={user}
+            productList = {productList}
+            reviewList={reviewList}
+            userProducts={userProducts}
+            setReviewList = {setReviewList}
+          />
+        </Route>
+        <Route path="/editreviewform">
+          <EditReviewForm 
+            review={review}
+            user={user}
+            handleReviewUpdate={handleReviewUpdate}
           />
         </Route>
         <Route path="/allproducts">
@@ -224,17 +264,6 @@ function handleProductUpdate(updatedProduct) {
             setUserProducts={setUserProducts}
             />
         </Route>
-        <Route path="/newreviewform">
-          <NewReviewForm
-            user={user}
-            productList = {productList}
-            reviewList={reviewList}
-            userProducts={userProducts}
-            userReviews={userReviews}
-            setReviewList = {setReviewList}
-            setUserReviews={setUserReviews}
-          />
-        </Route>
         <Route path="/newproductform">
           <NewProductForm
             brand={brand}
@@ -248,8 +277,6 @@ function handleProductUpdate(updatedProduct) {
                 brand={brand}
                 product={product}
                 handleProductUpdate={handleProductUpdate}
-                productList={productList}
-                setProductList={setProductList}
               />
           </Route>
         <Route path="/newbrandform">

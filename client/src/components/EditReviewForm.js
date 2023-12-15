@@ -1,42 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { NavLink, useHistory } from "react-router-dom";
 
-function NewReviewForm({
-        user,
-        userProducts,
-        productList,
-        reviewList,
-        setReviewList
-    }) {
-
+function EditReviewForm({review, handleReviewUpdate}) {
     const history = useHistory();
-
-    const userReviews = reviewList.filter(e => e.user_id === user.id)
-    const userReviewIDs = userReviews.map(e => e.product_id)    
-    const optionsList = userProducts.filter(({id}) => !userReviewIDs.includes(id))
-
-    const options = optionsList.map(e => <option key={e.id} id={e.id}>{e.name}</option>);
-
-    const [prodID, setProdID] = useState(0);
     
     const formSchema = yup.object().shape({
-        product: yup.string().required("Please select a product"),
         rating: yup.number().positive().integer().required().min(1).max(5),
         comment: yup.string().required().min(5).max(200)
     });
 
     const formik = useFormik({
         initialValues: {
-            rating: 1,
-            comment: "",
-            user_id: user.id,
+        rating: review.rating,
+        comment: review.comment,
+        user_id: review.user_id,
+        product_id: review.product_id
         },
         validationSchema: formSchema,
         onSubmit: (values) => {
-            fetch("/reviews", {
-                method: "POST",
+            fetch(`/reviews/${review.id}`, {
+                method: "PATCH",
                 headers: {
                     "Accept": "application/json",
                     "Content-Type": "application/json",
@@ -45,31 +30,16 @@ function NewReviewForm({
             })
             .then(resp => resp.json())
             .then(data => {
-                const newReviewList = [...reviewList, data[0]];
-                setReviewList(newReviewList);
+                handleReviewUpdate(data);
                 history.push("/");
             })
         }
-    })
-        
-    function getID(e) {
-        for (let i = 0; i < productList.length; i++) {
-            if (productList[i].name === e.target.value) {
-                setProdID(productList[i].id)
-            }
-        }
-    }
-    
+    });
+
     return (
         <div>
-            <h2>Review new linked products</h2>
+            <h2>Edit {review.product.name} Review</h2>
             <form autoComplete="off" onSubmit={formik.handleSubmit}>
-                <label>Product:</label>
-                <select name="product" value={formik.values.product} onChange={e => {getID(e); formik.handleChange(e)}}>
-                    <option>Select a Product:</option>
-                    {options}
-                </select>
-                <br/>
                 <label>Rating:</label>
                 <select  name="rating" value={formik.values.rating} onChange={formik.handleChange}>
                     <option value="1">⭐</option>
@@ -81,16 +51,13 @@ function NewReviewForm({
                 <br/>
                 <label>Comment:</label>
                 <input name="comment" value={formik.values.comment} onChange={formik.handleChange} />
-                <input name="product_id" type="hidden" value={formik.values.product_id = prodID} />
                 <br/>
                 <button type="submit">Submit Review</button>
             </form>
             <br/>
-            <NavLink to="/" exact>
-                <button>Cancel</button>
-            </NavLink>
+            <button onClick={() => history.goBack()}>Cancel</button>
         </div>
     )
-};
+}
 
-export default NewReviewForm;
+export default EditReviewForm;

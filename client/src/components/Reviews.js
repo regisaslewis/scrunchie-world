@@ -1,7 +1,7 @@
 import React from "react";
 import OneReview from "./OneReview";
 
-function Reviews({reviewList}) {
+function Reviews({reviewList, setReview, user, handleReviewDelete}) {
 
     // SORT BY NORMAL ORDER
     // reviewList.sort((a, b) => {
@@ -41,8 +41,14 @@ function Reviews({reviewList}) {
     //     }
     //     return 0;
     // });
-
-    const showReviewList = reviewList.map(e => <OneReview key={e.id} reviewItem={e} />)
+    
+    const showReviewList = reviewList.map(e => <OneReview 
+        key={e.id} 
+        reviewItem={e}
+        user={user}
+        setReview={setReview}
+        handleReviewDelete={handleReviewDelete}
+        />)
 
     return (
         <div>

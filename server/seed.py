@@ -42,11 +42,11 @@ if __name__ == '__main__':
         debra = User(username="Debra", age=35, hairstyle="bald", group=fans)
         users = [ted, marla, frannie, debra]
 
-        red_deluxe = Product(name="Red Deluxe", cost=3, brand=palace)
-        unbreakable = Product(name="Unbreakable", cost=5, brand=astro)
-        old_reliable = Product(name="Old Reliable", cost=1, brand=retro)
-        gorilla_grip = Product(name="Gorilla Grip", cost=4, brand=active)
-        madame = Product(name="Madame Elastique", cost=5, brand=palace)
+        red_deluxe = Product(name="Red Deluxe", cost=3, brand=palace, image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcA81AbRZncLsmKmLGvNFmNMhKEQ6a-rowrg&usqp=CAU")
+        unbreakable = Product(name="Unbreakable", cost=5, brand=astro, image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4oajaoKRjcAQaIa5gmdf0W9jDAtLKwqg0Jw&usqp=CAU")
+        old_reliable = Product(name="Old Reliable", cost=1, brand=retro, image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFcH_fF91sTD3RmAoLVMdI4XE53NJ-Qfv3mA&usqp=CAU")
+        gorilla_grip = Product(name="Gorilla Grip", cost=4, brand=active, image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiYJw4TszVUzrmW4E607pLY34fU_z9u9dLlw&usqp=CAU")
+        madame = Product(name="Madame Elastique", cost=5, brand=palace, image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlGycaamWdpMF90rmaiQA9y_7gtQk-5Rq_cA&usqp=CAU")
         products = [red_deluxe, unbreakable, old_reliable, gorilla_grip, madame]
 
         ted.products.append(old_reliable)

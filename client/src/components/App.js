@@ -13,6 +13,7 @@ import AllProducts from "./AllProducts.js";
 import NewProductForm from "./NewProductForm";
 import NewBrandForm from "./NewBrandForm";
 import NewGroupForm from "./NewGroupForm";
+import EditProductForm from "./EditProductForm";
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
   const [brand, setBrand] = useState(null);
   const [reviewList, setReviewList] = useState([]);
   const [productList, setProductList] = useState([]);
+  const [product, setProduct] = useState(null)
   const [userProducts, setUserProducts] = useState([]);
   const [userReviews, setUserReviews] = useState([]);
 
@@ -141,6 +143,17 @@ function handleGroupChange(newGroupID) {
   })
 }
 
+function handleProductUpdate(updatedProduct) {
+  const updatedProducts = productList.map(e => {
+    if (e.id === updatedProduct.id) {
+      return updatedProduct;
+    } else {
+      return e;
+    }
+  });
+  setProductList(updatedProducts);
+}
+
   return (
     <div>
       <NavBar
@@ -195,6 +208,7 @@ function handleGroupChange(newGroupID) {
           <AllProducts 
             user={user}
             userList={userList}
+            setProduct={setProduct}
             setBrand={setBrand}
             userProducts={userProducts}
             productList={productList}
@@ -229,6 +243,15 @@ function handleGroupChange(newGroupID) {
             setBrandList={setBrandList}
           />
         </Route>
+          <Route path="/editproductform">
+              <EditProductForm
+                brand={brand}
+                product={product}
+                handleProductUpdate={handleProductUpdate}
+                productList={productList}
+                setProductList={setProductList}
+              />
+          </Route>
         <Route path="/newbrandform">
           <NewBrandForm 
             brandList={brandList}

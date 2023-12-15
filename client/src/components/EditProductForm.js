@@ -3,9 +3,11 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { NavLink, useHistory } from "react-router-dom";
 
-function NewProductForm({
-    productList, 
+function EditProductForm({
     brand,
+    product,
+    handleProductUpdate,
+    productList,
     setProductList
     }) {
     const history = useHistory();
@@ -18,15 +20,15 @@ function NewProductForm({
 
     const formik = useFormik({
         initialValues: {
-            name: "",
-            cost: 1,
-            image: "",
+            name: product.name,
+            cost: product.cost,
+            image: product.image,
             brand_id: brand.id,
         },
         validationSchema: formSchema,
         onSubmit: (values) => {
-            fetch("/allproducts", {
-                method: "POST",
+            fetch(`/allproducts/${product.id}`, {
+                method: "PATCH",
                 headers: {
                     "Accept": "application/json",
                     "Content-Type": "application/json",
@@ -35,16 +37,15 @@ function NewProductForm({
             })
             .then(resp => resp.json())
             .then(data => {
-                const newProductList = [...productList, data[0]];
-                setProductList(newProductList);
-                history.push("/brands");
+                handleProductUpdate(data)
+                history.push("/allproducts");
             })
         }
     });
 
     return (
         <div>
-            <h2>New {brand.name} Product</h2>
+            <h2>Edit Product</h2>
             <form autoComplete="off" onSubmit={formik.handleSubmit}>
                 <label>Product Name:</label>
                 <input type="text" name="name" value={formik.values.name} onChange={formik.handleChange} />
@@ -61,13 +62,13 @@ function NewProductForm({
                 <label>Image:</label>
                 <input name="image" type="text" value={formik.values.image} onChange={formik.handleChange} />
                 <br />
-                <button type="submit">Submit New Product</button>
+                <button type="submit">Submit Edit</button>
             </form>
-            <NavLink to="/brands">
+            <NavLink to="/allproducts">
                 <button>Return</button>
             </NavLink>
         </div>
     )
 }
 
-export default NewProductForm;
+export default EditProductForm;

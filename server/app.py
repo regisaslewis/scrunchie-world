@@ -100,17 +100,20 @@ def allproducts():
         new_product = Product(
             name = data("name"),
             cost = data("cost"),
-            brand_id = data("brand_id")
+            brand_id = data("brand_id"),
+            image = data("image")
         )
         return post_item(new_product)
     return make_response(jsonify({"text": "Method Not Allowed"}), 405,)
 
-@app.route("/allproducts/<int:id>", methods=["GET"])
+@app.route("/allproducts/<int:id>", methods=["GET", "PATCH"])
 def show_all_product(id):
     product = Product.query.filter(Product.id == id).first()
     if product:
         if request.method == "GET":
             return get_item(product)
+        elif request.method == "PATCH":
+            return patch_item(product)
         return make_response(product.to_dict(), 200)
     else:
         return make_response(jsonify({"Error": f"Product #{id} not found."}), 404,)

@@ -36,6 +36,7 @@ class Product(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, unique=True)
     cost = db.Column(db.Integer)
+    image = db.Column(db.String)
     brand_id = db.Column(db.Integer, db.ForeignKey("brands.id"))
 
     brand = db.relationship("Brand", back_populates="products")

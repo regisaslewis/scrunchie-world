@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { NavLink, useHistory } from "react-router-dom";
@@ -6,11 +6,8 @@ import { NavLink, useHistory } from "react-router-dom";
 function NewProductForm({
     productList, 
     brand,
-    brandList,
-    setBrandList,
     setProductList
     }) {
-
     const history = useHistory();
 
     const formSchema = yup.object().shape({
@@ -22,7 +19,7 @@ function NewProductForm({
         initialValues: {
             name: "",
             cost: 1,
-            brand_id: brand.id
+            brand_id: brand.id,
         },
         validationSchema: formSchema,
         onSubmit: (values) => {

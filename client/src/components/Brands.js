@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import OneBrand from "./OneBrand";
 
 function Brands({
@@ -15,6 +16,9 @@ function Brands({
     return (
         <div>
             <h2>Brands Page Here.</h2>
+            <NavLink to="/newbrandform" exact>
+                <button>Add a New Brand</button>
+            </NavLink>
             {showBrandList}
         </div>
     );

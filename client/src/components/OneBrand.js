@@ -7,15 +7,22 @@ function OneBrand({
     }) {
 
     const { name, description, products } = brandItem
-    const productList = products.map(e => <p key={e.id}>{e.name} ({"💲".repeat(e.cost)})</p>)
+
+    function productsMap() {
+        if (brandItem.products.length > 0) {
+            return products.map(e => <p key={e.id}>{e.name} ({"💲".repeat(e.cost)})</p>)
+        } else {
+            return <p>No Products yet.</p>
+        }
+    }
 
     return (
         <div>
             <h2>{name}</h2>
             <h3>{description}</h3>
             <h4>Products:</h4>
-            {productList}
-            <NavLink to="/newproductform">
+            {productsMap()}
+            <NavLink to="/newproductform" exact>
                 <button onClick={() => setBrand(brandItem)}>Add a new {name} Product</button>
             </NavLink>
         </div>

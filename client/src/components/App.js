@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import NavBar from "./NavBar";
 import Home from "./Home";
 import SignUp from "./SignUp";
@@ -11,6 +11,8 @@ import NewReviewForm from "./NewReviewForm";
 import Products from "./Products";
 import AllProducts from "./AllProducts.js";
 import NewProductForm from "./NewProductForm";
+import NewBrandForm from "./NewBrandForm";
+import NewGroupForm from "./NewGroupForm";
 
 function App() {
 
@@ -86,7 +88,10 @@ function App() {
   useEffect(() => {
     fetch("/brands")
       .then(resp => resp.json())
-      .then(data => setBrandList(data))
+      .then(data => {
+        setBrandList(data);
+        setBrand(null)
+      })
       .catch(error => console.log(error.message))
   }, [productList])
 
@@ -175,7 +180,7 @@ function handleGroupChange(newGroupID) {
         </Route>
         <Route path="/brands">
           <Brands
-            brandList = {brandList}
+            brandList={brandList}
             setBrand={setBrand}
           />
         </Route>
@@ -215,12 +220,22 @@ function handleGroupChange(newGroupID) {
         </Route>
         <Route path="/newproductform">
           <NewProductForm
-          productList={productList}
-          setProductList={setProductList}
-          brand={brand}
-          brandList={brandList}
-          setBrandList={setBrandList}
+            brand={brand}
+            productList={productList}
+            setProductList={setProductList}
+            setBrandList={setBrandList}
           />
+        </Route>
+        <Route path="/newbrandform">
+          <NewBrandForm 
+            brandList={brandList}
+            setBrandList={setBrandList}
+          />
+        </Route>
+        <Route path="/newgroupform">
+          <NewGroupForm 
+            groupList={groupList}
+            setGroupList={setGroupList}/>
         </Route>
       </Switch>
     </div>

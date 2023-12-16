@@ -29,7 +29,8 @@ function App() {
   const [review, setReview] = useState(null)
   const [productList, setProductList] = useState([]);
   const [product, setProduct] = useState(null)
-  const [userProducts, setUserProducts] = useState([]);
+  const [userProducts, setUserProducts] = useState([])
+
   const noImage = "https://t3.ftcdn.net/jpg/04/34/72/82/240_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg"
 
   useEffect(() => {
@@ -58,22 +59,25 @@ function App() {
       .catch(error => console.log(error.message))
   }, [])
 
-    useEffect(() => {
-      fetch("/products")
-      .then(resp => resp.json())
-      .then(data => {
-        setProductList(data);
-        let userLinkedProducts = user.products;
-        setUserProducts(() => setUserProducts(userLinkedProducts));
-      })
-      .catch(error => console.log(error.message))
-      fetch("/reviews")
-      .then(resp => resp.json())
-      .then(data => {
-        setReviewList(data);
-      })
-      .catch(error => console.log(error.message))
-    }, [user, inGroup])
+  useEffect(() => {
+    fetch("/products")
+    .then(resp => resp.json())
+    .then(data => {
+      setProductList(data);
+      let userLinkedProducts = user.products;
+      setUserProducts(() => setUserProducts(userLinkedProducts));
+    })
+    .catch(error => console.log(error.message))
+  }, [])
+
+  useEffect(() => {
+    fetch("/reviews")
+    .then(resp => resp.json())
+    .then(data => {
+      setReviewList(data);
+    })
+    .catch(error => console.log(error.message))
+  }, [user, inGroup])
 
   useEffect(() => {
     fetch("/groups")
@@ -97,13 +101,6 @@ function App() {
       })
       .catch(error => console.log(error.message))
   }, [productList])
-
-  useEffect(() => {
-    fetch("/reviews")
-      .then(resp => resp.json())
-      .then(data => setReviewList(data))
-      .catch(error => console.log(error.message))
-  }, [setReviewList])
 
   function handleLogout() {
     fetch("/logout", {
@@ -182,7 +179,6 @@ function handleReviewDelete(id) {
       />
       <Switch>
         <Route exact path="/">
-          {!!user ? 
           <Home 
             user={user}
             inGroup={inGroup}
@@ -195,11 +191,15 @@ function handleReviewDelete(id) {
             handleReviewDelete={handleReviewDelete}
             setGroup={setGroup}
             userProducts={userProducts}
-            setUserProducts={setUserProducts}
-          /> : 
+          />
+        </Route>
+        <Route path="/signup">
           <SignUp
+            user={user}
             setUser={setUser}
-          />}
+            userList={userList}
+            setUserList={setUserList}
+          />
         </Route>
         <Route path="/login">
             <Login
@@ -250,21 +250,19 @@ function handleReviewDelete(id) {
           <AllProducts
             noImage={noImage}
             user={user}
-            userList={userList}
             setProduct={setProduct}
             setBrand={setBrand}
-            userProducts={userProducts}
             productList={productList}
-            setUserProducts={setUserProducts}
           />
         </Route>
         <Route path="/products">
             <Products
             noImage={noImage}
             user={user}
+            setUser={setUser}
             userList={userList}
-            userProducts={userProducts}
             productList={productList}
+            userProducts={userProducts}
             setUserProducts={setUserProducts}
             />
         </Route>

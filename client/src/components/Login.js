@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom"
+import { NavLink, useHistory } from "react-router-dom"
 import { useFormik } from "formik";
 import * as yup from "yup";
 
@@ -55,12 +55,14 @@ function Login({setUser, userList}) {
                 <input name="username" type="text" onChange={ e => {formik.handleChange(e); setPasses(true)}} value={formik.values.username} />
                 <br/>
                 <label>Password:</label>
-                <input type = {passwordVisible ? "text" : "password"} />
-                <br />
-                <input type="checkbox" onClick={toggleVisible} /> Show Password
+                <input name="password" type = {passwordVisible ? "text" : "password"} value={formik.values.password} onChange={formik.handleChange} />
+                <button type="button" onClick={toggleVisible}>{passwordVisible ? "😳" : "😑"}</button>
                 <br />
                 <button type="submit">Login</button>
             </form>
+            <NavLink to="/" exact>
+                <button>Sign Up Instead</button>
+            </NavLink>
             {passes ? "" : <p>Not a user.</p>}
         </div>
     );

@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom"
+import { NavLink, Redirect } from "react-router-dom"
 import OneReview from "./OneReview";
 import OneGroup from "./OneGroup";
 
@@ -16,11 +16,14 @@ function Home({
     setReview
     }) {
 
-    const userReviews = reviewList.filter(e => e.user_id === user.id)
+    if (!user) return <Redirect to="/signup" />; 
 
     let showGroup = group.map(e => <OneGroup key={e.id} groupList={groupList} user={user} handleGroupChange={handleGroupChange} groupItem={e} setGroup={setGroup} />)
 
+    const userReviews = reviewList.filter(e => e.user_id === user.id)
+
     const showReviewList = userReviews.map(e => <OneReview user={user} key={e.id} setReview={setReview} handleReviewDelete={handleReviewDelete} reviewItem={e} />)
+
     const showProducts = userProducts.map(e => <p key={e.id}>{e.name}</p>)
     
     return (

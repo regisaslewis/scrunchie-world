@@ -1,8 +1,9 @@
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
+from sqlalchemy.ext.hybrid import hybrid_property
 import emoji
 
-from config import db, metadata
+from config import db, metadata, bcrypt
 
 product_owners = db.Table(
     "products_owners",
@@ -21,6 +22,7 @@ class User(db.Model, SerializerMixin):
     age = db.Column(db.Integer)
     hairstyle = db.Column(db.String)
     group_id = db.Column(db.Integer, db.ForeignKey("groups.id"))
+    _password_hash = db.Column(db.String)
 
     group = db.relationship("Group", back_populates="members")
     products = db.relationship("Product", secondary=product_owners, back_populates="owners")
@@ -28,6 +30,20 @@ class User(db.Model, SerializerMixin):
 
     def __repr__(self):
         return f"User# {self.id}: {self.username}"
+
+    @hybrid_property
+    def password_hash(self):
+        return Exception("Password hashes may not be viewed.")
+    
+    @password_hash.setter
+    def password_hash(self, password):
+        password_hash = bcrypt.generate_password_hash(password.encode("utf-8"))
+        self._password_hash = password_hash.decode("utf-8")
+
+    def authenticate(self, password):
+        return bcrypt.check_password_hash(
+            self._password_hash, password.encode("utf-8")
+        )
 
 class Product(db.Model, SerializerMixin):
     __tablename__ = "products"

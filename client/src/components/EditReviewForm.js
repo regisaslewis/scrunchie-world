@@ -31,7 +31,7 @@ function EditReviewForm({review, handleReviewUpdate}) {
             .then(resp => resp.json())
             .then(data => {
                 handleReviewUpdate(data);
-                history.push("/");
+                history.goBack();
             })
         }
     });

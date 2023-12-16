@@ -36,10 +36,10 @@ if __name__ == '__main__':
         active = Brand(name="Momentum", description="Stopping is death.")
         brands =[palace, retro, astro, active]
 
-        ted = User(username="Ted", age=45, hairstyle="wavy, long", group=go_squad)
-        marla = User(username="Marla", age=33, hairstyle="straight, mid-length", group=all_business)
-        frannie = User(username="Frannie", age=24, hairstyle="curly, short", group=chic_cheeky)
-        debra = User(username="Debra", age=35, hairstyle="bald", group=fans)
+        ted = User(username="Ted", age=45, hairstyle="wavy, long", group=go_squad, password_hash="ted")
+        marla = User(username="Marla", age=33, hairstyle="straight, mid-length", group=all_business, password_hash="marla")
+        frannie = User(username="Frannie", age=24, hairstyle="curly, short", group=chic_cheeky, password_hash="frannie")
+        debra = User(username="Debra", age=35, hairstyle="bald", group=fans, password_hash="debra")
         users = [ted, marla, frannie, debra]
 
         red_deluxe = Product(name="Red Deluxe", cost=3, brand=palace, image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcA81AbRZncLsmKmLGvNFmNMhKEQ6a-rowrg&usqp=CAU")

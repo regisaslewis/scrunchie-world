@@ -37,18 +37,6 @@ def data(key):
 @app.route('/')
 def index():
     return '<h1>Scrunchie World Server</h1>'
-
-@app.route("/login", methods=["GET", "POST"])
-def login():
-    if request.method == "POST":
-        username = data("username")
-
-        user = User.query.filter_by(username=username).first()
-        if user is None:
-            return jsonify({"Error": "Not a valid user."}), 401
-        
-        session["user_id"] = user.id
-        return jsonify(user.to_dict())
     
 @app.route("/check_session", methods=["GET"])
 def check_session():
@@ -58,6 +46,20 @@ def check_session():
             return user.to_dict()
         else:
             return {"message": "401: Not Logged in"}, 401
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        username = data("username")
+        password_hash = data("password")
+
+        if username and password_hash:
+            user = User.query.filter_by(username=username).first()
+            if user.authenticate(password_hash):
+                session["user_id"] = user.id
+                return jsonify(user.to_dict())
+            if user is None:
+                return jsonify({"Error": "Not a valid user."}), 401
 
 @app.route("/logout", methods=["DELETE"])
 def logout():
@@ -74,9 +76,12 @@ def users():
             username = data("username"),
             age = data("age"),
             hairstyle = data("hairstyle"),
+            password_hash = data("password")
         )
-        session["user_id"] = len(User.query.all()) + 1
-        return post_item(new_user)
+        db.session.add(new_user)
+        db.session.commit()
+        session["user_id"] = new_user.id
+        return make_response(jsonify(new_user.to_dict(), 201))
     return make_response(jsonify({"text": "Method Not Allowed"}), 405)
 
 @app.route("/users/<int:id>", methods=["GET", "PATCH", "DELETE"])

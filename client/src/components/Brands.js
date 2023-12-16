@@ -4,13 +4,15 @@ import OneBrand from "./OneBrand";
 
 function Brands({
     brandList,
-    setBrand
+    setBrand,
+    noImage
     }) {
 
     const showBrandList = brandList.map(e => <OneBrand 
         key={e.id} 
         brandItem={e}
         setBrand={setBrand}
+        noImage={noImage}
         />)
 
     return (

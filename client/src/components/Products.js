@@ -8,6 +8,7 @@ function Products({
     userProducts,
     setUserProducts,
     productList,
+    noImage
     }) {
     
     let userProductsIDs = userProducts.map(e => e.id)
@@ -16,7 +17,8 @@ function Products({
         userProducts={userProducts}
         setUserProducts={setUserProducts}
         userList={userList}
-        user={user} 
+        user={user}
+        noImage={noImage}
         key={e.id} 
         productItem={e} 
         />)

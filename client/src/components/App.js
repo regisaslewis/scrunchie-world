@@ -30,6 +30,7 @@ function App() {
   const [productList, setProductList] = useState([]);
   const [product, setProduct] = useState(null)
   const [userProducts, setUserProducts] = useState([]);
+  const noImage = "https://t3.ftcdn.net/jpg/04/34/72/82/240_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg"
 
   useEffect(() => {
     fetch("/check_session")
@@ -216,6 +217,7 @@ function handleReviewDelete(id) {
         </Route>
         <Route path="/brands">
           <Brands
+            noImage={noImage}
             brandList={brandList}
             setBrand={setBrand}
           />
@@ -245,7 +247,8 @@ function handleReviewDelete(id) {
           />
         </Route>
         <Route path="/allproducts">
-          <AllProducts 
+          <AllProducts
+            noImage={noImage}
             user={user}
             userList={userList}
             setProduct={setProduct}
@@ -257,6 +260,7 @@ function handleReviewDelete(id) {
         </Route>
         <Route path="/products">
             <Products
+            noImage={noImage}
             user={user}
             userList={userList}
             userProducts={userProducts}

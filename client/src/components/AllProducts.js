@@ -5,7 +5,8 @@ import { NavLink } from "react-router-dom";
 function AllProducts({
     productList,
     setBrand,
-    setProduct
+    setProduct,
+    noImage
     }) {
         
     const showProductList = productList.map(e => <OneAllProduct 
@@ -13,6 +14,7 @@ function AllProducts({
         productItem={e}
         setBrand={setBrand}
         setProduct={setProduct}
+        noImage={noImage}
         />)
         
     return (

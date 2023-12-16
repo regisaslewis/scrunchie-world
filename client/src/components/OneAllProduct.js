@@ -4,12 +4,12 @@ import { NavLink } from "react-router-dom";
 function OneAllProduct({
     productItem,
     setBrand,
-    setProduct
+    setProduct,
+    noImage
     }) {
 
     const { name, brand, cost, image } = productItem;
     const brandName = brand.name
-    const noImage = "https://t3.ftcdn.net/jpg/04/34/72/82/240_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg"
 
     return (
         <div>

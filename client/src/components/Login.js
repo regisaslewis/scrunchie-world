@@ -6,18 +6,19 @@ import * as yup from "yup";
 function Login({setUser, userList}) {
 
     const [passes, setPasses] = useState(true)
+    const [passwordVisible, setPasswordVisible] = useState(false)
     const history = useHistory();
     const users = userList.map(e => e.username)
 
     const formSchema = yup.object().shape({
         username: yup.string().required("Must enter a username."),
-        // password: yup.string.required("Must enter a password.")
+        password: yup.string().required("Must enter a password.")
     })
 
     const formik = useFormik({
         initialValues: {
             username: "",
-            // password: "",
+            password: "",
         },
         validationSchema: formSchema,
         onSubmit: (values) => {
@@ -42,6 +43,10 @@ function Login({setUser, userList}) {
         }
     })
 
+    function toggleVisible() {
+        setPasswordVisible(!passwordVisible)
+    }
+
     return (
         <div>
             <h2>Log In Page Here</h2>
@@ -49,8 +54,11 @@ function Login({setUser, userList}) {
                 <label>Username:</label>
                 <input name="username" type="text" onChange={ e => {formik.handleChange(e); setPasses(true)}} value={formik.values.username} />
                 <br/>
-                {/* <label>Password:</label>
-                <input type="password" /> */}
+                <label>Password:</label>
+                <input type = {passwordVisible ? "text" : "password"} />
+                <br />
+                <input type="checkbox" onClick={toggleVisible} /> Show Password
+                <br />
                 <button type="submit">Login</button>
             </form>
             {passes ? "" : <p>Not a user.</p>}

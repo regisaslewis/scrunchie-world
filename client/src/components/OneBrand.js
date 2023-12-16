@@ -3,14 +3,15 @@ import { NavLink } from "react-router-dom/";
 
 function OneBrand({
     brandItem,
-    setBrand
+    setBrand,
+    noImage
     }) {
 
     const { name, description, products } = brandItem
 
     function productsMap() {
         if (brandItem.products.length > 0) {
-            return products.map(e => <p key={e.id}>{e.name} ({"💲".repeat(e.cost)})</p>)
+            return products.map(e => <p key={e.id}>{e.name} <br /> ({"💲".repeat(e.cost)}) <br /> <img style={{"width": "70px"}} alt={e.name} src={e.image !== "" ? e.image : noImage} /> </p>)
         } else {
             return <p style={{"color": "red"}}>No Products yet.</p>
         }
@@ -23,7 +24,7 @@ function OneBrand({
             <h4>Products:</h4>
             {productsMap()}
             <NavLink to="/newproductform" exact>
-                <button onClick={() => setBrand(brandItem)}>Add a new {name} Product</button>
+                <button onClick={() => setBrand(brandItem)}>Add New "{name}" Product</button>
             </NavLink>
         </div>
     );

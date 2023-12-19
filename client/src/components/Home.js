@@ -30,7 +30,7 @@ function Home({
         <div id="home">
             <h2 id="greeting">Hello, {user.username}!</h2>
             <div id="homeCards">
-                <div class="card gc">
+                <div className="card gc">
                     <h3>Group:</h3>
                     {inGroup ? 
                     showGroup : 
@@ -38,7 +38,7 @@ function Home({
                         <button>Join a Group</button>
                     </NavLink>}
                 </div>
-                <div class="card rc">
+                <div className="card rc">
                     <h3>Reviews:</h3>
                     <NavLink to="/newreviewform" exact>
                         <button>Add a Review</button>
@@ -46,7 +46,7 @@ function Home({
                     <br/>
                     {showReviewList.length > 0 ? showReviewList : "No Reviews Written"}
                 </div>
-                <div class="card pc">
+                <div className="card pc">
                     <NavLink to="/products" exact>
                         <button>Link New Product</button>
                     </NavLink>

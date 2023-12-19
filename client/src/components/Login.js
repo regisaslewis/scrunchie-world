@@ -56,7 +56,7 @@ function Login({setUser, userList}) {
                 <br/>
                 <label>Password:</label>
                 <input name="password" type = {passwordVisible ? "text" : "password"} value={formik.values.password} onChange={formik.handleChange} />
-                <button type="button" onClick={toggleVisible}>{passwordVisible ? "😳" : "😑"}</button>
+                <button className="visible" type="button" onClick={toggleVisible}>{passwordVisible ? "😳" : "😑"}</button>
                 <br />
                 <button type="submit">Login</button>
             </form>

@@ -65,7 +65,7 @@ function SignUp({ user, setUser, userList, setUserList }) {
                 <br />
                 <label>Password:</label>
                 <input name="password" value={formik.values.password} onChange={formik.handleChange} type={passwordVisible ? "text" : "password"} />
-                <button type="button" onClick={toggleVisible}>{passwordVisible ? "😳" : "😑"}</button>
+                <button className="visible" type="button" onClick={toggleVisible}>{passwordVisible ? "😳" : "😑"}</button>
                 <br />
                 <label>Confirm Password:</label>
                 <input name="confirmPassword" value={formik.values.confirmPassword} onChange={formik.handleChange} type="password" />

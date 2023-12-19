@@ -56,6 +56,7 @@ button:hover {
     grid-area: gc;
     border-bottom: solid 2px black;
     border-right: solid 2px black;
+    border-radius: 0 0 6px 0;
 }
 
 .rc {
@@ -76,8 +77,31 @@ button:hover {
     'gc rc'
     'pc rc';
     margin: auto 10px;
+    padding-bottom: 8px;
 }
 
 .card {
     text-align: center;
+}
+
+.visible {
+    width: 40px;
+    min-height: 28px;
+    background-color: none;
+    border: none;
+}
+
+.visible:hover {
+    border: none;
+    width: 40px;
+    min-height: 28px;
+}
+
+input {
+    border: none;
+    border-bottom: solid 1px black;
+}
+
+label {
+    display: block;
 }

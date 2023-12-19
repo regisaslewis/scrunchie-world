@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
+import "./App.css"
 import NavBar from "./NavBar";
 import Home from "./Home";
 import SignUp from "./SignUp";
@@ -64,11 +65,13 @@ function App() {
     .then(resp => resp.json())
     .then(data => {
       setProductList(data);
-      let userLinkedProducts = user.products;
-      setUserProducts(() => setUserProducts(userLinkedProducts));
+      if (!!user) {
+        let userLinkedProducts = user.products;
+        setUserProducts(() => setUserProducts(userLinkedProducts));
+      }
     })
     .catch(error => console.log(error.message))
-  }, [])
+  }, [user])
 
   useEffect(() => {
     fetch("/reviews")

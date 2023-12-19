@@ -5,6 +5,7 @@ function OneGroup({groupList, groupItem, handleGroupChange, user, setGroup}) {
     const { name, members, description, id } = groupItem;
 
     let newGroup = groupList.filter(e => e.id === id);
+    const abrvName = name.length < 16 ? name : name.substring(0, 13) + "..."
 
     function membersMap() {
         if (groupItem.members.length > 0) {
@@ -23,9 +24,9 @@ function OneGroup({groupList, groupItem, handleGroupChange, user, setGroup}) {
     function checkUser() {
         if (!!user) {
             if (user.group_id === id) {
-                return <button onClick={() => handleGroupChange(null)}>Leave current group: {name}</button>
+                return <button onClick={() => handleGroupChange(null)}>Leave<br />{abrvName}</button>
             } else {
-                return <button onClick={() => handleClick(id)}>Join {name}</button>
+                return <button onClick={() => handleClick(id)}>Join<br /> {abrvName}</button>
             }
         } else {
             return ""

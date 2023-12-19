@@ -25,11 +25,11 @@ function Products({
         
     return (
         <div>
-            <h2>Products Page Here.</h2>
-            {!!user ? showProductList : ""}
+            <h2>Link a Product</h2>
             <NavLink to="/" exact>
                 <button>Return</button>
             </NavLink>
+            {!!user ? showProductList : ""}
         </div>
     );
 }

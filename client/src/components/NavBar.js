@@ -4,8 +4,8 @@ import { NavLink } from "react-router-dom";
 function NavBar({user, handleLogout}) {
 
     return (
-        <div>
-        <h1>Scrunchie World!!</h1>
+        <div id="navBar">
+            <h1>Scrunchie World!!</h1>
             {!!user ?
             <NavLink to="/" exact>
                 <button onClick={handleLogout}>Logout</button>

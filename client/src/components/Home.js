@@ -27,28 +27,33 @@ function Home({
     const showProducts = userProducts.map(e => <p key={e.id}>{e.name}</p>)
     
     return (
-        <div>
-            <h2>Hello, {user.username}!</h2>
-            <h3>Group:</h3>
-            {inGroup ? 
-            showGroup : 
-            <NavLink to="/groups">
-                <button>Join a Group</button>
-            </NavLink>}
-            <p>_________</p>
-            <h3>Reviews:</h3>
-            <NavLink to="/newreviewform" exact>
-                <button>Add a Review</button>
-            </NavLink>
-            <br/>
-            <br/>
-            {showReviewList.length > 0 ? showReviewList : "No Reviews Written"}
-            <p>_________</p>
-            <NavLink to="/products" exact>
-                <button>Link New Product</button>
-            </NavLink>
-            <h3>Currently linked products:</h3>
-            {showProducts.length > 0 ? showProducts : "No Products Linked"}
+        <div id="home">
+            <h2 id="greeting">Hello, {user.username}!</h2>
+            <div id="homeCards">
+                <div class="card gc">
+                    <h3>Group:</h3>
+                    {inGroup ? 
+                    showGroup : 
+                    <NavLink to="/groups">
+                        <button>Join a Group</button>
+                    </NavLink>}
+                </div>
+                <div class="card rc">
+                    <h3>Reviews:</h3>
+                    <NavLink to="/newreviewform" exact>
+                        <button>Add a Review</button>
+                    </NavLink>
+                    <br/>
+                    {showReviewList.length > 0 ? showReviewList : "No Reviews Written"}
+                </div>
+                <div class="card pc">
+                    <NavLink to="/products" exact>
+                        <button>Link New Product</button>
+                    </NavLink>
+                    <h3>Currently linked products:</h3>
+                    {showProducts.length > 0 ? showProducts : "No Products Linked"}
+                </div>
+            </div>
         </div>
     );
 }

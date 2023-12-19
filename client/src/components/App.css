@@ -1,0 +1,83 @@
+body {
+    background-color: rgb(232, 251, 251);
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+img {
+    max-width: 220px;
+}
+
+button {
+    width: 130px;
+    min-height: 40px;
+    border: solid 5px black;
+    border-radius: 6px;
+    background-color: black;
+    color: white;
+    box-shadow: -5px 5px 10px 1px black;
+    margin: 0 10px;
+}
+
+button:hover {
+    border: solid 5px rgb(11, 12, 10);
+    background-color: rgb(11, 13, 10);
+    color: rgb(226, 184, 195);
+    box-shadow: none;
+    transform: scale(.95);
+    transition-duration: 100ms;
+}
+
+#navBar {
+    border-bottom: solid 5px black;
+    border-radius: 6px;
+    background-color: red;
+    padding: 5px;
+    text-align: center;
+}
+
+#navBar button {
+    width: 100px;
+}
+
+#home {
+    background-color: pink;
+}
+
+#greeting {
+    font-size: 50px;
+    width: 70%;
+    margin: auto;
+    text-align: center;
+    padding-bottom: -5px;
+    border-bottom: solid 2px black;
+}
+
+.gc {
+    grid-area: gc;
+    border-bottom: solid 2px black;
+    border-right: solid 2px black;
+}
+
+.rc {
+    grid-area: rc;
+}
+
+.pc {
+    grid-area: pc;
+    margin-top: 10px;
+    padding-top: 15px;
+    border-right: solid 2px black;
+}
+
+#homeCards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: 
+    'gc rc'
+    'pc rc';
+    margin: auto 10px;
+}
+
+.card {
+    text-align: center;
+}

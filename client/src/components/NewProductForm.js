@@ -37,7 +37,7 @@ function NewProductForm({
             .then(data => {
                 const newProductList = [...productList, data[0]];
                 setProductList(newProductList);
-                history.push("/brands");
+                history.goBack();
             })
         }
     });

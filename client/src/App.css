@@ -1,15 +1,21 @@
 body {
     background-color: rgb(232, 251, 251);
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 img {
     max-width: 220px;
+    border-radius: 3px;
+}
+
+a:visited {
+    color: black;
 }
 
 button {
     width: 130px;
-    min-height: 40px;
+    max-height: 60px;
+    min-height: 20px;
     border: solid 5px black;
     border-radius: 6px;
     background-color: black;
@@ -33,10 +39,16 @@ button:hover {
     background-color: red;
     padding: 5px;
     text-align: center;
+    display: block;
 }
 
 #navBar button {
     width: 100px;
+}
+
+.logButton {
+    display: inline-block;
+    margin: 10px 10px 5px;
 }
 
 #home {
@@ -52,22 +64,40 @@ button:hover {
     border-bottom: solid 2px black;
 }
 
-.gc {
+#gc {
     grid-area: gc;
-    border-bottom: solid 2px black;
-    border-right: solid 2px black;
-    border-radius: 0 0 6px 0;
 }
 
-.rc {
+#rc {
     grid-area: rc;
 }
 
-.pc {
+#prod {
+    grid-area: prod;
+}
+
+#linkProd {
+    grid-area: linkProd;
+}
+
+#pc {
+    background-color: aqua;
+    border: solid 2px black;
+    max-width: 500px;
     grid-area: pc;
-    margin-top: 10px;
+    margin: auto 10px auto 20px;
     padding-top: 15px;
-    border-right: solid 2px black;
+    display: grid;
+    grid-template-areas: 
+    "prod prod ."
+    "prod prod linkProd"
+    "prod prod .";
+    justify-content: space-around;
+    padding: 0 0 0 20px;
+}
+
+#pc button {
+    transform: rotate(0deg);
 }
 
 #homeCards {
@@ -78,6 +108,7 @@ button:hover {
     'pc rc';
     margin: auto 10px;
     padding-bottom: 8px;
+    align-items: center;
 }
 
 .card {
@@ -104,4 +135,46 @@ input {
 
 label {
     display: block;
+}
+
+#group {
+    max-width: 500px;
+    min-width: 250px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0 0 10px 15%;
+    border: solid 2px black;
+    background-color: aqua;
+    margin-bottom: 5px;
+}
+
+#gInfo {
+    max-width: 350px;
+    margin-right: 10px;
+}
+
+#gMembers {
+    max-width: 200px;
+}
+
+#groupBlurb {
+    margin: 0 0 10px 18%;
+    vertical-align: top;
+}
+
+#groupBlurb button {
+    padding: 4px;
+}
+
+#groupList {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 6px;
+}
+
+.sortButtons {
+    display: flex;
+    max-width: 400px;
+    height: 40px;
+    align-items: center;
 }

@@ -24,34 +24,37 @@ function Home({
 
     const showReviewList = userReviews.map(e => <OneReview user={user} key={e.id} setReview={setReview} handleReviewDelete={handleReviewDelete} reviewItem={e} />)
 
-    const showProducts = userProducts.map(e => <p key={e.id}>{e.name}</p>)
+    const showProducts = userProducts.map(e => <p key={e.id}>{e.name} <img alt={e.name} src={e.image} style={{"width": "30px"}} /></p>)
     
     return (
         <div id="home">
             <h2 id="greeting">Hello, {user.username}!</h2>
             <div id="homeCards">
-                <div className="card gc">
-                    <h3>Group:</h3>
+                <div id="gc" className="card">
+                    <h3>{user.username}'s Group:</h3>
                     {inGroup ? 
                     showGroup : 
                     <NavLink to="/groups">
                         <button>Join a Group</button>
                     </NavLink>}
                 </div>
-                <div className="card rc">
-                    <h3>Reviews:</h3>
+                <div id="rc" className="card">
+                    <h3>{user.username}'s Reviews:</h3>
                     <NavLink to="/newreviewform" exact>
                         <button>Add a Review</button>
                     </NavLink>
-                    <br/>
                     {showReviewList.length > 0 ? showReviewList : "No Reviews Written"}
                 </div>
-                <div className="card pc">
-                    <NavLink to="/products" exact>
-                        <button>Link New Product</button>
-                    </NavLink>
-                    <h3>Currently linked products:</h3>
-                    {showProducts.length > 0 ? showProducts : "No Products Linked"}
+                <div id="pc" className="card">
+                    <div id="prod">
+                        <h3>{user.username}'s Products:</h3>
+                        {showProducts.length > 0 ? showProducts : "No Products Linked"}
+                    </div>
+                    <div id="linkProd">
+                        <NavLink to="/products" exact>
+                            <button>Link New Product</button>
+                        </NavLink>
+                    </div>
                 </div>
             </div>
         </div>

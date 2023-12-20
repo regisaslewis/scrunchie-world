@@ -39,11 +39,15 @@ function OneGroup({groupList, groupItem, handleGroupChange, user, setGroup}) {
     }
 
     return (
-        <div>
-            <h2>{name}</h2>
-            <h3>{description}</h3>
-            {membersMap()}
-            {checkUser()}
+        <div id="group">
+            <div id="gInfo">
+                <h2>{name}</h2>
+                <h3>{description}</h3>
+                {checkUser()}
+            </div>
+            <div id="gMembers">
+                {membersMap()}
+            </div>
         </div>
     );
 }

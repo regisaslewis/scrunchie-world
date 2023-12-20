@@ -216,6 +216,7 @@ function handleReviewDelete(id) {
             setGroup={setGroup}
             handleGroupChange={handleGroupChange}
             groupList = {groupList}
+            setGroupList={setGroupList}
           />
         </Route>
         <Route path="/brands">

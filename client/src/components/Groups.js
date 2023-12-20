@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import OneGroup from "./OneGroup";
 import { NavLink } from "react-router-dom";
-import { set } from "react-hook-form";
 
 function Groups({
     groupList,
@@ -62,16 +61,17 @@ function Groups({
     let showGroupList = groupList.map(e => <OneGroup key={e.id} groupList={groupList} user={user} handleGroupChange={handleGroupChange} groupItem={e} setGroup={setGroup} />)
 
     return (
-        <div id="groupPage">
-            <div id="groupBlurb">
-                <h2>You can only be in one Group</h2>
-                <h3>Choose Wisely</h3>
-                <NavLink to="/newgroupform" exact>
-                    <button>Create New Group</button>
-                </NavLink>
-                <NavLink to="/" exact>
-                    <button>Return</button>
-                </NavLink>
+        <div>
+            <div className="header">
+                <div className="blurb">
+                    <NavLink to="/" exact>
+                        <button>Return</button>
+                    </NavLink>
+                    <NavLink to="/newgroupform" exact>
+                        <button>Create New Group</button>
+                    </NavLink>
+                </div>
+                <h2>Choose a Group</h2>
                 <div className="sortButtons">
                     <h4>Sort:</h4>
                     <button style={sortOldest ? buttonOn : buttonOff} onClick={() => ageSort()}>Oldest</button>

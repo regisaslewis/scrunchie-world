@@ -24,7 +24,11 @@ function Home({
 
     const showReviewList = userReviews.map(e => <OneReview user={user} key={e.id} setReview={setReview} handleReviewDelete={handleReviewDelete} reviewItem={e} />)
 
-    const showProducts = userProducts.map(e => <p key={e.id}>{e.name} <img alt={e.name} src={e.image} style={{"width": "30px"}} /></p>)
+    const showProducts = userProducts.map(e => 
+        <div id="prodName">
+            <p key={e.id}>{e.name} </p> 
+            <img alt={e.name} src={e.image} style={{"width": "30px"}} />
+        </div>)
     
     return (
         <div id="home">
@@ -46,8 +50,8 @@ function Home({
                     {showReviewList.length > 0 ? showReviewList : "No Reviews Written"}
                 </div>
                 <div id="pc" className="card">
+                    <h3 id="nameProd">{user.username}'s Products:</h3>
                     <div id="prod">
-                        <h3>{user.username}'s Products:</h3>
                         {showProducts.length > 0 ? showProducts : "No Products Linked"}
                     </div>
                     <div id="linkProd">

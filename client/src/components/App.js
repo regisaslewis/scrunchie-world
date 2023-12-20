@@ -230,6 +230,7 @@ function handleReviewDelete(id) {
           <Reviews 
             handleReviewDelete={handleReviewDelete}
             reviewList = {reviewList}
+            setReviewList={setReviewList}
             setReview={setReview}
             user={user}
           />

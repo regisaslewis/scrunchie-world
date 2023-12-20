@@ -7,10 +7,10 @@ function OneReview({reviewItem, user, setReview, handleReviewDelete}) {
     const starCount = "⭐".repeat(rating)
 
     return (
-        <div>
+        <div id="review">
             <h2>{reviewItem.user.username} on {product.name}</h2>
-            <h3>{rating}/5 {starCount}</h3>
             <p>{comment}</p>
+            <h3>{rating}/5 {starCount}</h3>
             {user.id === reviewItem.user_id ?
             <div>
                 <NavLink to="/editreviewform">

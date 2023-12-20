@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React from "react";
 import OneReview from "./OneReview";
 
 function Reviews({
@@ -8,10 +8,10 @@ function Reviews({
     user, 
     handleReviewDelete,
     buttonOn,
-    buttonOff
+    buttonOff,
+    sort,
+    setSort
     }) {
-
-    const [sort, setSort] = useState(1)
 
     // SORT BY NORMAL ORDER
     function sortOldest() {
@@ -76,7 +76,7 @@ function Reviews({
     return (
         <div>
             <div className="revHeader">
-                <h2>All user reviews.</h2>
+                <h2>All User Reviews</h2>
                 <div className="sortButtons">
                     <h4>Sort:</h4>
                     <button style={sort === 1 ? buttonOn : buttonOff} onClick={() => sortOldest()}>Oldest</button>

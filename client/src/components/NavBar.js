@@ -5,11 +5,18 @@ function NavBar({
     user, 
     handleLogout,
     reviewList,
-    setReviewList
+    setReviewList,
+    brandList,
+    setBrandList,
+    productList,
+    setProductList,
+    groupList,
+    setGroupList,
+    setSort
     }) {
     
-    function sortOldest() {
-        let sorted = reviewList.toSorted((a, b) => {
+    function sortOldest(y, z) {
+        let sorted = y.toSorted((a, b) => {
             const prodA = a.id;
             const prodB = b.id;
             if (prodA < prodB) {
@@ -20,27 +27,28 @@ function NavBar({
             }
             return 0;
         });
-        setReviewList(sorted);
+        z(sorted);
+        setSort(1);
     };
 
     return (
         <div id="navBar">
             <h1>Scrunchie World!!</h1>
             <NavLink to="/allproducts" exact>
-                <button>All Products</button>
+                <button onClick={() => sortOldest(productList, setProductList)} >All Products</button>
             </NavLink>
             <NavLink to="/brands" exact>
-                <button>Brands</button>
+                <button onClick={() => sortOldest(brandList, setBrandList)} >Brands</button>
             </NavLink>
             <NavLink to="/groups" exact>
-                <button>User Groups</button>
+                <button onClick={() => sortOldest(groupList, setGroupList)} >User Groups</button>
             </NavLink>
             <NavLink to="/reviews" exact>
-                <button>Reviews</button>
+                <button onClick={() => sortOldest(reviewList, setReviewList)} >Reviews</button>
             </NavLink>
             <div id="logButtons">
                 <NavLink to="/" exact>
-                    {!user ? "" : <button onClick={sortOldest} className="logButton">Home</button>}
+                    {!user ? "" : <button onClick={() => sortOldest(reviewList, setReviewList)} className="logButton">Home</button>}
                 </NavLink>
                 {!!user ?
                 <NavLink to="/" exact>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import OneGroup from "./OneGroup";
 import { NavLink } from "react-router-dom";
 
@@ -9,10 +9,10 @@ function Groups({
     setGroup,
     setGroupList,
     buttonOn,
-    buttonOff
+    buttonOff,
+    sort,
+    setSort
 }) {
-
-    const [sortOldest, setSortOldest] = useState(true)
 
     // SORT BY NORMAL ORDER
     function ageSort() {
@@ -28,7 +28,7 @@ function Groups({
             return 0;
         });
         setGroupList(sorted);
-        setSortOldest(true);
+        setSort(1);
     }
     
 
@@ -46,7 +46,7 @@ function Groups({
             return 0;
         });
         setGroupList(sorted);
-        setSortOldest(false);
+        setSort(2);
     }
 
     let showGroupList = groupList.map(e => <OneGroup key={e.id} groupList={groupList} user={user} handleGroupChange={handleGroupChange} groupItem={e} setGroup={setGroup} />)
@@ -65,8 +65,8 @@ function Groups({
                 <h2>Choose a Group</h2>
                 <div className="sortButtons">
                     <h4>Sort:</h4>
-                    <button style={sortOldest ? buttonOn : buttonOff} onClick={() => ageSort()}>Oldest</button>
-                    <button style={sortOldest ? buttonOff : buttonOn} onClick={() => nameSort()}>Alphabetical</button>
+                    <button style={sort === 1 ? buttonOn : buttonOff} onClick={() => ageSort()}>Oldest</button>
+                    <button style={sort === 2 ? buttonOn : buttonOff} onClick={() => nameSort()}>Alphabetical</button>
                 </div>
             </div>
             <div id="groupList">

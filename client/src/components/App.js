@@ -27,10 +27,11 @@ function App() {
   const [brandList, setBrandList] = useState([]);
   const [brand, setBrand] = useState(null);
   const [reviewList, setReviewList] = useState([]);
-  const [review, setReview] = useState(null)
+  const [review, setReview] = useState(null);
   const [productList, setProductList] = useState([]);
-  const [product, setProduct] = useState(null)
-  const [userProducts, setUserProducts] = useState([])
+  const [product, setProduct] = useState(null);
+  const [userProducts, setUserProducts] = useState([]);
+  const [sort, setSort] = useState(1);
 
   const noImage = "https://t3.ftcdn.net/jpg/04/34/72/82/240_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg"
 
@@ -114,7 +115,7 @@ function App() {
         setBrand(null)
       })
       .catch(error => console.log(error.message))
-  }, [productList])
+  }, [])
 
   function handleLogout() {
     fetch("/logout", {
@@ -192,6 +193,13 @@ function handleReviewDelete(id) {
       user={user}
       reviewList={reviewList}
       setReviewList={setReviewList}
+      groupList={groupList}
+      setGroupList={setGroupList}
+      productList={productList}
+      setProductList={setProductList}
+      brandList={brandList}
+      setBrandList={setBrandList}
+      setSort={setSort}
       />
       <Switch>
         <Route exact path="/">
@@ -232,6 +240,8 @@ function handleReviewDelete(id) {
             setGroupList={setGroupList}
             buttonOn={buttonOn}
             buttonOff={buttonOff}
+            sort={sort}
+            setSort={setSort}
           />
         </Route>
         <Route path="/brands">
@@ -239,6 +249,8 @@ function handleReviewDelete(id) {
             noImage={noImage}
             brandList={brandList}
             setBrand={setBrand}
+            sort={sort}
+            setSort={setSort}
           />
         </Route>
         <Route path="/reviews">
@@ -250,6 +262,8 @@ function handleReviewDelete(id) {
             user={user}
             buttonOn={buttonOn}
             buttonOff={buttonOff}
+            sort={sort}
+            setSort={setSort}
           />
         </Route>
         <Route path="/newreviewform">
@@ -275,6 +289,11 @@ function handleReviewDelete(id) {
             setProduct={setProduct}
             setBrand={setBrand}
             productList={productList}
+            setProductList={setProductList}
+            buttonOn={buttonOn}
+            buttonOff={buttonOff}
+            sort={sort}
+            setSort={setSort}
           />
         </Route>
         <Route path="/products">
@@ -284,8 +303,13 @@ function handleReviewDelete(id) {
             setUser={setUser}
             userList={userList}
             productList={productList}
+            setProductList={setProductList}
             userProducts={userProducts}
             setUserProducts={setUserProducts}
+            buttonOn={buttonOn}
+            buttonOff={buttonOff}
+            sort={sort}
+            setSort={setSort}
             />
         </Route>
         <Route path="/newproductform">

@@ -27,13 +27,19 @@ function OneProduct({
     }
 
     return (
-        <div>
-            <h2>{name}</h2>
-            <img alt={name} src={image !== "" ? image : noImage} />
-            <h3>{brandName}</h3>
-            <h5>{"💲".repeat(cost)}</h5>
-            <button onClick={handleClick}>Link Product</button>
-        </div> 
+        <div className="allProd">
+            <div className="allProdDetails">
+                <h2>{name}</h2>
+            </div>
+            <div className="allProdDImage">
+                <img alt={name} src={image !== "" ? image : noImage} />
+            </div>
+            <div className="allProdBrand">
+                <h3 className="dollars">cost: {"💲".repeat(cost)}</h3>
+                <h3>By: {brandName}</h3>
+                <button onClick={handleClick}>Link Product</button>
+            </div>
+        </div>
     );
 }
 

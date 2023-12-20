@@ -7,21 +7,12 @@ function Groups({
     user,
     handleGroupChange, 
     setGroup,
-    setGroupList
+    setGroupList,
+    buttonOn,
+    buttonOff
 }) {
 
     const [sortOldest, setSortOldest] = useState(true)
-
-    const buttonOn = {
-        color: "rgb(226, 184, 195)",
-        boxShadow: "none",
-        transform: "scale(.95)"
-    }
-
-    const buttonOff = {
-        color: "white",
-        boxShadow: "-5px 5px 10px 1px black"
-    }
 
     // SORT BY NORMAL ORDER
     function ageSort() {

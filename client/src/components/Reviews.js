@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState} from "react";
 import OneReview from "./OneReview";
 
 function Reviews({
@@ -6,8 +6,12 @@ function Reviews({
     setReview, 
     setReviewList, 
     user, 
-    handleReviewDelete
+    handleReviewDelete,
+    buttonOn,
+    buttonOff
     }) {
+
+    const [sort, setSort] = useState(1)
 
     // SORT BY NORMAL ORDER
     function sortOldest() {
@@ -23,6 +27,7 @@ function Reviews({
             return 0;
         });
         setReviewList(sorted);
+        setSort(1)
     };
 
     // SORT BY PRODUCT NAME
@@ -39,6 +44,7 @@ function Reviews({
             return 0;
         });
         setReviewList(sorted);
+        setSort(2)
     };
 
     
@@ -56,6 +62,7 @@ function Reviews({
             return 0;
         });
         setReviewList(sorted);
+        setSort(3)
     };
 
     const showReviewList = reviewList.map(e => <OneReview 
@@ -68,8 +75,19 @@ function Reviews({
 
     return (
         <div>
-            <h2>All user reviews.</h2>
-            {showReviewList}
+            <div className="revHeader">
+                <h2>All user reviews.</h2>
+                <div className="sortButtons">
+                    <h4>Sort:</h4>
+                    <button style={sort === 1 ? buttonOn : buttonOff} onClick={() => sortOldest()}>Oldest</button>
+                    <button style={sort === 2 ? buttonOn : buttonOff} onClick={() => sortProdName()}>Product Name</button>
+                    <button style={sort === 3 ? buttonOn : buttonOff} onClick={() => sortUserName()}>User Name</button>
+                </div>
+                
+            </div>
+            <div id="revList">
+                {showReviewList}
+            </div>            
         </div>
     );
 }

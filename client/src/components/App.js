@@ -34,6 +34,17 @@ function App() {
 
   const noImage = "https://t3.ftcdn.net/jpg/04/34/72/82/240_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg"
 
+  const buttonOn = {
+      color: "rgb(226, 184, 195)",
+      boxShadow: "none",
+      transform: "scale(.95)"
+  }
+
+  const buttonOff = {
+      color: "white",
+      boxShadow: "-5px 5px 10px 1px black"
+  }
+
   useEffect(() => {
     fetch("/check_session")
     .then(resp => {
@@ -179,6 +190,8 @@ function handleReviewDelete(id) {
       <NavBar
       handleLogout={handleLogout}
       user={user}
+      reviewList={reviewList}
+      setReviewList={setReviewList}
       />
       <Switch>
         <Route exact path="/">
@@ -217,6 +230,8 @@ function handleReviewDelete(id) {
             handleGroupChange={handleGroupChange}
             groupList = {groupList}
             setGroupList={setGroupList}
+            buttonOn={buttonOn}
+            buttonOff={buttonOff}
           />
         </Route>
         <Route path="/brands">
@@ -233,6 +248,8 @@ function handleReviewDelete(id) {
             setReviewList={setReviewList}
             setReview={setReview}
             user={user}
+            buttonOn={buttonOn}
+            buttonOff={buttonOff}
           />
         </Route>
         <Route path="/newreviewform">

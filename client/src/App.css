@@ -209,4 +209,24 @@ label {
     grid-template-columns: 1fr 1fr;
     align-items: center;
     margin-bottom: 5px;
+    padding: 10px;
+}
+
+#revTitle {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+}
+
+#revList {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10px;
+}
+
+.revHeader {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    text-align: center;
+    align-items: center;
 }

@@ -43,10 +43,12 @@ function Home({
                     </NavLink>}
                 </div>
                 <div id="rc" className="card">
-                    <h3>{user.username}'s Reviews:</h3>
-                    <NavLink to="/newreviewform" exact>
-                        <button>Add a Review</button>
-                    </NavLink>
+                    <div id="revTitle">
+                        <h3>{user.username}'s Reviews:</h3>
+                        <NavLink to="/newreviewform" exact>
+                            <button>Add a Review</button>
+                        </NavLink>
+                    </div>
                     {showReviewList.length > 0 ? showReviewList : "No Reviews Written"}
                 </div>
                 <div id="pc" className="card">

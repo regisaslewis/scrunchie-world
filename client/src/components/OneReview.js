@@ -20,8 +20,7 @@ function OneReview({reviewItem, user, setReview, handleReviewDelete}) {
                     <button onClick={() => handleReviewDelete(reviewItem.id)}>Delete Review</button>
                 </NavLink>
             </div>:
-            ""
-            }
+            ""}
         </div>
     );
 }

@@ -1,7 +1,27 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-function NavBar({user, handleLogout}) {
+function NavBar({
+    user, 
+    handleLogout,
+    reviewList,
+    setReviewList
+    }) {
+    
+    function sortOldest() {
+        let sorted = reviewList.toSorted((a, b) => {
+            const prodA = a.id;
+            const prodB = b.id;
+            if (prodA < prodB) {
+                return -1;
+            }
+            if (prodA > prodB) {
+                return 1
+            }
+            return 0;
+        });
+        setReviewList(sorted);
+    };
 
     return (
         <div id="navBar">
@@ -20,7 +40,7 @@ function NavBar({user, handleLogout}) {
             </NavLink>
             <div id="logButtons">
                 <NavLink to="/" exact>
-                    {!user ? "" : <button className="logButton">Home</button>}
+                    {!user ? "" : <button onClick={sortOldest} className="logButton">Home</button>}
                 </NavLink>
                 {!!user ?
                 <NavLink to="/" exact>

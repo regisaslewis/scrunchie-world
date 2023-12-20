@@ -81,7 +81,6 @@ button:hover {
 #prod {
     grid-area: prod;
     display: grid;
-    justify-self: center;
 }
 
 #linkProd {

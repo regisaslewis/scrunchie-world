@@ -47,7 +47,6 @@ function Reviews({
         setSort(2)
     };
 
-    
     // SORT BY USER NAME
     function sortUserName() {
         let sorted = reviewList.toSorted((a, b) => {
@@ -63,6 +62,22 @@ function Reviews({
         });
         setReviewList(sorted);
         setSort(3)
+    };
+    
+    function sortRating() {
+        let sorted = reviewList.toSorted((a, b) => {
+            const prodA = a.rating;
+            const prodB = b.rating;
+            if (prodA > prodB) {
+                return -1;
+            }
+            if (prodA > prodB) {
+                return 1
+            }
+            return 0;
+        });
+        setReviewList(sorted);
+        setSort(4)
     };
 
     const showReviewList = reviewList.map(e => <OneReview 
@@ -82,6 +97,7 @@ function Reviews({
                     <button style={sort === 1 ? buttonOn : buttonOff} onClick={() => sortOldest()}>Oldest</button>
                     <button style={sort === 2 ? buttonOn : buttonOff} onClick={() => sortProdName()}>Product Name</button>
                     <button style={sort === 3 ? buttonOn : buttonOff} onClick={() => sortUserName()}>User Name</button>
+                    <button style={sort === 4 ? buttonOn : buttonOff} onClick={() => sortRating()}>Rating</button>
                 </div>
                 
             </div>

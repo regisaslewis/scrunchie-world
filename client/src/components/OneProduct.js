@@ -10,8 +10,7 @@ function OneProduct({
     const { name, brand, cost, image, id } = productItem;
     const brandName = brand.name
     
-    function handleClick() {
-        
+    function handleClick() {        
         fetch(`/products/${id}`, {
             method: "POST",
             headers: {

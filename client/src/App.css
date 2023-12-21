@@ -125,6 +125,15 @@ button:hover {
     align-items: center;
 }
 
+#prodName img {
+    width: 30px;
+}
+
+#prodName img:hover {
+    transform: scale(1.1);
+    transition: 500ms;
+}
+
 #homeCards {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -163,11 +172,12 @@ label {
     min-width: 300px;
     display: grid;
     grid-template-columns: 2fr 1fr;
-    padding: 0 0 10px 15%;
+    padding: 10px 0 10px 15%;
     border-bottom: solid 2px black;
     border-radius: 6px;
     background-color: aqua;
     margin-bottom: 5px;
+
 }
 
 #gInfo {

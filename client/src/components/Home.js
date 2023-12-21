@@ -9,10 +9,11 @@ function Home({
     groupList,
     group,
     setGroup,
-    userProducts,
     handleGroupChange,
     handleReviewDelete,
-    setReview
+    setReview,
+    userProducts,
+    setUserProducts
     }) {
 
     let showGroup = group.map(e => <OneGroup key={e.id} groupList={groupList} user={user} handleGroupChange={handleGroupChange} groupItem={e} setGroup={setGroup} />)
@@ -22,10 +23,34 @@ function Home({
     const showReviewList = userReviews.map(e => <OneReview user={user} key={e.id} setReview={setReview} handleReviewDelete={handleReviewDelete} reviewItem={e} />)
 
     const showProducts = userProducts.map(e => 
-        <div id="prodName">
-            <p key={e.id}>{e.name} </p> 
-            <img alt={e.name} src={e.image} style={{"width": "30px"}} />
+        <div id="prodName" key={e.id}>
+            <p>{e.name} </p> 
+            <img title="Click to Remove." alt={e.name} src={e.image} onClick={() => removeProduct(e)} />
         </div>)
+
+    function removeProduct(item) {
+        fetch(`/products/${item.id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        .then(resp => resp.json())
+        .then(() => {
+            const newList = userProducts.filter(e => e.id !== item.id);
+            setUserProducts(newList);
+        })
+    }
+
+    function prodListStyle() {
+        if (showProducts.length < 4) {
+            return {"gridTemplateColumns" : "1fr"}
+        } else if (showProducts.length < 7) {
+            return {"gridTemplateColumns" : "1fr 1fr"}
+        } else {
+            return {"gridTemplateColumns" : "1fr 1fr 1fr"}
+        }
+    }
     
     return (
         <div id="home">
@@ -50,7 +75,7 @@ function Home({
                 </div>
                 <div id="pc" className="card">
                     <h3 id="nameProd">{user.username}'s Products:</h3>
-                    <div id="prod">
+                    <div id="prod" style={prodListStyle()}>
                         {showProducts.length > 0 ? showProducts : "No Products Linked"}
                     </div>
                     <div id="linkProd">

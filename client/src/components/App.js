@@ -178,17 +178,17 @@ function handleReviewDelete(id) {
   return (
     <div>
       <NavBar
-      handleLogout={handleLogout}
-      user={user}
-      reviewList={reviewList}
-      setReviewList={setReviewList}
-      groupList={groupList}
-      setGroupList={setGroupList}
-      productList={productList}
-      setProductList={setProductList}
-      brandList={brandList}
-      setBrandList={setBrandList}
-      setSort={setSort}
+        handleLogout={handleLogout}
+        user={user}
+        reviewList={reviewList}
+        setReviewList={setReviewList}
+        groupList={groupList}
+        setGroupList={setGroupList}
+        productList={productList}
+        setProductList={setProductList}
+        brandList={brandList}
+        setBrandList={setBrandList}
+        setSort={setSort}
       />
       <Switch>
         <Route exact path="/">
@@ -203,6 +203,7 @@ function handleReviewDelete(id) {
             handleReviewDelete={handleReviewDelete}
             setGroup={setGroup}
             userProducts={userProducts}
+            setUserProducts={setUserProducts}
           />:
           <Redirect to="/signup" />}
         </Route>

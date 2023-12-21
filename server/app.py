@@ -129,7 +129,7 @@ def product():
         return get_group(Product)
     return make_response(jsonify({"text": "Method Not Allowed"}), 405,)
 
-@app.route("/products/<int:id>", methods=["GET", "POST"])
+@app.route("/products/<int:id>", methods=["GET", "POST", "DELETE"])
 def show_product(id):
     product = Product.query.filter(Product.id == id).first()
     if product:
@@ -137,6 +137,10 @@ def show_product(id):
             return get_item(product)
         elif request.method == "POST":
             product.owners.append(User.query.filter_by(id = session["user_id"]).first())
+            db.session.add(product)
+            db.session.commit()
+        elif request.method == "DELETE":
+            product.owners.remove(User.query.filter_by(id = session["user_id"]).first())
             db.session.add(product)
             db.session.commit()
         return make_response(product.to_dict(), 200)

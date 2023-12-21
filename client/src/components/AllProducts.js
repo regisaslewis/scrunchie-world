@@ -27,10 +27,9 @@ function AllProducts({
             return 0;
         });
         setProductList(sorted);
-        setSort(1)
+        setSort(1);
     };
 
-    // SORT BY PRODUCT NAME
     function sortProdName() {
         let sorted = productList.toSorted((a, b) => {
             const prodA = a.name.toUpperCase();
@@ -47,8 +46,6 @@ function AllProducts({
         setSort(2)
     };
 
-    
-    // SORT BY USER NAME
     function sortBrandName() {
         let sorted = productList.toSorted((a, b) => {
             const prodA = a.brand.name.toUpperCase();

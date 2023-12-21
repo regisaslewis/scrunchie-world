@@ -249,8 +249,12 @@ function handleReviewDelete(id) {
             noImage={noImage}
             brandList={brandList}
             setBrand={setBrand}
+            buttonOn={buttonOn}
+            buttonOff={buttonOff}
             sort={sort}
             setSort={setSort}
+            productList={productList}
+            setBrandList={setBrandList}
           />
         </Route>
         <Route path="/reviews">

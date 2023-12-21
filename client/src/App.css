@@ -42,7 +42,7 @@ button:hover {
     min-width: 340px;
     border-bottom: solid 5px black;
     border-radius: 6px;
-    background-color: red;
+    background-color: rgb(245, 149, 149);
     padding: 5px;
     text-align: center;
     display: block;
@@ -58,7 +58,7 @@ button:hover {
 }
 
 #home {
-    background-color: pink;
+    background-color: rgba(157, 255, 162, 0.365);
 }
 
 #greeting {
@@ -92,9 +92,8 @@ button:hover {
 }
 
 #pc {
-    background-color: aqua;
+    background-color: palevioletred;
     border: solid 2px black;
-    max-width: 500px;
     grid-area: pc;
     margin: auto 10px auto 20px;
     padding-top: 15px;
@@ -104,7 +103,7 @@ button:hover {
     "prod prod ."
     "prod prod linkProd"
     "prod prod .";
-    padding: 0 0 0 20px;
+    padding: 0 0 10px 20px;
 }
 
 #pc button {
@@ -131,6 +130,7 @@ button:hover {
 .card {
     text-align: center;
     border-radius: 6px;
+    margin: 15px auto;
 }
 
 .visible {
@@ -144,11 +144,6 @@ button:hover {
     border: none;
     width: 40px;
     min-height: 28px;
-}
-
-input {
-    border: none;
-    border-bottom: solid 1px black;
 }
 
 label {
@@ -208,7 +203,7 @@ label {
 #review {
     border-bottom: solid 2px black;
     border-radius: 6px;
-    background-color: aqua;
+    background-color: rgb(228, 163, 106);
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
@@ -233,6 +228,11 @@ label {
     grid-template-columns: 2fr 1fr;
     text-align: center;
     align-items: center;
+}
+
+#revButtons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
 .allProdList {
@@ -320,4 +320,35 @@ label {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 6px;
+}
+
+input {
+    border: none;
+    border-bottom: solid 1px black;
+    width: 200px;
+    height: 28px;
+    font-size: 16px;
+}
+
+.form {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: auto;
+    justify-items: start;
+    width: 300px;
+}
+
+.submit {
+    margin-top: 10px;
+}
+
+#signUp {
+    border: solid 2px black;
+    border-radius: 6px;
+    box-shadow: -10px 5px 10px black;
+    background-color: bisque;
+    text-align: center;
+    width:fit-content;
+    margin: 20px auto;
+    padding: 10px;
 }

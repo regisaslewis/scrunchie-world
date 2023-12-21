@@ -12,13 +12,11 @@ function OneReview({reviewItem, user, setReview, handleReviewDelete}) {
             <p>{comment}</p>
             <h3>{rating}/5 {starCount}</h3>
             {user && user.id === reviewItem.user_id ?
-            <div>
+            <div id="revButtons">
                 <NavLink to="/editreviewform">
                     <button onClick={() => setReview(reviewItem)}>Edit Review</button>
                 </NavLink>
-                <NavLink to="/">
-                    <button onClick={() => handleReviewDelete(reviewItem.id)}>Delete Review</button>
-                </NavLink>
+                <button onClick={() => handleReviewDelete(reviewItem.id)}>Delete Review</button>
             </div>:
             ""}
         </div>

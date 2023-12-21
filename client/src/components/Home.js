@@ -12,7 +12,6 @@ function Home({
     userProducts,
     handleGroupChange,
     handleReviewDelete,
-    inGroup,
     setReview
     }) {
 
@@ -36,7 +35,7 @@ function Home({
             <div id="homeCards">
                 <div id="gc" className="card">
                     <h3>{user.username}'s Group:</h3>
-                    {inGroup ? 
+                    {!!user.group ? 
                     showGroup : 
                     <NavLink to="/groups">
                         <button>Join a Group</button>

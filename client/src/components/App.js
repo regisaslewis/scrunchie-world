@@ -23,7 +23,6 @@ function App() {
   const [user, setUser] = useState(null);
   const [groupList, setGroupList] = useState([]);
   const [group, setGroup] = useState([]);
-  const [inGroup, setInGroup] = useState(false);
   const [brandList, setBrandList] = useState([]);
   const [brand, setBrand] = useState(null);
   const [reviewList, setReviewList] = useState([]);
@@ -55,12 +54,7 @@ function App() {
         return resp.json()
       }
     })
-    .then(user => {
-      setUser(user);
-      if (!!user && user.group_id !== null) {
-        setInGroup(true)
-      }
-    })
+    .then(user => setUser(user))
   }, [])
 
   useEffect(() => {
@@ -92,7 +86,7 @@ function App() {
       setReviewList(data);
     })
     .catch(error => console.log(error.message))
-  }, [user, inGroup])
+  }, [user])
 
   useEffect(() => {
     fetch("/groups")
@@ -139,11 +133,6 @@ function handleGroupChange(newGroupID) {
   })
   .then(resp => resp.json())
   .then(data => {
-    if (data.group === null) {
-      setInGroup(false);
-    } else {
-      setInGroup(true);
-    }
     setUser(data);
     fetch("/groups")
       .then(resp => resp.json())
@@ -205,8 +194,6 @@ function handleReviewDelete(id) {
         <Route exact path="/">
           <Home 
             user={user}
-            inGroup={inGroup}
-            setinGroup={setInGroup}
             handleGroupChange={handleGroupChange}
             reviewList={reviewList}
             setReview={setReview}

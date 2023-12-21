@@ -27,6 +27,7 @@ function SignUp({ user, setUser, userList, setUserList }) {
             hairstyle: "",
             password: "",
             confirmPassword: "",
+            group: "",
         },
         validationSchema: formSchema,
         onSubmit: (values) => {
@@ -51,26 +52,23 @@ function SignUp({ user, setUser, userList, setUserList }) {
     if (!!user) return <Redirect to="/" exact />
 
     return (
-        <div>
-            <h2>Sign Up Page Here.</h2>
-            <form autoComplete="off" onSubmit={formik.handleSubmit}>
+        <div id="signUp">
+            <h2>Sign Up!</h2>
+            <form className="form" autoComplete="off" onSubmit={formik.handleSubmit}>
                 <label>Username:</label>
                 <input name="username" value={formik.values.username} onChange={formik.handleChange} />
-                <br />
                 <label>Age:</label>
                 <input name="age" value={formik.values.age} onChange={formik.handleChange} />
-                <br />
                 <label>Hairstyle:</label>
                 <input name="hairstyle" value={formik.values.hairstyle} onChange={formik.handleChange} />
-                <br />
                 <label>Password:</label>
-                <input name="password" value={formik.values.password} onChange={formik.handleChange} type={passwordVisible ? "text" : "password"} />
-                <button className="visible" type="button" onClick={toggleVisible}>{passwordVisible ? "😳" : "😑"}</button>
-                <br />
+                <div className="password">
+                    <input name="password" value={formik.values.password} onChange={formik.handleChange} type={passwordVisible ? "text" : "password"} />
+                    <button tabIndex="-1" className="visible" type="button" onClick={toggleVisible}>{passwordVisible ? "😳" : "😑"}</button>
+                </div>
                 <label>Confirm Password:</label>
                 <input name="confirmPassword" value={formik.values.confirmPassword} onChange={formik.handleChange} type="password" />
-                <br />
-                <button type="submit">Submit</button>
+                <button className="submit" type="submit">Submit</button>
             </form>
         </div>
     );

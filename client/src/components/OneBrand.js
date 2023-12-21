@@ -10,7 +10,7 @@ function OneBrand({
 
     const { name, description } = brandItem
 
-    let brandProducts = productList.filter(e => e.brand.name == name)
+    let brandProducts = productList.filter(e => e.brand.name === name)
 
     function productsMap() {
         if (brandProducts.length > 0) {

@@ -322,13 +322,25 @@ label {
     gap: 6px;
 }
 
-input {
+input, select {
     border: none;
     border-bottom: solid 1px black;
     width: 200px;
     height: 28px;
     font-size: 16px;
 }
+
+textarea {
+    border: none;
+    border-bottom: solid 1px black;
+    font-size: 16px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+textarea::-webkit-scrollbar {
+    display: none;
+}
+
 
 .form {
     display: grid;
@@ -342,7 +354,7 @@ input {
     margin-top: 10px;
 }
 
-#signUp {
+.signIn {
     border: solid 2px black;
     border-radius: 6px;
     box-shadow: -10px 5px 10px black;

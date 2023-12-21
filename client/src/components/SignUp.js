@@ -30,6 +30,8 @@ function SignUp({ user, setUser, userList, setUserList }) {
             group: "",
         },
         validationSchema: formSchema,
+        validateOnChange: false,
+        validateOnBlur: false,
         onSubmit: (values) => {
             fetch("/users", {
                 method: "POST",
@@ -52,22 +54,27 @@ function SignUp({ user, setUser, userList, setUserList }) {
     if (!!user) return <Redirect to="/" exact />
 
     return (
-        <div id="signUp">
+        <div className="signIn">
             <h2>Sign Up!</h2>
             <form className="form" autoComplete="off" onSubmit={formik.handleSubmit}>
                 <label>Username:</label>
                 <input name="username" value={formik.values.username} onChange={formik.handleChange} />
+                {!!formik.errors.username ? <p style={{"color" : "red"}}>{formik.errors.username}</p> : ""}
                 <label>Age:</label>
                 <input name="age" value={formik.values.age} onChange={formik.handleChange} />
+                {!!formik.errors.age ? <p style={{"color" : "red"}}>{formik.errors.age}</p> : ""}
                 <label>Hairstyle:</label>
                 <input name="hairstyle" value={formik.values.hairstyle} onChange={formik.handleChange} />
+                {!!formik.errors.hairstyle ? <p style={{"color" : "red"}}>{formik.errors.hairstyle}</p> : ""}
                 <label>Password:</label>
                 <div className="password">
                     <input name="password" value={formik.values.password} onChange={formik.handleChange} type={passwordVisible ? "text" : "password"} />
                     <button tabIndex="-1" className="visible" type="button" onClick={toggleVisible}>{passwordVisible ? "😳" : "😑"}</button>
+                {!!formik.errors.password ? <p style={{"color" : "red"}}>{formik.errors.password}</p> : ""}
                 </div>
                 <label>Confirm Password:</label>
                 <input name="confirmPassword" value={formik.values.confirmPassword} onChange={formik.handleChange} type="password" />
+                {!!formik.errors.confirmPassword ? <p style={{"color" : "red"}}>{formik.errors.confirmPassword}</p> : ""}
                 <button className="submit" type="submit">Submit</button>
             </form>
         </div>

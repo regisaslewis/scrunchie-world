@@ -1,7 +1,7 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { NavLink, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 function NewProductForm({
     productList, 
@@ -24,6 +24,8 @@ function NewProductForm({
             brand_id: brand.id,
         },
         validationSchema: formSchema,
+        validateOnChange: false,
+        validateOnBlur: false,
         onSubmit: (values) => {
             fetch("/allproducts", {
                 method: "POST",
@@ -43,11 +45,13 @@ function NewProductForm({
     });
 
     return (
-        <div>
+        <div className="signIn">
             <h2>New {brand.name} Product</h2>
-            <form autoComplete="off" onSubmit={formik.handleSubmit}>
+            <br />
+            <form className="form" autoComplete="off" onSubmit={formik.handleSubmit}>
                 <label>Product Name:</label>
                 <input type="text" name="name" value={formik.values.name} onChange={formik.handleChange} />
+                {!!formik.errors.name ? <p style={{"color" : "red"}}>{formik.errors.name}</p> : ""}
                 <br/>
                 <label>Cost:</label>
                 <select name="cost" type="number" min="1" max="5" value={formik.values.cost} onChange={formik.handleChange}>
@@ -59,13 +63,12 @@ function NewProductForm({
                 </select>
                 <br />
                 <label>Image:</label>
-                <input name="image" type="text" value={formik.values.image} onChange={formik.handleChange} />
+                <textarea rows="3" cols="38" name="image" type="text" value={formik.values.image} onChange={formik.handleChange} />
                 <br />
                 <button type="submit">Submit New Product</button>
             </form>
-            <NavLink to="/brands">
-                <button>Return</button>
-            </NavLink>
+            <br />
+            <button onClick={() => history.goBack()}>Return</button>
         </div>
     )
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { NavLink, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 function EditProductForm({
     brand,
@@ -36,15 +36,15 @@ function EditProductForm({
             .then(resp => resp.json())
             .then(data => {
                 handleProductUpdate(data)
-                history.push("/allproducts");
+                history.goBack();
             })
         }
     });
 
     return (
-        <div>
+        <div className="signIn">
             <h2>Edit Product</h2>
-            <form autoComplete="off" onSubmit={formik.handleSubmit}>
+            <form className="form" autoComplete="off" onSubmit={formik.handleSubmit}>
                 <label>Product Name:</label>
                 <input type="text" name="name" value={formik.values.name} onChange={formik.handleChange} />
                 <br/>
@@ -58,13 +58,12 @@ function EditProductForm({
                 </select>
                 <br />
                 <label>Image:</label>
-                <input name="image" type="text" value={formik.values.image} onChange={formik.handleChange} />
+                <textarea rows="3" cols="38" name="image" type="text" value={formik.values.image} onChange={formik.handleChange} />
                 <br />
                 <button type="submit">Submit Edit</button>
             </form>
-            <NavLink to="/allproducts">
-                <button>Return</button>
-            </NavLink>
+            <br />
+            <button onClick={() => history.goBack()}>Return</button>
         </div>
     )
 }

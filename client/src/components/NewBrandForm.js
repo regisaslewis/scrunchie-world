@@ -18,6 +18,8 @@ function NewBrandForm({brandList, setBrandList}) {
             description: "",
         },
         validationSchema: formSchema,
+        validateOnChange: false,
+        validateOnBlur: false,
         onSubmit: (values) => {
             fetch("/brands", {
                 method: "POST",
@@ -37,14 +39,17 @@ function NewBrandForm({brandList, setBrandList}) {
     })
 
     return (
-        <div>
-            <h2>New Brand Form Here</h2>
-            <form autoComplete="off" onSubmit={formik.handleSubmit}>
+        <div className="signIn">
+            <h2>Brand Details</h2>
+            <br />
+            <form className="form" autoComplete="off" onSubmit={formik.handleSubmit}>
                 <label>Brand Name:</label>
                 <input name="name" type="text" value={formik.values.name} onChange={formik.handleChange} />
+                {!!formik.errors.name ? <p style={{"color" : "red"}}>{formik.errors.name}</p> : ""}
                 <br />
                 <label>Description:</label>
                 <input name="description" type="text" value={formik.values.description} onChange={formik.handleChange} />
+                {!!formik.errors.description ? <p style={{"color" : "red"}}>{formik.errors.description}</p> : ""}
                 <br />
                 <button type="submit">Submit New Brand</button>
             </form>

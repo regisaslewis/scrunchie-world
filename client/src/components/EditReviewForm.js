@@ -1,7 +1,7 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { NavLink, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 function EditReviewForm({review, handleReviewUpdate}) {
     const history = useHistory();
@@ -37,9 +37,9 @@ function EditReviewForm({review, handleReviewUpdate}) {
     });
 
     return (
-        <div>
+        <div className="signIn">
             <h2>Edit {review.product.name} Review</h2>
-            <form autoComplete="off" onSubmit={formik.handleSubmit}>
+            <form className="form" autoComplete="off" onSubmit={formik.handleSubmit}>
                 <label>Rating:</label>
                 <select  name="rating" value={formik.values.rating} onChange={formik.handleChange}>
                     <option value="1">⭐</option>
@@ -50,7 +50,7 @@ function EditReviewForm({review, handleReviewUpdate}) {
                 </select>
                 <br/>
                 <label>Comment:</label>
-                <input name="comment" value={formik.values.comment} onChange={formik.handleChange} />
+                <textarea rows="4" cols="38" name="comment" value={formik.values.comment} onChange={formik.handleChange} />
                 <br/>
                 <button type="submit">Submit Review</button>
             </form>

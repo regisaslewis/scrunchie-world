@@ -21,6 +21,8 @@ function Login({setUser, userList}) {
             password: "",
         },
         validationSchema: formSchema,
+        validateOnChange: false,
+        validateOnBlur: false,
         onSubmit: (values) => {
             if (users.includes(formik.values.username)) {
                 fetch("/login", {
@@ -48,22 +50,27 @@ function Login({setUser, userList}) {
     }
 
     return (
-        <div>
-            <h2>Log In Page Here</h2>
-            <form onSubmit={formik.handleSubmit} autoComplete="off">
+        <div className="signIn">
+            <h2>Log In</h2>
+            <form className="form" onSubmit={formik.handleSubmit} autoComplete="off">
                 <label>Username:</label>
                 <input name="username" type="text" onChange={ e => {formik.handleChange(e); setPasses(true)}} value={formik.values.username} />
+                {!!formik.errors.username ? <p style={{"color" : "red"}}>{formik.errors.username}</p> : ""}
                 <br/>
                 <label>Password:</label>
-                <input name="password" type = {passwordVisible ? "text" : "password"} value={formik.values.password} onChange={formik.handleChange} />
-                <button className="visible" type="button" onClick={toggleVisible}>{passwordVisible ? "😳" : "😑"}</button>
+                <div>
+                    <input name="password" type = {passwordVisible ? "text" : "password"} value={formik.values.password} onChange={formik.handleChange} />
+                    <button tabIndex="-1" className="visible" type="button" onClick={toggleVisible}>{passwordVisible ? "😳" : "😑"}</button>
+                    {!!formik.errors.password ? <p style={{"color" : "red"}}>{formik.errors.password}</p> : ""}
+                </div>
                 <br />
                 <button type="submit">Login</button>
             </form>
+            {passes ? "" : <p style={{"color" : "red"}}>Not a user.</p>}
+            <br />
             <NavLink to="/" exact>
                 <button>Sign Up Instead</button>
             </NavLink>
-            {passes ? "" : <p>Not a user.</p>}
         </div>
     );
 }

@@ -1,13 +1,14 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { useHistory } from "react-router-dom";
 
 function EditProductForm({
     brand,
     product,
     handleProductUpdate,
     }) {
+    
     const history = useHistory();
 
     const formSchema = yup.object().shape({

@@ -49,7 +49,7 @@ function NewGroupForm({groupList, setGroupList}) {
                 {!!formik.errors.name ? <p style={{"color" : "red"}}>{formik.errors.name}</p> : ""}
                 <br />
                 <label>Description:</label>
-                <input name="description" type="text" value={formik.values.description} onChange={formik.handleChange} />
+                <textarea rows="2" cols="38" name="description" type="text" value={formik.values.description} onChange={formik.handleChange} />
                 {!!formik.errors.description ? <p style={{"color" : "red"}}>{formik.errors.description}</p> : ""}
                 <br />
                 <button type="submit">Submit New Group</button>

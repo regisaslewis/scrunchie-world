@@ -1,6 +1,10 @@
 body {
-    background-color: rgb(232, 251, 251);
+    background-color: rgb(187, 198, 246);
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+body::-webkit-scrollbar {
+    display: none;
 }
 
 h2 {
@@ -11,6 +15,10 @@ img {
     max-width: 200px;
     max-height: 200px;
     border-radius: 6px;
+}
+
+a {
+    cursor: default;
 }
 
 a:visited {
@@ -25,7 +33,7 @@ button {
     border-radius: 6px;
     background-color: black;
     color: white;
-    box-shadow: -5px 5px 8px 1px black;
+    box-shadow: -3px 3px 3px -1px black;
     margin: 0 10px;
 }
 
@@ -58,7 +66,8 @@ button:hover {
 }
 
 #home {
-    background-color: rgba(157, 255, 162, 0.365);
+    background-color: rgb(157, 255, 224);
+    border-radius: 0 0 6px 6px;
 }
 
 #greeting {
@@ -93,7 +102,7 @@ button:hover {
 
 #pc {
     background-color: palevioletred;
-    border: solid 2px black;
+    border-bottom: solid 2px black;
     grid-area: pc;
     margin: auto 10px auto 20px;
     padding-top: 15px;
@@ -151,12 +160,11 @@ label {
 }
 
 #group {
-    max-width: 500px;
-    min-width: 250px;
+    min-width: 300px;
     display: grid;
     grid-template-columns: 2fr 1fr;
     padding: 0 0 10px 15%;
-    border: solid 2px black;
+    border-bottom: solid 2px black;
     border-radius: 6px;
     background-color: aqua;
     margin-bottom: 5px;
@@ -177,7 +185,7 @@ label {
     grid-template-columns: 1fr 1fr 1fr;
     justify-items: center;
     align-items: center;
-    margin: 4px 0;
+    margin: 10px 0;
 }
 
 .blurb {
@@ -265,7 +273,7 @@ label {
 }
 
 .allProd {
-    border: solid 2px black;
+    border-bottom: solid 2px black;
     border-radius: 6px;
     background-color: palevioletred;
     margin-top: 10px;
@@ -296,11 +304,12 @@ label {
     grid-area: bp;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    justify-items: center;
+    text-align: center;
+    align-items: center;
 }
 
 #brand {
-    border: solid 2px black;
+    border-bottom: solid 2px black;
     max-height: 265px;
     overflow-y: auto;
     border-radius: 6px;
@@ -314,6 +323,11 @@ label {
 
 #brand::-webkit-scrollbar {
     display: none;
+}
+
+#brand img {
+    max-width: 70px;
+    max-height: 70px;
 }
 
 #brandList {
@@ -355,7 +369,7 @@ textarea::-webkit-scrollbar {
 }
 
 .signIn {
-    border: solid 2px black;
+    border-bottom: solid 2px black;
     border-radius: 6px;
     box-shadow: -10px 5px 10px black;
     background-color: bisque;

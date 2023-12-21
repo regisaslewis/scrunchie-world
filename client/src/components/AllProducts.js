@@ -61,6 +61,38 @@ function AllProducts({
         setProductList(sorted);
         setSort(3)
     };
+
+    function sortCheapest() {
+        let sorted = productList.toSorted((a, b) => {
+            const prodA = a.cost;
+            const prodB = b.cost;
+            if (prodA < prodB) {
+                return -1;
+            }
+            if (prodA > prodB) {
+                return 1
+            }
+            return 0;
+        });
+        setProductList(sorted);
+        setSort(4)
+    };
+    
+    function sortCostliest() {
+        let sorted = productList.toSorted((a, b) => {
+            const prodA = a.cost
+            const prodB = b.cost;
+            if (prodA > prodB) {
+                return -1;
+            }
+            if (prodA < prodB) {
+                return 1
+            }
+            return 0;
+        });
+        setProductList(sorted);
+        setSort(5)
+    };
         
     const showProductList = productList.map(e => <OneAllProduct 
         key={e.id} 
@@ -79,6 +111,8 @@ function AllProducts({
                     <button style={sort === 1 ? buttonOn : buttonOff} onClick={() => sortOldest()}>Oldest</button>
                     <button style={sort === 2 ? buttonOn : buttonOff} onClick={() => sortProdName()}>Product Name</button>
                     <button style={sort === 3 ? buttonOn : buttonOff} onClick={() => sortBrandName()}>Brand Name</button>
+                    <button style={sort === 4 ? buttonOn : buttonOff} onClick={() => sortCheapest()}>💲</button>
+                    <button style={sort === 5 ? buttonOn : buttonOff} onClick={() => sortCostliest()}>💲💲💲💲💲</button>
                 </div>
             </div>            
             <div className="allProdList">

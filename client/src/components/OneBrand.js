@@ -21,7 +21,7 @@ function OneBrand({
                         <br /> 
                         ({"💲".repeat(e.cost)})
                     </p>
-                    <img style={{"width": "70px"}} alt={e.name} src={e.image !== "" ? e.image : noImage} />
+                    <img alt={e.name} src={e.image !== "" ? e.image : noImage} />
                 </div>
                 )
         } else {

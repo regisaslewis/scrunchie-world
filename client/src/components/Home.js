@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, Redirect } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import OneReview from "./OneReview";
 import OneGroup from "./OneGroup";
 
@@ -14,8 +14,6 @@ function Home({
     handleReviewDelete,
     setReview
     }) {
-
-    if (!user) return <Redirect to="/signup" />; 
 
     let showGroup = group.map(e => <OneGroup key={e.id} groupList={groupList} user={user} handleGroupChange={handleGroupChange} groupItem={e} setGroup={setGroup} />)
 

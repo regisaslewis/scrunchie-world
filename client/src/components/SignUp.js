@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { useHistory, Redirect } from "react-router-dom";
+import { useHistory, NavLink } from "react-router-dom";
 
-function SignUp({ user, setUser, userList, setUserList }) {
+function SignUp({ setUser, userList, setUserList }) {
 
     const history = useHistory()
     const [passwordVisible, setPasswordVisible] = useState(false)
@@ -51,8 +51,6 @@ function SignUp({ user, setUser, userList, setUserList }) {
         }
     })
 
-    if (!!user) return <Redirect to="/" exact />
-
     return (
         <div className="signIn">
             <h2>Sign Up!</h2>
@@ -73,10 +71,14 @@ function SignUp({ user, setUser, userList, setUserList }) {
                 {!!formik.errors.password ? <p style={{"color" : "red"}}>{formik.errors.password}</p> : ""}
                 </div>
                 <label>Confirm Password:</label>
-                <input name="confirmPassword" value={formik.values.confirmPassword} onChange={formik.handleChange} type="password" />
+                <input name="confirmPassword" value={formik.values.confirmPassword} onChange={formik.handleChange} type={passwordVisible ? "text" : "password"} />
                 {!!formik.errors.confirmPassword ? <p style={{"color" : "red"}}>{formik.errors.confirmPassword}</p> : ""}
                 <button className="submit" type="submit">Submit</button>
             </form>
+            <br />
+            <NavLink to="/login" exact>
+                    <button className="logButton">Log In Instead</button>
+                </NavLink>
         </div>
     );
 }

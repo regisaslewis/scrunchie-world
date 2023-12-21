@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import "../App.css"
 import NavBar from "./NavBar";
 import Home from "./Home";
@@ -192,6 +192,7 @@ function handleReviewDelete(id) {
       />
       <Switch>
         <Route exact path="/">
+          {!!user ?
           <Home 
             user={user}
             handleGroupChange={handleGroupChange}
@@ -202,15 +203,18 @@ function handleReviewDelete(id) {
             handleReviewDelete={handleReviewDelete}
             setGroup={setGroup}
             userProducts={userProducts}
-          />
+          />:
+          <Redirect to="/signup" />}
         </Route>
         <Route path="/signup">
+          {!user ?
           <SignUp
             user={user}
             setUser={setUser}
             userList={userList}
             setUserList={setUserList}
-          />
+          />:
+          <Redirect to="/" exact />}
         </Route>
         <Route path="/login">
             <Login
@@ -267,11 +271,13 @@ function handleReviewDelete(id) {
           />
         </Route>
         <Route path="/editreviewform">
+          {!! review ?
           <EditReviewForm 
             review={review}
             user={user}
             handleReviewUpdate={handleReviewUpdate}
-          />
+          />:
+          <Redirect to="/" />}
         </Route>
         <Route path="/allproducts">
           <AllProducts
@@ -312,11 +318,14 @@ function handleReviewDelete(id) {
           />
         </Route>
           <Route path="/editproductform">
+              {!!brand ?
               <EditProductForm
                 brand={brand}
                 product={product}
                 handleProductUpdate={handleProductUpdate}
-              />
+              />: 
+              <Redirect to="/allproducts" />}
+              
           </Route>
         <Route path="/newbrandform">
           <NewBrandForm 

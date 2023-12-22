@@ -107,7 +107,7 @@ function AllProducts({
             <div className="revHeader">
                 <h2 className="prodGreeting" >All Products</h2>
                 <div className="sortButtons">
-                    <h4>Sort:</h4>
+                    <h4 className="prodGreeting">Sort:</h4>
                     <button style={sort === 1 ? buttonOn : buttonOff} onClick={() => sortOldest()}>Oldest</button>
                     <button style={sort === 2 ? buttonOn : buttonOff} onClick={() => sortProdName()}>Product Name</button>
                     <button style={sort === 3 ? buttonOn : buttonOff} onClick={() => sortBrandName()}>Brand Name</button>

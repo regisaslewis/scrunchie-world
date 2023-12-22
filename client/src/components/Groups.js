@@ -64,7 +64,7 @@ function Groups({
                 </div>
                 <h2 className="groupGreeting">Choose a Group</h2>
                 <div className="sortButtons">
-                    <h4>Sort:</h4>
+                    <h4 className="groupGreeting">Sort:</h4>
                     <button style={sort === 1 ? buttonOn : buttonOff} onClick={() => ageSort()}>Oldest</button>
                     <button style={sort === 2 ? buttonOn : buttonOff} onClick={() => nameSort()}>Alphabetical</button>
                 </div>

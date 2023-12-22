@@ -91,15 +91,14 @@ function Reviews({
     return (
         <div>
             <div className="revHeader">
-                <h2>All User Reviews</h2>
+                <h2 className="revGreeting">All User Reviews</h2>
                 <div className="sortButtons">
-                    <h4>Sort:</h4>
+                    <h4 className="revGreeting">Sort:</h4>
                     <button style={sort === 1 ? buttonOn : buttonOff} onClick={() => sortOldest()}>Oldest</button>
                     <button style={sort === 2 ? buttonOn : buttonOff} onClick={() => sortProdName()}>Product Name</button>
                     <button style={sort === 3 ? buttonOn : buttonOff} onClick={() => sortUserName()}>User Name</button>
                     <button style={sort === 4 ? buttonOn : buttonOff} onClick={() => sortRating()}>Rating</button>
                 </div>
-                
             </div>
             <div id="revList">
                 {showReviewList}

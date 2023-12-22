@@ -118,6 +118,7 @@ function Brands({
                 </NavLink>
                 <h2 className="brandGreeting">All Brands</h2>
                 <div className="sortButtons">
+                    <h4 className="brandGreeting">Sort:</h4>
                     <button style={sort === 1 ? buttonOn : buttonOff} onClick={() => sortOldest()}>Oldest</button>
                     <button style={sort === 2 ? buttonOn : buttonOff} onClick={() => sortBrandName()}>Brand Name</button>
                     <button style={sort === 3 ? buttonOn : buttonOff} onClick={() => sortCheapest()}>💲</button>

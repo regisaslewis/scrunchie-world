@@ -71,7 +71,7 @@ function Home({
                             <button>Add a Review</button>
                         </NavLink>
                     </div>
-                    {showReviewList.length > 0 ? showReviewList : "No Reviews Written"}
+                    {showReviewList.length > 0 ? showReviewList : <p className="revGreeting">No Reviews Written</p>}
                 </div>
                 <div id="pc" className="card">
                     <h3 id="nameProd">{user.username}'s Products:</h3>

@@ -116,7 +116,7 @@ function Brands({
                 <NavLink to="/newbrandform" exact>
                     <button>Add a New Brand</button>
                 </NavLink>
-                <h2>All Brands</h2>
+                <h2 className="brandGreeting">All Brands</h2>
                 <div className="sortButtons">
                     <button style={sort === 1 ? buttonOn : buttonOff} onClick={() => sortOldest()}>Oldest</button>
                     <button style={sort === 2 ? buttonOn : buttonOff} onClick={() => sortBrandName()}>Brand Name</button>

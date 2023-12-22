@@ -44,11 +44,11 @@ function Home({
 
     function prodListStyle() {
         if (showProducts.length < 4) {
-            return {"gridTemplateColumns" : "1fr"}
+            return {"gridTemplateColumns" : "1fr", "font-size" : "18px"}
         } else if (showProducts.length < 7) {
-            return {"gridTemplateColumns" : "1fr 1fr"}
+            return {"gridTemplateColumns" : "1fr 1fr", "font-size" : "16px"}
         } else {
-            return {"gridTemplateColumns" : "1fr 1fr 1fr"}
+            return {"gridTemplateColumns" : "1fr 1fr 1fr", "font-size" : "14px"}
         }
     }
     
@@ -57,7 +57,7 @@ function Home({
             <h2 id="greeting">Hello, {user.username}!</h2>
             <div id="homeCards">
                 <div id="gc" className="card">
-                    <h3>{user.username}'s Group:</h3>
+                    <h3 className="groupGreeting">{user.username}'s Group:</h3>
                     {!!user.group ? 
                     showGroup : 
                     <NavLink to="/groups">
@@ -66,7 +66,7 @@ function Home({
                 </div>
                 <div id="rc" className="card">
                     <div id="revTitle">
-                        <h3>{user.username}'s Reviews:</h3>
+                        <h3 className="revGreeting">{user.username}'s Reviews:</h3>
                         <NavLink to="/newreviewform" exact>
                             <button>Add a Review</button>
                         </NavLink>

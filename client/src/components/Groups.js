@@ -62,7 +62,7 @@ function Groups({
                         <button>Create New Group</button>
                     </NavLink>
                 </div>
-                <h2>Choose a Group</h2>
+                <h2 className="groupGreeting">Choose a Group</h2>
                 <div className="sortButtons">
                     <h4>Sort:</h4>
                     <button style={sort === 1 ? buttonOn : buttonOff} onClick={() => ageSort()}>Oldest</button>

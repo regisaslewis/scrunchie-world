@@ -37,7 +37,8 @@ function App() {
   const buttonOn = {
       color: "rgb(226, 184, 195)",
       boxShadow: "none",
-      transform: "scale(.95)"
+      transform: "scale(.95)",
+      zIndex: "-1"
   }
 
   const buttonOff = {

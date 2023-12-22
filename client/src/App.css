@@ -1,5 +1,8 @@
 body {
-    background-color: rgb(187, 198, 246);
+    background-color: rgb(157, 255, 224);
+    background-image: url("./Background.png");
+    background-attachment: fixed;
+    background-size: contain;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
@@ -12,9 +15,12 @@ h2 {
 }
 
 img {
-    max-width: 200px;
-    max-height: 200px;
     border-radius: 6px;
+}
+
+.image {
+    max-width: 250px;
+    max-height: 250px;
 }
 
 a {
@@ -47,17 +53,36 @@ button:hover {
 }
 
 #navBar {
+    position: sticky;
+    top: 0;
     min-width: 340px;
     border-bottom: solid 5px black;
     border-radius: 6px;
+    background-image: url("./Banner.png");
+    background-size: contain;
     background-color: rgb(245, 149, 149);
     padding: 5px;
     text-align: center;
-    display: block;
+    display: grid;
+    grid-template-columns: 5fr 6fr;
+    justify-items: center;
+    margin-top: 0;
+}
+
+#navData {
+    margin: auto;
 }
 
 #navBar button {
     width: 100px;
+}
+
+#logoBox {
+    width: 250px;
+}
+
+.logo {
+    width: 250px;
 }
 
 .logButton {
@@ -66,17 +91,18 @@ button:hover {
 }
 
 #home {
-    background-color: rgb(157, 255, 224);
     border-radius: 0 0 6px 6px;
 }
 
 #greeting {
     font-size: 50px;
     width: 70%;
-    margin: auto;
+    margin: 10px auto 0;
     text-align: center;
     padding-bottom: -5px;
+    background-color: rgba(251, 242, 64, 0.83);
     border-bottom: solid 2px black;
+    border-radius: 6px;
 }
 
 #gc {
@@ -123,6 +149,15 @@ button:hover {
     display: grid;
     grid-template-columns: 2fr 1fr;
     align-items: center;
+}
+
+.prodGreeting {
+    border-bottom: solid 2px black;
+    border-radius: 6px;
+    background-color: palevioletred;
+    width: fit-content;
+    margin: auto auto 6px auto;
+    padding:  5px 10px;
 }
 
 #prodName img {
@@ -175,9 +210,17 @@ label {
     padding: 10px 0 10px 15%;
     border-bottom: solid 2px black;
     border-radius: 6px;
-    background-color: aqua;
+    background-color: rgb(91, 154, 212);
     margin-bottom: 5px;
+}
 
+.groupGreeting {
+    border-bottom: solid 2px black;
+    border-radius: 6px;
+    background-color: rgb(91, 154, 212);
+    width: fit-content;
+    margin: auto auto 6px auto;
+    padding:  5px 10px;
 }
 
 #gInfo {
@@ -229,10 +272,20 @@ label {
     padding: 10px;
 }
 
+.revGreeting {
+    border-bottom: solid 2px black;
+    border-radius: 6px;
+    background-color: rgb(228, 163, 106);
+    width: fit-content;
+    margin: auto;
+    padding:  5px 10px;
+}
+
 #revTitle {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
+    margin-bottom: 6px;
 }
 
 #revList {
@@ -329,6 +382,15 @@ label {
     "bd bnp"
     "bp bp";
     padding: 10px;
+}
+
+.brandGreeting {
+    border-bottom: solid 2px black;
+    border-radius: 6px;
+    background-color: rgb(249, 172, 144);
+    width: fit-content;
+    margin: auto;
+    padding:  5px 10px;
 }
 
 #brand::-webkit-scrollbar {

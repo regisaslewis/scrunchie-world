@@ -31,7 +31,7 @@ function OneProduct({
                 <h2>{name}</h2>
             </div>
             <div className="allProdDImage">
-                <img alt={name} src={image !== "" ? image : noImage} />
+                <img className="image" alt={name} src={image !== "" ? image : noImage} />
             </div>
             <div className="allProdBrand">
                 <h3 className="dollars">cost: {"💲".repeat(cost)}</h3>

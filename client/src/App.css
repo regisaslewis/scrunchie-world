@@ -146,7 +146,6 @@ button:hover, #prodName:hover {
     "prod prod linkProd"
     "prod prod .";
     padding: 0 0 10px 20px;
-    width: 750px;
 }
 
 #pc button {
@@ -160,7 +159,6 @@ button:hover, #prodName:hover {
     height: 65px;
     margin: auto;
     padding-left: 10px;
-    width: 200px;
 }
 
 .prodGreeting {
@@ -214,7 +212,7 @@ label {
 }
 
 #group {
-    min-width: 500px;
+    min-width: 300px;
     display: grid;
     grid-template-columns: 2fr 1fr;
     padding: 10px 0 10px 15%;

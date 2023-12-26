@@ -13,7 +13,6 @@ function AllProducts({
     setSort
     }) {
     
-    // SORT BY NORMAL ORDER
     function sortOldest() {
         let sorted = productList.toSorted((a, b) => {
             const prodA = a.id;
@@ -111,8 +110,8 @@ function AllProducts({
                     <button style={sort === 1 ? buttonOn : buttonOff} onClick={() => sortOldest()}>Oldest</button>
                     <button style={sort === 2 ? buttonOn : buttonOff} onClick={() => sortProdName()}>Product Name</button>
                     <button style={sort === 3 ? buttonOn : buttonOff} onClick={() => sortBrandName()}>Brand Name</button>
-                    <button style={sort === 4 ? buttonOn : buttonOff} onClick={() => sortCheapest()}>💲</button>
-                    <button style={sort === 5 ? buttonOn : buttonOff} onClick={() => sortCostliest()}>💲💲💲💲💲</button>
+                    <button title="LEAST Expensive" style={sort === 4 ? buttonOn : buttonOff} onClick={() => sortCheapest()}>💲</button>
+                    <button title="MOST Expensive" style={sort === 5 ? buttonOn : buttonOff} onClick={() => sortCostliest()}>💲💲💲💲💲</button>
                 </div>
             </div>            
             <div className="allProdList">

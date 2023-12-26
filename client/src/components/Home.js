@@ -59,11 +59,11 @@ function Home({
 
     function prodListStyle() {
         if (showProducts.length < 4) {
-            return {"gridTemplateColumns" : "1fr", "font-size" : "18px"}
+            return {"gridTemplateColumns" : "1fr", "font-size" : "18px", "width": "280px"}
         } else if (showProducts.length < 7) {
-            return {"gridTemplateColumns" : "1fr 1fr", "font-size" : "16px"}
+            return {"gridTemplateColumns" : "1fr 1fr", "font-size" : "16px", "width": "420px"}
         } else {
-            return {"gridTemplateColumns" : "1fr 1fr 1fr", "font-size" : "14px"}
+            return {"gridTemplateColumns" : "1fr 1fr 1fr", "font-size" : "14px", "width": "540px"}
         }
     }
     

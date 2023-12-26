@@ -1,7 +1,6 @@
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
-import emoji
 
 from config import db, metadata, bcrypt
 
@@ -107,6 +106,6 @@ class Review(db.Model, SerializerMixin):
     product = db.relationship("Product", back_populates="reviews")
 
     def __repr__(self):
-        return f"{self.user.username}'s Review of {self.product.name}: {self.rating * (emoji.emojize(':star:'))} {self.comment}"
+        return f"{self.user.username}'s Review of {self.product.name}: Rating: {self.rating}/5 Comment: {self.comment}"
     
     

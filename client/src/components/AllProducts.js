@@ -10,7 +10,7 @@ function AllProducts({
     buttonOn,
     buttonOff,
     sort,
-    setSort
+    setSort,
     }) {
     
     function sortOldest() {

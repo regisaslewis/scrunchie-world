@@ -1,4 +1,3 @@
-![logo](./client/src/JackieLogo.png)
 # SCRUNCHIE WORLD!
 ## RAD to the MAX!
 

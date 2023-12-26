@@ -114,6 +114,7 @@ button:hover, #prodName:hover {
 
 #gc {
     grid-area: gc;
+    width: 90%;
 }
 
 #rc {
@@ -212,10 +213,10 @@ label {
 }
 
 #group {
-    min-width: 300px;
+    width: 80%;
     display: grid;
     grid-template-columns: 2fr 1fr;
-    padding: 10px 0 10px 15%;
+    padding: 10px 0 20px 15%;
     border-bottom: solid 2px black;
     border-radius: 6px;
     color: rgb(213, 239, 224);

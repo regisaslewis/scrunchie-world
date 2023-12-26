@@ -14,7 +14,6 @@ function Groups({
     setSort
 }) {
 
-    // SORT BY NORMAL ORDER
     function ageSort() {
         let sorted = groupList.toSorted((a, b) => {
             const groupA = a.id;
@@ -31,8 +30,6 @@ function Groups({
         setSort(1);
     }
     
-
-    // SORT BY GROUP NAME 
     function nameSort() {
         let sorted = groupList.toSorted((a, b) => {
             const nameA = a.name.toUpperCase();

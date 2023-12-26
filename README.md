@@ -5,6 +5,7 @@ We know, deep down inside, we've all wanted a place to get together and discuss 
 Fret no longer!  Scrunchie World is here to provide a place of open discussion.
 
 First things first, a new user needs to sign up:
+
 ![signup](./Readme_Images/signup.png)
 
 Once securely signed up, the user (you) will remain logged in until they choose to log out (allowing for someone else in the house to finally get a chance to review their faves).

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom"
 import OneReview from "./OneReview";
 import OneGroup from "./OneGroup";
@@ -16,6 +16,9 @@ function Home({
     setUserProducts
     }) {
 
+    const [isHovered, setIsHovered] = useState(false)
+    const [id, setId] = useState(0)
+
     let showGroup = group.map(e => <OneGroup key={e.id} groupList={groupList} user={user} handleGroupChange={handleGroupChange} groupItem={e} setGroup={setGroup} />)
 
     const userReviews = reviewList.filter(e => e.user_id === user.id)
@@ -23,9 +26,21 @@ function Home({
     const showReviewList = userReviews.map(e => <OneReview user={user} key={e.id} setReview={setReview} handleReviewDelete={handleReviewDelete} reviewItem={e} />)
 
     const showProducts = userProducts.map(e => 
-        <div id="prodName" key={e.id}>
-            <p>{e.name} </p> 
-            <img title="Click to Remove." alt={e.name} src={e.image} onClick={() => removeProduct(e)} />
+        <div id="prodName" 
+        title="Click to Remove." 
+        onMouseEnter={() => {setIsHovered(true); setId(e.id)}} 
+        onMouseLeave={() => {setIsHovered(false); setId(0)}}
+        onClick={() => removeProduct(e)} 
+        key={e.id}>
+            {isHovered && id === e.id ?
+            <>
+                <p>Unlink {e.name}</p>
+                <img alt={e.name} src={e.image} />
+            </>:
+            <>
+                <p>{e.name}</p> 
+                <img alt={e.name} src={e.image} />
+            </>}            
         </div>)
 
     function removeProduct(item) {

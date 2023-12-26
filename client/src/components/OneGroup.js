@@ -8,8 +8,8 @@ function OneGroup({groupList, groupItem, handleGroupChange, user, setGroup}) {
     const abrvName = name.length < 16 ? name : name.substring(0, 13) + "..."
 
     function membersMap() {
+        const memberList = members.map(e => <p key={e.id}>{e.username}</p>)
         if (groupItem.members.length > 0) {
-            const memberList = members.map(e => <p key={e.id}>{e.username}</p>)
             return (
                 <div>
                     <h4>Members:</h4>

@@ -43,13 +43,20 @@ button {
     margin: 0 10px;
 }
 
-button:hover {
+button:hover, #prodName:hover {
     border: solid 5px rgb(11, 12, 10);
+    border-radius: 6px;
     background-color: rgb(11, 13, 10);
     color: rgb(226, 184, 195);
     box-shadow: none;
     transform: scale(.95);
     transition-duration: 100ms;
+}
+
+#prodName:hover {
+    border: none;
+    cursor: pointer;
+    transition-duration: 200ms;
 }
 
 #navBar {
@@ -139,6 +146,7 @@ button:hover {
     "prod prod linkProd"
     "prod prod .";
     padding: 0 0 10px 20px;
+    width: 750px;
 }
 
 #pc button {
@@ -149,6 +157,10 @@ button:hover {
     display: grid;
     grid-template-columns: 2fr 1fr;
     align-items: center;
+    height: 65px;
+    margin: auto;
+    padding-left: 10px;
+    width: 200px;
 }
 
 .prodGreeting {
@@ -162,11 +174,8 @@ button:hover {
 
 #prodName img {
     width: 30px;
-}
-
-#prodName img:hover {
-    transform: scale(1.1);
-    transition: 500ms;
+    height: 30px;
+    margin-left: 5px;
 }
 
 #homeCards {
@@ -175,7 +184,8 @@ button:hover {
     grid-template-areas: 
     'gc rc'
     'pc rc';
-    margin: auto 10px;
+    margin: auto;
+    column-gap: 10px;
     padding-bottom: 8px;
     align-items: center;
 }
@@ -204,20 +214,22 @@ label {
 }
 
 #group {
-    min-width: 300px;
+    min-width: 500px;
     display: grid;
     grid-template-columns: 2fr 1fr;
     padding: 10px 0 10px 15%;
     border-bottom: solid 2px black;
     border-radius: 6px;
-    background-color: rgb(91, 154, 212);
-    margin-bottom: 5px;
+    color: rgb(213, 239, 224);
+    background-color: rgb(41, 88, 131);
+    margin: 5px auto;
 }
 
 .groupGreeting {
     border-bottom: solid 2px black;
     border-radius: 6px;
-    background-color: rgb(91, 154, 212);
+    background-color: rgb(41, 88, 131);
+    color: rgb(213, 239, 224);
     width: fit-content;
     margin: auto auto 6px auto;
     padding:  5px 10px;
@@ -225,7 +237,7 @@ label {
 
 #gInfo {
     max-width: 350px;
-    margin-right: 10px;
+    margin: auto;
 }
 
 #gMembers {

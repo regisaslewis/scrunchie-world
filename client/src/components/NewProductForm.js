@@ -11,7 +11,7 @@ function NewProductForm({
     const history = useHistory();
 
     const formSchema = yup.object().shape({
-        name: yup.string().required(),
+        name: yup.string().required().max(20),
         cost: yup.number().positive().integer().required().min(1).max(5),
         image: yup.string()
     });

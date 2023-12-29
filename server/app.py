@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from flask import request, make_response, jsonify, session
+from flask import Flask, request, make_response, jsonify, session
 from flask_restful import Resource
 import copy
 

@@ -17,6 +17,7 @@ emoji = "*"
 gunicorn = "*"
 psycopg2-binary = "*"
 flask-bcrypt = "*"
+sqlalchemy = "*"
 
 [requires]
 python_full_version = "3.8.13"

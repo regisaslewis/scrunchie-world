@@ -9,7 +9,7 @@ function OneReview({reviewItem, user, setReview, handleReviewDelete}) {
     return (
         <div id="review">
             <h2>{reviewItem.user.username} on {product.name}</h2>
-            <p>{comment}</p>
+            <p id="revCom">{comment}</p>
             <h3>{rating}/5 {starCount}</h3>
             {user && user.id === reviewItem.user_id ?
             <div id="revButtons">

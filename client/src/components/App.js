@@ -191,6 +191,7 @@ function handleReviewDelete(id) {
         setBrandList={setBrandList}
         setSort={setSort}
       />
+      <div id="background">
       <Switch>
         <Route exact path="/">
           {!!user ?
@@ -341,6 +342,7 @@ function handleReviewDelete(id) {
             setGroupList={setGroupList}/>
         </Route>
       </Switch>
+      </div>
     </div>
   )
 }

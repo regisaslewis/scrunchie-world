@@ -1,9 +1,26 @@
 body {
-    background-color: rgb(157, 255, 224);
-    background-image: url("./Background.png");
-    background-attachment: fixed;
-    background-size: contain;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: rgb(113, 169, 202);
+    background: url("./Background.png");
+    background-size: 300px;
+    margin: 0;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#background {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+#background::before {
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    z-index: -1;
+    transform: rotate(-20deg);
 }
 
 body::-webkit-scrollbar {
@@ -74,6 +91,7 @@ button:hover, #prodName:hover {
     grid-template-columns: 5fr 6fr;
     justify-items: center;
     margin-top: 0;
+    z-index: 2;
 }
 
 #navData {
@@ -119,6 +137,7 @@ button:hover, #prodName:hover {
 
 #rc {
     grid-area: rc;
+    margin-right: 6px;
 }
 
 #prod {
@@ -138,7 +157,6 @@ button:hover, #prodName:hover {
     background-color: palevioletred;
     border-bottom: solid 2px black;
     grid-area: pc;
-    margin: auto 10px auto 20px;
     padding-top: 15px;
     display: grid;
     grid-template-areas:
@@ -183,9 +201,7 @@ button:hover, #prodName:hover {
     grid-template-areas: 
     'gc rc'
     'pc rc';
-    margin: auto;
     column-gap: 10px;
-    padding-bottom: 8px;
     align-items: center;
 }
 
@@ -278,9 +294,14 @@ label {
     background-color: rgb(228, 163, 106);
     display: grid;
     grid-template-columns: 1fr 1fr;
+    text-align: center;
     align-items: center;
     margin-bottom: 5px;
     padding: 10px;
+}
+
+#revCom {
+    text-align: left;
 }
 
 .revGreeting {

@@ -102,12 +102,8 @@ button:hover, #prodName:hover {
     width: 100px;
 }
 
-#logoBox {
-    width: 250px;
-}
-
 .logo {
-    width: 250px;
+    width: 200px;
 }
 
 .logButton {

@@ -95,7 +95,7 @@ function Home({
                     </div>
                     <div id="linkProd">
                         <NavLink to="/products" exact>
-                            <button>Link New Product</button>
+                            <button>Link<br/>New<br/>Product</button>
                         </NavLink>
                     </div>
                 </div>

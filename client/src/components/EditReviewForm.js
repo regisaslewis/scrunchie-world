@@ -42,6 +42,7 @@ function EditReviewForm({review, handleReviewUpdate}) {
             <form className="form" autoComplete="off" onSubmit={formik.handleSubmit}>
                 <label>Rating:</label>
                 <select  name="rating" value={formik.values.rating} onChange={formik.handleChange}>
+                {!!formik.errors.name ? <p style={{"color" : "red"}}>{formik.errors.name}</p> : ""}
                     <option value="1">⭐</option>
                     <option value="2">⭐⭐</option>
                     <option value="3">⭐⭐⭐</option>
@@ -51,6 +52,7 @@ function EditReviewForm({review, handleReviewUpdate}) {
                 <br/>
                 <label>Comment:</label>
                 <textarea rows="4" cols="38" name="comment" value={formik.values.comment} onChange={formik.handleChange} />
+                {!!formik.errors.comment ? <p style={{"color" : "red"}}>{formik.errors.comment}</p> : ""}
                 <br/>
                 <button type="submit">Submit Review</button>
             </form>

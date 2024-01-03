@@ -48,6 +48,7 @@ function EditProductForm({
             <form className="form" autoComplete="off" onSubmit={formik.handleSubmit}>
                 <label>Product Name:</label>
                 <input type="text" name="name" value={formik.values.name} onChange={formik.handleChange} />
+                {!!formik.errors.name ? <p style={{"color" : "red"}}>{formik.errors.name}</p> : ""}
                 <br/>
                 <label>Cost:</label>
                 <select name="cost" type="number" min="1" max="5" value={formik.values.cost} onChange={formik.handleChange}>

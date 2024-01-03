@@ -84,6 +84,7 @@ return (
             <br/>
             <label>Comment:</label>
             <textarea rows="4" cols="38" name="comment" value={formik.values.comment} onChange={formik.handleChange} />
+            {!!formik.errors.comment ? <p style={{"color" : "red"}}>{formik.errors.comment}</p> : ""}
             <input name="product_id" type="hidden" value={formik.values.product_id = prodID} />
             <input name="user_id" type="hidden" value={formik.values.user_id = user.id} />
             <br/>

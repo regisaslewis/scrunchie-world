@@ -484,7 +484,7 @@ textarea::-webkit-scrollbar {
     box-shadow: -10px 5px 10px black;
     background-color: bisque;
     text-align: center;
-    width:fit-content;
+    width: fit-content;
     margin: 20px auto;
     padding: 10px;
 }

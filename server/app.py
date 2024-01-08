@@ -216,29 +216,6 @@ def show_review(id):
     else:
         return make_response(jsonify({"Error": f"Review #{id} not found."}), 404)
 
-# @app.route("/five_star_reviews", methods=["GET"])
-# def five_stars():
-#     reviews = Review.query.all()
-#     if request.method == "GET":
-#         return make_response(jsonify([n.to_dict() for n in reviews if n.rating == 5]))
-
-# @app.route("/most_reviewed", methods=["GET"])
-# def get_most_reviewed():
-#     if request.method == "GET":
-#         items = Product.query.all()
-#         def sort_by_review_count(e):
-#             return len(e.reviews)
-#         items.sort(key=sort_by_review_count)
-
-#         return make_response({"most reviewed": items[-1].name}, 200)
-    
-# @app.route("/search_product/<product_name>", methods=["GET"])
-# def search_prod(product_name):
-#     if request.method == "GET":
-#         items = Product.query.all()
-
-#         return make_response(jsonify([n.to_dict() for n in items if product_name.lower() in n.name.lower()]))
-
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
 

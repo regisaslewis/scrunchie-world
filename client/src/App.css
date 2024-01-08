@@ -291,7 +291,8 @@ label {
     background-color: rgb(228, 163, 106);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    text-align: center;
+    column-gap: 10px;
+    text-align: left;
     align-items: center;
     margin: 0 5px 5px;
     padding: 10px;
@@ -299,6 +300,10 @@ label {
 
 #revCom {
     text-align: left;
+    padding: 3px;
+    border-radius: 3px;
+    box-shadow: -2px 2px 4px black;
+    width: fit-content;
 }
 
 .revGreeting {

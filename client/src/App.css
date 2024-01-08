@@ -2,6 +2,7 @@ body {
     background-color: rgb(113, 169, 202);
     background: url("./Background.png");
     background-size: 300px;
+    background-attachment: fixed;
     margin: 0;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }

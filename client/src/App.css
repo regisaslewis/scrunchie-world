@@ -301,6 +301,7 @@ label {
 #revCom {
     text-align: left;
     padding: 3px;
+    border: solid 3px rgba(0, 0, 0, 0.284);
     border-radius: 3px;
     box-shadow: -2px 2px 4px black;
     width: fit-content;

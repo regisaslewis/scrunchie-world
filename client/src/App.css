@@ -302,9 +302,9 @@ label {
 #revCom {
     text-align: left;
     padding: 3px;
-    border: solid 3px rgba(0, 0, 0, 0.284);
+    background-color: rgb(225, 144, 87);
+    border-bottom: solid 2px black ;
     border-radius: 3px;
-    box-shadow: -2px 2px 4px black;
     width: fit-content;
 }
 
@@ -347,14 +347,15 @@ label {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 6px;
+    padding: 10px;
 }
 
 .allProdDetails {
     grid-area: apd;
     text-align: center;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
+    grid-template-columns: 2fr 1fr;
+    justify-items:self-start;
     margin-bottom: 4px;;
 }
 
@@ -373,6 +374,7 @@ label {
 }
 
 .allProd {
+    min-width: 430px;
     border-bottom: solid 2px black;
     border-radius: 6px;
     background-color: palevioletred;
@@ -387,7 +389,10 @@ label {
 }
 
 .dollars {
+    padding: 0 0 2px 3px;
     border-bottom: solid 2px black;
+    width: max-content;
+    border-radius: 3px;
     background-color: rgba(151, 15, 65, 0.842);
 }
 

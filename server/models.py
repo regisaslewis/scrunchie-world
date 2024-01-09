@@ -1,5 +1,4 @@
 from sqlalchemy_serializer import SerializerMixin
-from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
 
 from config import db, metadata, bcrypt
@@ -46,7 +45,7 @@ class User(db.Model, SerializerMixin):
 
 class Product(db.Model, SerializerMixin):
     __tablename__ = "products"
-    serialize_rules = ("-brand.products", "-owners.group", "-reviews",)
+    serialize_rules = ("-brand.products", "-owners.group", "-reviews.user", "-reviews.product",)
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, unique=True)

@@ -42,7 +42,6 @@ function EditReviewForm({review, handleReviewUpdate}) {
             <form className="form" autoComplete="off" onSubmit={formik.handleSubmit}>
                 <label>Rating:</label>
                 <select  name="rating" value={formik.values.rating} onChange={formik.handleChange}>
-                {!!formik.errors.name ? <p style={{"color" : "red"}}>{formik.errors.name}</p> : ""}
                     <option value="1">⭐</option>
                     <option value="2">⭐⭐</option>
                     <option value="3">⭐⭐⭐</option>
